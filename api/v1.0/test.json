@@ -1,0 +1,57 @@
+{
+  "data": {
+    "environment": "production",
+    "body": {
+      "trace": {
+        "frames": [
+          {
+            "filename": "/home/mira/PhpstormProjects/RollbarClient/test.php",
+            "lineno": 9,
+            "method": "require_once"
+          },
+          {
+            "filename": "/home/mira/PhpstormProjects/RollbarClient/rollbar.php",
+            "lineno": 52
+          }
+        ],
+        "exception": {
+          "class": "Exception",
+          "message": "logging with Rollbar failed"
+        }
+      }
+    },
+    "level": "error",
+    "timestamp": 1541643406,
+    "code_version": "",
+    "platform": "Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64",
+    "language": "php",
+    "request": {
+      "url": "http://rollbarclient.test-local/test.php",
+      "method": "GET",
+      "headers": {
+        "Cache-Control": "max-age\u003d0",
+        "Upgrade-Insecure-Requests": "1",
+        "Connection": "keep-alive",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept-Language": "cs,sk;q\u003d0.8,en-US;q\u003d0.5,en;q\u003d0.3",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q\u003d0.9,*/*;q\u003d0.8",
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:62.0) Gecko/20100101 Firefox/62.0",
+        "Host": "rollbarclient.test-local"
+      },
+      "GET": [],
+      "query_string": "",
+      "POST": [],
+      "user_ip": "192.168.2.10"
+    },
+    "server": {
+      "host": "linux-mira"
+    },
+    "custom": [],
+    "uuid": "d16eefa7-3037-448e-a602-fe9bdc3ed10f",
+    "notifier": {
+      "name": "rollbar-php",
+      "version": "1.7.0"
+    }
+  },
+  "access_token": "f571229d9ee543a79029858bc5e487c0"
+}
