@@ -33,4 +33,14 @@ class occurrence
     $this->data = \json_decode($obj->data);
   }
 
+  public function getTimestampStr(string $format, \DateTimeZone $timezone=null): string
+  {
+    if ($timezone === null){
+      $this->timestamp->setTimezone(new \DateTimeZone('UTC'));
+    } else {
+      $this->timestamp->setTimezone($timezone);
+    }
+    return $this->timestamp->format($format);
+  }
+
 }

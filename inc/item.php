@@ -28,6 +28,11 @@ class item
   public $level;
 
   /**
+   * @var string 'trace' | 'message' | 'crash_report'
+   */
+  public $type;
+
+  /**
    * @var string programing language
    */
   public $language;
@@ -65,7 +70,7 @@ class item
   /**
    * @var \rollbug\occurrence
    */
-  public $occurrence = array();
+  public $occurrences = array();
 
   /**
    * item constructor.
@@ -77,6 +82,7 @@ class item
     $this->id = $item->id;
     $this->projectId = $item->project_id;
     $this->level = $item->level;
+    $this->type = $item->type;
     $this->language = $item->language;
     $this->lastOcc = $item->last_occ;
     $this->lastTimestamp = new \DateTime( $item->last_timestamp, new \DateTimeZone('UTC'));
@@ -85,6 +91,49 @@ class item
     $this->exceptionClass = \strtok('|');
     $this->exceptionMessage = \strtok('|');
   }
+
+  /**
+   * @param string             $format
+   * @param \DateTimeZone|null $timezone null = UTC
+   *
+   * @return \DateTime
+   */
+  public function getLastTimestampStr(string $format, \DateTimeZone $timezone=null): string
+  {
+    if ($timezone === null){
+      $this->lastTimestamp->setTimezone(new \DateTimeZone('UTC'));
+    } else {
+      $this->lastTimestamp->setTimezone($timezone);
+    }
+    return $this->lastTimestamp->format($format);
+  }
+
+  /**
+   * @param string             $format
+   * @param \DateTimeZone|null $timezone
+   *
+   * @return string
+   */
+  public function getFirstTimestampStr(string $format, \DateTimeZone $timezone=null): string
+  {
+    $occurrence = $this->getFirstOcc();
+    if ($timezone === null){
+      $occurrence->timestamp->setTimezone(new \DateTimeZone('UTC'));
+    } else {
+      $occurrence->timestamp->setTimezone($timezone);
+    }
+    return $occurrence->timestamp->format($format);
+  }
+
+  /**
+   * @return \rollbug\occurrence
+   */
+  public function getFirstOcc(): \rollbug\occurrence
+  {
+    // mysql sorting from last to first (desc)
+    return end($this->occurrences);
+  }
+
 
 
 }

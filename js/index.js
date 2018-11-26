@@ -11,6 +11,10 @@ $(function() {
     e.stopPropagation();
   });
 
+  $('[role="tab"]').on('click', function(e) {
+    $(this).blur();
+  });
+
   $("#formLogin").submit(function (e) {
     e.preventDefault();
 

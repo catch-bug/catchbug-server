@@ -18,16 +18,17 @@ $user->setItems($projectId);
 $tableBody = '';
 /** @var \rollbug\item $item */
 foreach ($user->items as $item){
-  $item->lastTimestamp->setTimezone($user->DateTimeZone);
   $tableBody .= <<<HTML
 <tr>
 <td>{$item->lastOcc}</td>
-<td>{$item->lastTimestamp->format('d.m.Y H:i:s e')}</td>
+<td>{$item->getLastTimestampStr('d.m.Y H:i:s', $user->DateTimeZone)}</td>
 <td><a href="?/project/{$item->projectId}/item/{$item->id}">#{$item->id} {$item->exceptionClass}: {$item->exceptionMessage}</a></td>
 <td>{$item->level}</td>
 </tr>
 HTML;
 }
+
+// todo add language (icons)
 
 $content .= <<<HTML
 <div class="table-responsive">

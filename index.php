@@ -72,8 +72,9 @@ HTML;
       }
 
       $content .= <<<HTML
-</ul>
 <div class="pt-4"></div>
+</ul>
+<hr>
 HTML;
 
       switch ($projectSection){
@@ -281,5 +282,10 @@ class active
   public function checkActive($section, $item)
   {
     return $section === $item ? ' active' : '';
+  }
+
+  public function checkSelected($option, $item)
+  {
+    return $option === $item ? ' selected' : '';
   }
 }
