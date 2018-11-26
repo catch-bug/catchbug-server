@@ -8,6 +8,30 @@
 
 error_reporting(E_ALL);
 
+// Allow from any origin
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+  // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
+  // you want to allow, and if so:
+  header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+  header('Access-Control-Allow-Credentials: true');
+  header('Access-Control-Max-Age: 86400');    // cache for 1 day
+}
+
+// Access-Control headers are received during OPTIONS requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+
+  if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'])){
+    // may also be using PUT, PATCH, HEAD etc
+    header('Access-Control-Allow-Methods: GET, POST, DELETE, PATCH, OPTIONS');
+  }
+
+  if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
+    header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+  }
+
+  exit(0);
+}
+
 // get the HTTP method, path and body of the request
 $path = $_GET['path'] ?? $_GET['path'] ?? '';
 $method = $_SERVER['REQUEST_METHOD'];
@@ -15,16 +39,16 @@ $request = explode('/', trim($_GET['path'],'/'));
 
 $input = file_get_contents('php://input');
 
-$payload = json_decode($_POST['payload'] ?? $_GET['payload'] ?? $input ?? '',false);
+$payload = json_decode($_POST['payload'] ?? $_GET['payload'] ?? $input ?? '',false, 512, JSON_BIGINT_AS_STRING);
 
 $access_token = $_GET['access_token'] ?? $payload->access_token ?? '';
 
 require_once __DIR__ . '/../../inc/config.php';
 $config = new config();
 
-switch ($request[0]){
+switch ($request[0]) {
   case 'status':
-    switch ($request[1]){
+    switch ($request[1]) {
       case 'ping':
         include __DIR__ . '/status/ping.php';
         break;
@@ -34,7 +58,6 @@ switch ($request[0]){
   case 'item':
     include __DIR__ . '/item.php';
     break;
-
 
 
   default:
