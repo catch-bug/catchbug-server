@@ -8,6 +8,8 @@
 
 error_reporting(E_ALL);
 
+use rollbug\config;
+
 // Allow from any origin
 if (isset($_SERVER['HTTP_ORIGIN'])) {
   // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
@@ -43,7 +45,8 @@ $payload = json_decode($_POST['payload'] ?? $_GET['payload'] ?? $input ?? '',fal
 
 $access_token = $_GET['access_token'] ?? $payload->access_token ?? '';
 
-require_once __DIR__ . '/../../inc/config.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+
 $config = new config();
 
 switch ($request[0]) {

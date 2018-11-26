@@ -5,6 +5,7 @@
  * @Date   : 19.11.18
  * @Time   : 16:02
  */
+namespace rollbug;
 
 class config
 {

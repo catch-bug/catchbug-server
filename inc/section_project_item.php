@@ -76,6 +76,70 @@ HTML;
         $tabTracebackContent .= '</div>';
       }
 
+      if ($item->type === 'trace') {
+
+
+        $tabOccurrencesContentBody = '';
+        /** @var \rollbug\occurrence $occurrence */
+        foreach ($item->occurrences as $id => $occurrence) {
+          $tabOccurrencesContentBody .= '<tr>';
+          // Timestamp
+          $tabOccurrencesContentBody .= "<td><a href=\"?/project/$projectId/item/{$item->id}/occurrence/$id\">{$occurrence->getTimestampStr('d.m.Y H:i:s', $user->DateTimeZone)}</a> </td>";
+          // Browser
+          $tabOccurrencesContentBody .= "<td>{$occurrence->browser->getName()}</td>";
+          // OS
+          $tabOccurrencesContentBody .= "<td>{$occurrence->os->getName()}</td>";
+          // Req. Method
+          $tabOccurrencesContentBody .= "<td>{$occurrence->getRequestMethod()}</td>";
+          // Request URL
+          if ($occurrence->getRequestMethod() === 'GET') {
+            $tabOccurrencesContentBody .= "<td><a href='{$occurrence->getURL()}' target='_blank'>{$occurrence->getURL()}</a></td>";
+          } elseif ($occurrence->getRequestMethod() === 'POST'){
+            // todo script for CURL replay post data
+            $tabOccurrencesContentBody .= "<td>{$occurrence->getURL()}</td>";
+          }
+          // Exception Message
+          $tabOccurrencesContentBody .= "<td>{$occurrence->getExceptionMessage()}</td>";
+          // Code Version
+          $tabOccurrencesContentBody .= "<td></td>";
+          // GET
+          $tabOccurrencesContentBody .= "<td></td>";
+          // POST
+          $tabOccurrencesContentBody .= "<td></td>";
+          // Query String
+          $tabOccurrencesContentBody .= "<td>{$occurrence->getQueryString()}</td>";
+          // User IP
+          $tabOccurrencesContentBody .= "<td>{$occurrence->getUserIP()}</td>";
+          $tabOccurrencesContentBody .= '</tr>';
+
+        }
+
+        $tz = $user->DateTimeZone->getName();
+        $tabOccurrencesContent = <<<HTML
+<div class="table-responsive table-occurrence">
+<table class="table table-hover table-sm ">
+<thead class="thead-dark">
+<tr>
+<th scope="col">Timestamp</th>
+<th scope="col">Browser</th>
+<th scope="col">OS</th>
+<th scope="col">Req. Method</th>
+<th scope="col">Request URL</th>
+<th scope="col">Exception Message</th>
+<th scope="col">Code Version</th>
+<th scope="col">GET</th>
+<th scope="col">POST</th>
+<th scope="col">Query String</th>
+<th scope="col">User IP</th>
+</tr>
+</thead>
+<tbody>$tabOccurrencesContentBody</tbody>
+</table>
+</div>
+HTML;
+
+      }
+
 
       $content .= <<<HTML
 <h4>#{$item->id} {$item->exceptionClass}: {$item->exceptionMessage}</h4>
@@ -116,7 +180,7 @@ HTML;
   $tabTracebackContent
   </div>
   <div class="tab-pane fade pt-3" id="nav-occurrences" role="tabpanel" aria-labelledby="nav-occurrences-tab">
-  bbbbb...occurrences
+  $tabOccurrencesContent
   </div>
   <div class="tab-pane fade pt-3" id="nav-cooccurrences" role="tabpanel" aria-labelledby="nav-cooccurrences-tab">
   bbbbb...cooccurrences

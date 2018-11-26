@@ -166,8 +166,8 @@ class itemWriter
    */
   public function makeIdStr(\stdClass $trace): string
   {
-    return $trace->frames[ count($trace->frames) - 1 ]->filename . '|'
-        . $trace->frames[ count($trace->frames) - 1 ]->lineno . '|'
+    return $trace->frames[ \count($trace->frames) - 1 ]->filename . '|'
+        . $trace->frames[ \count($trace->frames) - 1 ]->lineno . '|'
         . $trace->exception->class . '|'
         . $trace->exception->message;
   }

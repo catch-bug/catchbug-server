@@ -8,8 +8,6 @@
 
 namespace rollbug;
 
-require_once __DIR__ . '/occurrence.php';
-
 class item
 {
   /**

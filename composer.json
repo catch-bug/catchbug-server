@@ -1,0 +1,24 @@
+{
+  "name": "ms502040/rollbug",
+  "description": "description_text",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Mira",
+      "email": "ms502040@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "sinergi/browser-detector": "7.0.0.x-dev",
+    "ext-mysqli": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "rollbug\\": "\\inc\\rollbug"
+    },
+    "files": ["config.php"]
+  }
+}

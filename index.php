@@ -7,6 +7,9 @@
  */
 
 use rollbug\user;
+use rollbug\config;
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 session_start();
 
@@ -31,11 +34,9 @@ $section = strtok($_SERVER['QUERY_STRING'], '/');
 $active = new active();
 
 if (isset($_SESSION['user_id'])){
-  require_once __DIR__ . '/inc/config.php';
   $config = new config();
 
   require_once __DIR__ . '/inc/mysqli.php';
-  require_once __DIR__ . '/inc/user.php';
 
   $user = new user($_SESSION['user_id'], $mysqli);
 

@@ -8,8 +8,6 @@
 
 namespace rollbug;
 
-require_once __DIR__ . '/project.php';
-require_once __DIR__ . '/item.php';
 
 class user
 {
@@ -29,12 +27,12 @@ class user
   public $root;
 
   /**
-   * @var \rollbug\project
+   * @var project
    */
   public $projects = array();
 
   /**
-   * @var \rollbug\item
+   * @var item
    */
   public $items = array();
 
@@ -99,9 +97,9 @@ class user
   /**
    * @param int $id item id
    *
-   * @return \rollbug\item
+   * @return item
    */
-  public function getItem(int $id): \rollbug\item
+  public function getItem(int $id): item
   {
     return $this->items[$id];
   }
@@ -124,9 +122,9 @@ class user
   /**
    * @param int $id project id
    *
-   * @return \rollbug\project
+   * @return project
    */
-  public function getProject(int $id): \rollbug\project
+  public function getProject(int $id): project
   {
     return $this->projects[$id];
   }

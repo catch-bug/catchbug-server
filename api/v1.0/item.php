@@ -28,8 +28,6 @@ switch ($method){
       if ($userId !== null) {
         $mysqli->autocommit(false);
 
-        require_once __DIR__ . '/../../inc/itemWriter.php';
-
         $itemWriter = new itemWriter($mysqli, $config);
 
         // todo check /  switch server/client token
