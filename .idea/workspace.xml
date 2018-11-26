@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb0bb5ca-e76d-4b35-a40f-0e8a02a522ad" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/84934dfa-c045-4fec-8b12-532fc6d18eee.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/84934dfa-c045-4fec-8b12-532fc6d18eee.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/api/v1.0/textfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1.0/textfile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inc/item.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/item.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inc/occurrence.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/occurrence.php" afterDir="false" />
@@ -115,7 +114,7 @@
           <entry key="js" value="128" />
           <entry key="json" value="91" />
           <entry key="php" value="9706" />
-          <entry key="txt" value="84" />
+          <entry key="txt" value="119" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -125,7 +124,7 @@
           <entry key="JSON" value="91" />
           <entry key="JavaScript" value="128" />
           <entry key="PHP" value="9616" />
-          <entry key="PLAIN_TEXT" value="117" />
+          <entry key="PLAIN_TEXT" value="152" />
           <entry key="SQL" value="1" />
         </counts>
       </usages-collector>
@@ -830,7 +829,7 @@
       <updated>1541608450363</updated>
       <workItem from="1541608452428" duration="22466000" />
       <workItem from="1541703607874" duration="8340000" />
-      <workItem from="1542643330936" duration="98295000" />
+      <workItem from="1542643330936" duration="98546000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1542978126304</created>
@@ -853,11 +852,18 @@
       <option name="project" value="LOCAL" />
       <updated>1543195721875</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="delete .idea directory from remote">
+      <created>1543196324122</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1543196324122</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129101000" />
+    <option name="totallyTimeSpent" value="129352000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1673" y="0" width="1934" height="1182" extended-state="6" />
@@ -866,22 +872,22 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="DB Browser" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="SQL Generator" weight="0.3294686" />
-      <window_info anchor="bottom" id="Database Console" weight="0.3294686" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3294686" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27686352" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.32913843" />
-      <window_info anchor="bottom" id="DB Execution Console" order="9" />
-      <window_info anchor="bottom" id="Database Changes" order="10" weight="0.32913843" />
-      <window_info anchor="bottom" id="Regex Tester" order="11" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.32913843" />
-      <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" weight="0.32913843" />
+      <window_info anchor="bottom" id="SQL Generator" order="0" weight="0.3294686" />
+      <window_info anchor="bottom" id="Database Console" order="1" weight="0.3294686" />
+      <window_info anchor="bottom" id="Message" order="2" />
+      <window_info anchor="bottom" id="Find" order="3" weight="0.3294686" />
+      <window_info anchor="bottom" id="Run" order="4" weight="0.27686352" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="DB Execution Console" order="10" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="11" visible="true" weight="0.32913843" />
+      <window_info anchor="bottom" id="Database Changes" order="12" weight="0.32913843" />
+      <window_info anchor="bottom" id="Regex Tester" order="13" />
+      <window_info anchor="bottom" id="Terminal" order="14" weight="0.32913843" />
+      <window_info anchor="bottom" id="Event Log" order="15" side_tool="true" weight="0.32913843" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -931,7 +937,8 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="add trace_chain into api/item" />
     <MESSAGE value="add Access-Control headers for cross origin requests" />
-    <option name="LAST_COMMIT_MESSAGE" value="add Access-Control headers for cross origin requests" />
+    <MESSAGE value="delete .idea directory from remote" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete .idea directory from remote" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/rest-api_2.http">
