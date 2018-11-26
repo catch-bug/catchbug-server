@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cb0bb5ca-e76d-4b35-a40f-0e8a02a522ad" name="Default Changelist" comment="" />
+    <list default="true" id="cb0bb5ca-e76d-4b35-a40f-0e8a02a522ad" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/84934dfa-c045-4fec-8b12-532fc6d18eee.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/84934dfa-c045-4fec-8b12-532fc6d18eee.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/v1.0/textfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1.0/textfile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inc/item.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/item.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inc/occurrence.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/occurrence.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inc/section_project_item.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/section_project_item.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inc/section_project_items.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/section_project_items.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inc/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/index.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,71 +110,83 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="58" />
+          <entry key="gitignore" value="33" />
           <entry key="html" value="2" />
-          <entry key="js" value="107" />
+          <entry key="js" value="128" />
           <entry key="json" value="91" />
-          <entry key="php" value="7072" />
-          <entry key="txt" value="14" />
+          <entry key="php" value="9706" />
+          <entry key="txt" value="84" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="58" />
-          <entry key="HTML" value="72" />
+          <entry key="HTML" value="91" />
           <entry key="JSON" value="91" />
-          <entry key="JavaScript" value="107" />
-          <entry key="PHP" value="7001" />
-          <entry key="PLAIN_TEXT" value="14" />
+          <entry key="JavaScript" value="128" />
+          <entry key="PHP" value="9616" />
+          <entry key="PLAIN_TEXT" value="117" />
           <entry key="SQL" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="SCHEMA:rollbar" value="1" />
-          <entry key="css" value="5" />
+          <entry key="css" value="6" />
+          <entry key="gitignore" value="2" />
           <entry key="html" value="2" />
           <entry key="js" value="1" />
-          <entry key="json" value="3" />
+          <entry key="json" value="4" />
           <entry key="occurence" value="1" />
-          <entry key="php" value="14" />
+          <entry key="php" value="17" />
           <entry key="sql" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="5" />
+          <entry key="CSS" value="6" />
           <entry key="Database Element" value="1" />
           <entry key="HTML" value="2" />
-          <entry key="JSON" value="3" />
+          <entry key="JSON" value="4" />
           <entry key="JavaScript" value="1" />
-          <entry key="PHP" value="14" />
+          <entry key="PHP" value="17" />
+          <entry key="PLAIN_TEXT" value="2" />
           <entry key="Scratch" value="2" />
           <entry key="UML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.php.new.class">
         <counts>
-          <entry key="PHP Class.type" value="5" />
+          <entry key="PHP Class.type" value="6" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api/v1.0/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+            <state relative-caret-position="527">
+              <caret line="31" column="10" lean-forward="true" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="268" column="44" selection-start-line="268" selection-start-column="44" selection-end-line="268" selection-end-column="44" />
+            <state relative-caret-position="4471">
+              <caret line="263" column="12" lean-forward="true" selection-start-line="263" selection-start-column="12" selection-end-line="263" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/custom.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="477">
+              <caret line="221" column="24" lean-forward="true" selection-start-line="221" selection-start-column="24" selection-end-line="221" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -170,8 +194,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inc/section_project_item.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="788">
-              <caret line="63" column="6" selection-start-line="63" selection-start-column="6" selection-end-line="63" selection-end-column="6" />
+            <state relative-caret-position="-221">
+              <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -179,8 +203,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inc/occurrence.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
+            <state relative-caret-position="663">
+              <caret line="39" column="12" lean-forward="true" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -188,8 +212,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inc/section_project_items.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="123" selection-start-line="25" selection-start-column="60" selection-end-line="25" selection-end-column="123" />
+            <state relative-caret-position="510">
+              <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -197,8 +230,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inc/item.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="65" column="29" selection-start-line="65" selection-start-column="29" selection-end-line="65" selection-end-column="29" />
+            <state relative-caret-position="935">
+              <caret line="132" column="46" selection-start-line="132" selection-start-column="46" selection-end-line="132" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -215,8 +248,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inc/user.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="86" column="139" selection-start-line="86" selection-start-column="139" selection-end-line="86" selection-end-column="139" />
+            <state relative-caret-position="403">
+              <caret line="86" column="79" selection-start-line="86" selection-start-column="79" selection-end-line="86" selection-end-column="79" />
             </state>
           </provider>
         </entry>
@@ -233,8 +266,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+            <state relative-caret-position="238">
+              <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -251,8 +284,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/v1.0/item.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="38" column="61" selection-start-line="38" selection-start-column="45" selection-end-line="38" selection-end-column="61" />
+            <state relative-caret-position="229">
+              <caret line="37" column="62" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/inc/itemWriter.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -277,11 +319,7 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/rest-api.http">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="5" selection-start-column="5" selection-end-column="50" />
-            </state>
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -297,37 +335,47 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>:</find>
+      <find>$payload-&gt;data-&gt;body-&gt;trace</find>
+      <find>$uuid</find>
+      <find>this-&gt;last_item</find>
+      <find>$this-&gt;last_item</find>
     </findStrings>
     <replaceStrings>
       <replace>=&gt;</replace>
     </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/api/v1.0/status/ping.php" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/rest-api_1.http" />
-        <option value="$APPLICATION_CONFIG_DIR$/scratches/rest-api.http" />
         <option value="$PROJECT_DIR$/api/v1.0/payloadDataFormat.json" />
         <option value="$PROJECT_DIR$/api/v1.0/payloadDataFormatNoComents.json" />
         <option value="$PROJECT_DIR$/exportToHTML/payloadDataFormatNoComents.json.html" />
         <option value="$PROJECT_DIR$/api/v1.0/inc/mysqli.php" />
         <option value="$PROJECT_DIR$/api/v1.0/config.php" />
-        <option value="$PROJECT_DIR$/api/v1.0/item.php" />
-        <option value="$PROJECT_DIR$/api/v1.0/index.php" />
-        <option value="$PROJECT_DIR$/js/index.js" />
         <option value="$PROJECT_DIR$/ajax/a_index.php" />
         <option value="$PROJECT_DIR$/inc/project.php" />
         <option value="$PROJECT_DIR$/inc/config.php" />
         <option value="$PROJECT_DIR$/inc/mysqli.php" />
         <option value="$PROJECT_DIR$/inc/section_project.php" />
         <option value="$PROJECT_DIR$/css/custom.css" />
-        <option value="$PROJECT_DIR$/inc/section_project_items.php" />
-        <option value="$PROJECT_DIR$/inc/item.php" />
         <option value="$PROJECT_DIR$/inc/occurrence.php" />
-        <option value="$PROJECT_DIR$/inc/user.php" />
-        <option value="$PROJECT_DIR$/inc/section_project_item.php" />
+        <option value="$PROJECT_DIR$/js/index.js" />
         <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/inc/user.php" />
+        <option value="$PROJECT_DIR$/inc/item.php" />
+        <option value="$PROJECT_DIR$/inc/section_project_item.php" />
+        <option value="$PROJECT_DIR$/inc/section_project_items.php" />
+        <option value="$PROJECT_DIR$/test.php" />
+        <option value="$PROJECT_DIR$/api/v1.0/index.php" />
+        <option value="$PROJECT_DIR$/inc/itemWriter.php" />
+        <option value="$PROJECT_DIR$/api/v1.0/item.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/rest-api.http" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -364,6 +412,7 @@
       </profile-state>
     </entry>
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -379,16 +428,28 @@
             <path>
               <item name="RollbarServer" type="b2602c69:ProjectViewProjectNode" />
               <item name="RollbarServer" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RollbarServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RollbarServer" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="v1.0" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RollbarServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RollbarServer" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RollbarServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RollbarServer" type="462c0819:PsiDirectoryNode" />
+              <item name="inc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RollbarServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RollbarServer" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RollbarServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-            </path>
-            <path>
-              <item name="RollbarServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
             </path>
           </expand>
           <select />
@@ -422,6 +483,30 @@
   <component name="RestClientSettings">
     <option name="REQUEST_HISTORY">
       <list>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://rollbarserver.test-local/api/v1.0/item" />
+          <option name="urlPath" value="" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Content-Type" />
+                <option name="value" value="application/json; charset=utf-8" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="haveTextToSend" value="true" />
+          <option name="textToSend" value="{&#10;  &quot;data&quot;: {&#10;    &quot;environment&quot;: &quot;production&quot;,&#10;    &quot;body&quot;: {&#10;      &quot;trace_chain&quot;: [&#10;        {&#10;          &quot;frames&quot;: [&#10;            {&#10;              &quot;method&quot;: &quot;main&quot;,&#10;              &quot;lineno&quot;: 832,&#10;              &quot;filename&quot;: &quot;kernel/loader.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;epilogue&quot;,&#10;              &quot;lineno&quot;: 720,&#10;              &quot;filename&quot;: &quot;kernel/loader.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run_at_exits&quot;,&#10;              &quot;lineno&quot;: 695,&#10;              &quot;filename&quot;: &quot;kernel/loader.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;call&quot;,&#10;              &quot;lineno&quot;: 20,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/proc.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;autorun&quot;,&#10;              &quot;lineno&quot;: 17,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/runner.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 103,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/runner.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 21,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/command_line.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;report&quot;,&#10;              &quot;lineno&quot;: 58,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/reporter.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 24,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/command_line.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;map&quot;,&#10;              &quot;lineno&quot;: 97,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/array.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 24,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/command_line.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 497,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example_group.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;map&quot;,&#10;              &quot;lineno&quot;: 97,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/array.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 497,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example_group.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 496,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example_group.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run_examples&quot;,&#10;              &quot;lineno&quot;: 511,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example_group.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;map&quot;,&#10;              &quot;lineno&quot;: 97,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/array.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run_examples&quot;,&#10;              &quot;lineno&quot;: 515,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example_group.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 113,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;with_around_each_hooks&quot;,&#10;              &quot;lineno&quot;: 248,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 116,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;instance_eval_with_args&quot;,&#10;              &quot;lineno&quot;: 16,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/extensions/instance_eval_with_args.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;instance_exec&quot;,&#10;              &quot;lineno&quot;: 101,&#10;              &quot;filename&quot;: &quot;kernel/common/eval.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;__script__&quot;,&#10;              &quot;lineno&quot;: 15,&#10;              &quot;filename&quot;: &quot;/home/travis/build/rollbar/rollbar-gem/spec/requests/home_spec.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;to&quot;,&#10;              &quot;lineno&quot;: 117,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-expectations-2.99.2/lib/rspec/expectations/expectation_target.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;to&quot;,&#10;              &quot;lineno&quot;: 59,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-expectations-2.99.2/lib/rspec/expectations/expectation_target.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;handle_matcher&quot;,&#10;              &quot;lineno&quot;: 24,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-expectations-2.99.2/lib/rspec/expectations/handler.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;matches?&quot;,&#10;              &quot;lineno&quot;: 42,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-expectations-2.99.2/lib/rspec/matchers/built_in/raise_error.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;call&quot;,&#10;              &quot;lineno&quot;: 20,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/proc.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;__script__&quot;,&#10;              &quot;lineno&quot;: 15,&#10;              &quot;filename&quot;: &quot;/home/travis/build/rollbar/rollbar-gem/spec/requests/home_spec.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;__script__&quot;,&#10;              &quot;lineno&quot;: 333,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/actionpack-3.2.17/lib/action_dispatch/testing/integration.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;get&quot;,&#10;              &quot;lineno&quot;: 33,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/actionpack-3.2.17/lib/action_dispatch/testing/integration.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;process&quot;,&#10;              &quot;lineno&quot;: 299,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/actionpack-3.2.17/lib/action_dispatch/testing/integration.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;request&quot;,&#10;              &quot;lineno&quot;: 122,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-test-0.6.2/lib/rack/test.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;env_for (env_for_with_rollbar)&quot;,&#10;              &quot;lineno&quot;: 8,&#10;              &quot;filename&quot;: &quot;/home/travis/build/rollbar/rollbar-gem/lib/rollbar/middleware/rack/test_session.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;env_for_without_rollbar (env_for)&quot;,&#10;              &quot;lineno&quot;: 220,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-test-0.6.2/lib/rack/test.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;set_cookie&quot;,&#10;              &quot;lineno&quot;: 24,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-test-0.6.2/lib/rack/mock_session.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;merge&quot;,&#10;              &quot;lineno&quot;: 132,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-test-0.6.2/lib/rack/test/cookie_jar.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;each&quot;,&#10;              &quot;lineno&quot;: 76,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/array.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;merge&quot;,&#10;              &quot;lineno&quot;: 133,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-test-0.6.2/lib/rack/test/cookie_jar.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;initialize&quot;,&#10;              &quot;lineno&quot;: 21,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-test-0.6.2/lib/rack/test/cookie_jar.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;parse_query&quot;,&#10;              &quot;lineno&quot;: 70,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-1.4.5/lib/rack/utils.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;each&quot;,&#10;              &quot;lineno&quot;: 76,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/array.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;parse_query&quot;,&#10;              &quot;lineno&quot;: 72,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-1.4.5/lib/rack/utils.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;map&quot;,&#10;              &quot;lineno&quot;: 97,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/array.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;call (__yield__)&quot;,&#10;              &quot;lineno&quot;: 172,&#10;              &quot;filename&quot;: &quot;kernel/common/proc.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;call&quot;,&#10;              &quot;lineno&quot;: 71,&#10;              &quot;filename&quot;: &quot;kernel/common/method.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;unescape&quot;,&#10;              &quot;lineno&quot;: 41,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-1.4.5/lib/rack/utils.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;decode_www_form_component&quot;,&#10;              &quot;lineno&quot;: 898,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/rubies/rbx/gems/gems/rubysl-uri-2.0.0/lib/uri/common.rb&quot;&#10;            }&#10;          ],&#10;          &quot;exception&quot;: {&#10;            &quot;message&quot;: &quot;Exception1: invalid %-encoding (8%B)&quot;,&#10;            &quot;class&quot;: &quot;ArgumentErrorException1&quot;&#10;          }&#10;        },&#10;        {&#10;          &quot;frames&quot;: [&#10;            {&#10;              &quot;method&quot;: &quot;main&quot;,&#10;              &quot;lineno&quot;: 832,&#10;              &quot;filename&quot;: &quot;kernel/loader.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;epilogue&quot;,&#10;              &quot;lineno&quot;: 720,&#10;              &quot;filename&quot;: &quot;kernel/loader.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run_at_exits&quot;,&#10;              &quot;lineno&quot;: 695,&#10;              &quot;filename&quot;: &quot;kernel/loader.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;call&quot;,&#10;              &quot;lineno&quot;: 20,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/proc.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;autorun&quot;,&#10;              &quot;lineno&quot;: 17,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/runner.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 103,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/runner.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 21,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/command_line.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;report&quot;,&#10;              &quot;lineno&quot;: 58,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/reporter.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 24,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/command_line.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;map&quot;,&#10;              &quot;lineno&quot;: 97,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/array.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 24,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/command_line.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 497,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example_group.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;map&quot;,&#10;              &quot;lineno&quot;: 97,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/array.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 497,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example_group.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 496,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example_group.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run_examples&quot;,&#10;              &quot;lineno&quot;: 511,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example_group.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;map&quot;,&#10;              &quot;lineno&quot;: 97,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/array.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run_examples&quot;,&#10;              &quot;lineno&quot;: 515,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example_group.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 113,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;with_around_each_hooks&quot;,&#10;              &quot;lineno&quot;: 248,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;run&quot;,&#10;              &quot;lineno&quot;: 116,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/example.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;instance_eval_with_args&quot;,&#10;              &quot;lineno&quot;: 16,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-core-2.99.2/lib/rspec/core/extensions/instance_eval_with_args.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;instance_exec&quot;,&#10;              &quot;lineno&quot;: 101,&#10;              &quot;filename&quot;: &quot;kernel/common/eval.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;__script__&quot;,&#10;              &quot;lineno&quot;: 15,&#10;              &quot;filename&quot;: &quot;/home/travis/build/rollbar/rollbar-gem/spec/requests/home_spec.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;to&quot;,&#10;              &quot;lineno&quot;: 117,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-expectations-2.99.2/lib/rspec/expectations/expectation_target.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;to&quot;,&#10;              &quot;lineno&quot;: 59,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-expectations-2.99.2/lib/rspec/expectations/expectation_target.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;handle_matcher&quot;,&#10;              &quot;lineno&quot;: 24,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-expectations-2.99.2/lib/rspec/expectations/handler.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;matches?&quot;,&#10;              &quot;lineno&quot;: 42,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rspec-expectations-2.99.2/lib/rspec/matchers/built_in/raise_error.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;call&quot;,&#10;              &quot;lineno&quot;: 20,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/proc.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;__script__&quot;,&#10;              &quot;lineno&quot;: 15,&#10;              &quot;filename&quot;: &quot;/home/travis/build/rollbar/rollbar-gem/spec/requests/home_spec.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;__script__&quot;,&#10;              &quot;lineno&quot;: 333,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/actionpack-3.2.17/lib/action_dispatch/testing/integration.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;get&quot;,&#10;              &quot;lineno&quot;: 33,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/actionpack-3.2.17/lib/action_dispatch/testing/integration.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;process&quot;,&#10;              &quot;lineno&quot;: 299,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/actionpack-3.2.17/lib/action_dispatch/testing/integration.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;request&quot;,&#10;              &quot;lineno&quot;: 122,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-test-0.6.2/lib/rack/test.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;env_for (env_for_with_rollbar)&quot;,&#10;              &quot;lineno&quot;: 8,&#10;              &quot;filename&quot;: &quot;/home/travis/build/rollbar/rollbar-gem/lib/rollbar/middleware/rack/test_session.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;env_for_without_rollbar (env_for)&quot;,&#10;              &quot;lineno&quot;: 220,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-test-0.6.2/lib/rack/test.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;set_cookie&quot;,&#10;              &quot;lineno&quot;: 24,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-test-0.6.2/lib/rack/mock_session.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;merge&quot;,&#10;              &quot;lineno&quot;: 132,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-test-0.6.2/lib/rack/test/cookie_jar.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;each&quot;,&#10;              &quot;lineno&quot;: 76,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/array.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;merge&quot;,&#10;              &quot;lineno&quot;: 133,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-test-0.6.2/lib/rack/test/cookie_jar.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;initialize&quot;,&#10;              &quot;lineno&quot;: 21,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-test-0.6.2/lib/rack/test/cookie_jar.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;parse_query&quot;,&#10;              &quot;lineno&quot;: 70,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-1.4.5/lib/rack/utils.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;each&quot;,&#10;              &quot;lineno&quot;: 76,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/array.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;parse_query&quot;,&#10;              &quot;lineno&quot;: 72,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-1.4.5/lib/rack/utils.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;map&quot;,&#10;              &quot;lineno&quot;: 97,&#10;              &quot;filename&quot;: &quot;kernel/bootstrap/array.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;call (__yield__)&quot;,&#10;              &quot;lineno&quot;: 172,&#10;              &quot;filename&quot;: &quot;kernel/common/proc.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;call&quot;,&#10;              &quot;lineno&quot;: 71,&#10;              &quot;filename&quot;: &quot;kernel/common/method.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;unescape&quot;,&#10;              &quot;lineno&quot;: 41,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/gems/rbx/gems/rack-1.4.5/lib/rack/utils.rb&quot;&#10;            },&#10;            {&#10;              &quot;method&quot;: &quot;decode_www_form_component&quot;,&#10;              &quot;lineno&quot;: 898,&#10;              &quot;filename&quot;: &quot;/home/travis/.rvm/rubies/rbx/gems/gems/rubysl-uri-2.0.0/lib/uri/common.rb&quot;&#10;            }&#10;          ],&#10;          &quot;exception&quot;: {&#10;            &quot;message&quot;: &quot;Exception2: invalid %-encoding (8%B)&quot;,&#10;            &quot;class&quot;: &quot;ArgumentErrorException2&quot;&#10;          }&#10;        }&#10;      ]&#10;    },&#10;    &quot;uuid&quot;: &quot;d9a419d7-7b11-4435-bf5a-ffaa0fa9ff8c&quot;,&#10;    &quot;language&quot;: &quot;ruby&quot;,&#10;    &quot;server&quot;: {&#10;      &quot;pid&quot;: 3586,&#10;      &quot;host&quot;: &quot;testing-worker-linux-docker-eeafdf0f-2420-linux-9&quot;,&#10;      &quot;root&quot;: &quot;/home/travis/build/rollbar/rollbar-gem/spec/dummyapp&quot;&#10;    },&#10;    &quot;framework&quot;: &quot;Rails: 3.2.17&quot;,&#10;    &quot;notifier&quot;: {&#10;      &quot;version&quot;: &quot;1.2.9&quot;,&#10;      &quot;name&quot;: &quot;rollbar-gem&quot;&#10;    },&#10;    &quot;metadata&quot;: {&#10;      &quot;customer_timestamp&quot;: 1416877955&#10;    },&#10;    &quot;level&quot;: &quot;error&quot;,&#10;    &quot;timestamp&quot;: 1541643406,&#10;    &quot;code_version&quot;: &quot;&quot;,&#10;    &quot;platform&quot;: &quot;Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64Linux linux-mira 4.4.155-68-default #1 SMP Tue Sep 11 13:07:19 UTC 2018 (4ecc783) x86_64&quot;,&#10;    &quot;request&quot;: {&#10;      &quot;url&quot;: &quot;http://rollbarclient.test-local/test.php&quot;,&#10;      &quot;method&quot;: &quot;GET&quot;,&#10;      &quot;headers&quot;: {&#10;        &quot;Cache-Control&quot;: &quot;max-age\u003d0&quot;,&#10;        &quot;Upgrade-Insecure-Requests&quot;: &quot;1&quot;,&#10;        &quot;Connection&quot;: &quot;keep-alive&quot;,&#10;        &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,&#10;        &quot;Accept-Language&quot;: &quot;cs,sk;q\u003d0.8,en-US;q\u003d0.5,en;q\u003d0.3&quot;,&#10;        &quot;Accept&quot;: &quot;text/html,application/xhtml+xml,application/xml;q\u003d0.9,*/*;q\u003d0.8&quot;,&#10;        &quot;User-Agent&quot;: &quot;Mozilla/5.0 (X11; Linux x86_64; rv:62.0) Gecko/20100101 Firefox/62.0&quot;,&#10;        &quot;Host&quot;: &quot;rollbarclient.test-local&quot;&#10;      },&#10;      &quot;GET&quot;: [],&#10;      &quot;query_string&quot;: &quot;&quot;,&#10;      &quot;POST&quot;: [],&#10;      &quot;user_ip&quot;: &quot;192.168.2.10&quot;&#10;    },&#10;    &quot;custom&quot;: []&#10;  },&#10;  &quot;access_token&quot;: &quot;f571229d9ee543a79029858bc5e487c0&quot;&#10;}" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
         <RestClientRequest>
           <option name="httpMethod" value="POST" />
           <option name="urlBase" value="http://rollbarserver.test-local/api/v1.0/item" />
@@ -745,18 +830,39 @@
       <updated>1541608450363</updated>
       <workItem from="1541608452428" duration="22466000" />
       <workItem from="1541703607874" duration="8340000" />
-      <workItem from="1542643330936" duration="65273000" />
+      <workItem from="1542643330936" duration="98295000" />
     </task>
+    <task id="LOCAL-00001" summary="initial commit">
+      <created>1542978126304</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1542978126304</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add trace_chain into api/item">
+      <created>1543195597595</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1543195597595</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add Access-Control headers for cross origin requests">
+      <created>1543195721875</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1543195721875</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96079000" />
+    <option name="totallyTimeSpent" value="129101000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1673" y="0" width="1934" height="1182" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19743863" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1456777" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="DB Browser" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -764,18 +870,18 @@
       <window_info anchor="bottom" id="Database Console" weight="0.3294686" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3294686" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2772947" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.27686352" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.32913843" />
       <window_info anchor="bottom" id="DB Execution Console" order="9" />
-      <window_info anchor="bottom" id="Database Changes" order="10" weight="0.3294686" />
+      <window_info anchor="bottom" id="Database Changes" order="10" weight="0.32913843" />
       <window_info anchor="bottom" id="Regex Tester" order="11" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.3294686" />
-      <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" weight="0.3294686" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.32913843" />
+      <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" weight="0.32913843" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -790,8 +896,42 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="initial commit" />
+    <MESSAGE value="add trace_chain into api/item" />
+    <MESSAGE value="add Access-Control headers for cross origin requests" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Access-Control headers for cross origin requests" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/rest-api_2.http">
@@ -870,31 +1010,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/v1.0/payloadDataFormat.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/rest-api_1.http">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="38" selection-start-column="38" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/rest-api.http">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="5" selection-start-column="5" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -926,13 +1045,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/v1.0/item.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="38" column="61" selection-start-line="38" selection-start-column="45" selection-end-line="38" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/mysqli/mysqli.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
@@ -954,48 +1066,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inc/item.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="65" column="29" selection-start-line="65" selection-start-column="29" selection-end-line="65" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inc/section_project_items.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="123" selection-start-line="25" selection-start-column="60" selection-end-line="25" selection-end-column="123" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inc/occurrence.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inc/user.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="86" column="139" selection-start-line="86" selection-start-column="139" selection-end-line="86" selection-end-column="139" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/custom.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3876">
-          <caret line="228" selection-start-line="228" selection-end-line="228" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/v1.0/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153680">
@@ -1003,17 +1073,111 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/css/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="221" column="24" lean-forward="true" selection-start-line="221" selection-start-column="24" selection-end-line="221" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/occurrence.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="12" lean-forward="true" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/user.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="86" column="79" selection-start-line="86" selection-start-column="79" selection-end-line="86" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/item.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="935">
+          <caret line="132" column="46" selection-start-line="132" selection-start-column="46" selection-end-line="132" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/date/date_c.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="318" column="20" selection-start-line="318" selection-start-column="20" selection-end-line="318" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/v1.0/payloadDataFormat.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/inc/section_project_item.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="788">
-          <caret line="63" column="6" selection-start-line="63" selection-start-column="6" selection-end-line="63" selection-end-column="6" />
+        <state relative-caret-position="-221">
+          <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/section_project_items.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="268" column="44" selection-start-line="268" selection-start-column="44" selection-end-line="268" selection-end-column="44" />
+        <state relative-caret-position="4471">
+          <caret line="263" column="12" lean-forward="true" selection-start-line="263" selection-start-column="12" selection-end-line="263" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/itemWriter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/rest-api.http">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/v1.0/item.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="37" column="62" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/v1.0/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="10" lean-forward="true" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
         </state>
       </provider>
     </entry>
