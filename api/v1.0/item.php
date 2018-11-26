@@ -39,11 +39,14 @@ switch ($method){
           $itemWriter->setItemType('trace');
           $itemWriter->setUserId($userId);
           $itemWriter->setProjectId($projectId);
-          $itemWriter->setPayload($payload);
           $itemWriter->setLastItem($last_item);
 
-          foreach ($payload->data->body->trace_chain as $trace){
+          $trace_chain = $payload->data->body->trace_chain;
+          unset ($payload->data->body->trace_chain);
+          foreach ($trace_chain as $trace){
             $id_str = $itemWriter->makeIdStr($trace);
+            $payload->data->body->trace = $trace;
+            $itemWriter->setPayload($payload);
             $itemWriter->setIdStr($id_str);
 
             $itemWriter->writeItem(true);

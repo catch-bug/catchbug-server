@@ -227,3 +227,7 @@ div#loading {
   border-bottom: 5px solid #5bc0eb;
 }
 
+.text-monospace{
+  font-size: 0.8rem;
+}
+

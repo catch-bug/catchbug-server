@@ -30,7 +30,7 @@ class occurrence
   {
     $this->id = $obj->id;
     $this->timestamp = new \DateTime( $obj->timestamp, new \DateTimeZone('UTC'));
-    $this->data = \json_decode($obj->data);
+    $this->data = \json_decode($obj->data, false);
   }
 
   public function getTimestampStr(string $format, \DateTimeZone $timezone=null): string
