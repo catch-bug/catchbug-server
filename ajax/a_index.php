@@ -7,9 +7,11 @@
  */
 
 
-require_once __DIR__ . '/../inc/ajax_secure.php';
+use rollbug\config;
 
-require_once __DIR__ . '/../inc/config.php';
+require_once __DIR__ . '/../inc/ajax_secure.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+
 $config = new config();
 
 require_once __DIR__ . '/../inc/mysqli.php';
@@ -56,6 +58,32 @@ switch ($cmd){
 #region lostPassword
   case 'lostPassword':
 
+    break;
+#endregion
+
+#region delete_item
+  case 'delete_item':
+    $userId = (integer) ($_GET['userid'] ?? 0);
+    $projectId = (integer) ($_GET['projectid'] ?? 0);
+    $itemId = (integer) ($_GET['itemid'] ?? 0);
+
+    if ($_SESSION['user_id'] === $userId) {
+      $stmt = $mysqli->prepare('DELETE FROM item WHERE user_id=? and project_id=? and id=?');
+      $stmt->bind_param('iii', $userId, $projectId, $itemId);
+      $query_success = $stmt->execute();
+      $stmt->close();
+
+      if($query_success) {
+        $vystup['code'] = 0;
+        $vystup['message'] = 'Item successfully deleted.';
+      } else {
+        $vystup['code'] = 1;
+        $vystup['message'] = 'Delete item failed.';
+      }
+    } else {
+      $vystup['code'] = 1;
+      $vystup['message'] = 'Unauthorised access!';
+    }
     break;
 #endregion
 }
