@@ -210,5 +210,46 @@ class item
     }
   }
 
+  /**
+   * @param bool $htmlSafe
+   *
+   * @return string
+   */
+  public function getExceptionMessage(bool $htmlSafe=false): string
+  {
+    if ($htmlSafe){
+      return \htmlentities($this->exceptionMessage, ENT_QUOTES);
+    }
+    return $this->exceptionMessage;
+  }
+
+  /**
+   * @return string
+   */
+  public function getTracebackHTML(): string
+  {
+    $tracebackContent = <<<HTML
+<p><span class="text-danger">{$this->exceptionClass}:</span> {$this->getFirstOcc()->getExceptionMessage(true)}</p>
+HTML;
+
+    if ($this->type === 'trace') {
+
+      $frames = $this->getFirstOcc()->data->body->trace->frames;
+      $tracebackContent .= '<div class="text-monospace">';
+      foreach ($frames as $id => $frame) {
+        $tracebackContent .= str_replace(' ', '&nbsp;', sprintf('%3s ', $id)) .
+            '<span class="text-black-50">File</span> ' . $frame->filename . ' ' .
+            (property_exists($frame, 'lineno') ? '<span class="text-black-50">line</span> ' . $frame->lineno . ' ' : '') .
+            (property_exists($frame, 'colno') ? '<span class="text-black-50">col.</span> ' . $frame->colno . ' ' : '') .
+            (property_exists($frame, 'method') ? '<span class="text-black-50">in</span> <code>' . $frame->method . '</code> ' : '') .
+            (property_exists($frame, 'code') ? '<span class="text-black-50">code <code>' . $frame->code . '</code> ' : '') .
+            (property_exists($frame, 'class_name') ? '<span class="text-black-50">class</span> ' . $frame->class_name . ' ' : '') . '<br>';
+      }
+      $tracebackContent .= '</div>';
+    }
+
+    return $tracebackContent;
+  }
+
 
 }

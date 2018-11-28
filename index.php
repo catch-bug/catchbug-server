@@ -35,6 +35,7 @@ $title = '';
 $section = strtok($_SERVER['QUERY_STRING'], '/');
 $helper = new helper();
 
+// user is logged
 if (isset($_SESSION['user_id'])){
   $config = new config();
 
@@ -55,9 +56,11 @@ if (isset($_SESSION['user_id'])){
       $projectSection = strtok('/');
       $projectSection = $projectSection === false ? 'items' : $projectSection;
 
-      $projectName = $projectId !== 0 ? $user->getProject($projectId)->getName() : 'All projects';
+      if ($user->isProject($projectId)) {
 
-      $content .= <<<HTML
+        $projectName = $projectId !== 0 ? $user->getProject($projectId)->getName() : 'All projects';
+
+        $content .= <<<HTML
 <h1>{$projectName}</h1>
 
 <ul class="nav justify-content-center subnav">
@@ -66,35 +69,53 @@ if (isset($_SESSION['user_id'])){
   </li>
 HTML;
 
-      if ($projectId !== 0) {
-        $content .= <<<HTML
+        if ($projectId !== 0) {
+          $content .= <<<HTML
   <li class="nav-item {$helper->checkActive($projectSection, 'settings')}">
     <a class="nav-link" href="/?project/$projectId/settings">Settings</a>
   </li> 
 HTML;
-      }
+        }
 
-      $content .= <<<HTML
+        $content .= <<<HTML
 <div class="pt-4"></div>
 </ul>
 <hr>
 HTML;
 
-      switch ($projectSection){
-        case 'items':
-          include __DIR__ . '/inc/section_project_items.php';
-          break;
+        switch ($projectSection) {
+          case 'items':
+            include __DIR__ . '/inc/section_project_items.php';
+            break;
 
-        case 'item':
-          $projectItem = (integer) strtok('/');
-          include __DIR__ . '/inc/section_project_item.php';
-          break;
+          case 'item':
+            $projectItem = (integer)strtok('/');
+            $itemSection = strtok('/');
+            if ($itemSection === false) {
+              include __DIR__ . '/inc/section_project_item.php';
+            } else {
+              switch ($itemSection) {
+                case 'occurrence':
+                  $itemOccurrenceId = (integer)strtok('/');
+                  if ($itemOccurrenceId > 0) {
+                    include __DIR__ . '/inc/section_project_item_occurrence.php';
+                  }
+                  break;
+              }
+            }
+            break;
 
-        case 'settings':
-          $projectSectionMenu = strtok('/');
-          $projectSectionMenu = $projectSectionMenu === false ? 'general' : $projectSectionMenu;
+          case 'settings':
+            $projectSectionMenu = strtok('/');
+            $projectSectionMenu = $projectSectionMenu === false ? 'general' : $projectSectionMenu;
 
-          break;
+            break;
+        }
+
+      } else {
+        $content .= <<<HTML
+<h4 class="text-danger">Project not found</h4>
+HTML;
       }
       break;
 
@@ -103,6 +124,7 @@ HTML;
       break;
   }
 
+// user NOT logged
 } else {
 
 }
@@ -121,7 +143,7 @@ echo <<<HTML
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/css/devicon.css">
     <link rel="stylesheet" href="/css/devicon-colors.css">
-    <link rel="stylesheet" href="/css/c3.css">
+    <link rel="stylesheet" href="/css/c3.min.css">
     <link rel="stylesheet" href="/css/custom.css">
 
     <title>$title</title>
@@ -143,6 +165,25 @@ echo <<<HTML
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-danger btn-block" data-dismiss="modal">OK</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="okModal" class="modal fade">
+	<div class="modal-dialog modal-confirm modal-confirm-ok">
+		<div class="modal-content">
+			<div class="modal-header justify-content-center">
+				<div class="icon-box">
+					<i class="material-icons">&#xE876;</i>
+				</div>				
+				<h4 class="modal-title">OK!</h4>	
+			</div>
+			<div class="modal-body">
+				<p class="text-center" id="okModalText"></p>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
 			</div>
 		</div>
 	</div>
@@ -272,6 +313,7 @@ echo <<<HTML
 <script type="text/javascript">
   var AJAX_TOKEN = '$_SESSION[ajax_token]';
 </script>
+
 <script src="/js/jquery-3.3.1.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/d3.min.js" charset="utf-8"></script>
@@ -283,3 +325,4 @@ echo <<<HTML
   </body>
 </html>
 HTML;
+

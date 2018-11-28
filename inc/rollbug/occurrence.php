@@ -189,6 +189,20 @@ class occurrence
   }
 
   /**
+   * @param bool $htmlSafe
+   *
+   * @return string
+   */
+  public function getRawJSON(bool $htmlSafe=false):string
+  {
+    if ($htmlSafe) {
+      return \htmlentities(json_encode($this->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE), ENT_QUOTES);
+    }
+
+    return json_encode($this->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+  }
+
+  /**
    * @return string
    */
   private function getUserAgent(): string

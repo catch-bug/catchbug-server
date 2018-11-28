@@ -129,6 +129,15 @@ class user
     return $this->projects[$id];
   }
 
+  /**
+   * @param int $id
+   *
+   * @return bool
+   */
+  public function isProject(int $id): bool
+  {
+    return isset($this->projects[$id]);
+  }
 
   /**
    * @return int

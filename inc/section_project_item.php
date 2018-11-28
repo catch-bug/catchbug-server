@@ -33,50 +33,8 @@ if ($result = $mysqli->query($query) ) {
       echo '</pre>';
       */
 
-      /**
-       * Helper function for tab name in heredoc
-       *
-       * @param $type
-       *
-       * @return string
-       */
-      $tabTracebackName = function ($type) {
-        switch ($type) {
-          case 'trace':
-            return 'Traceback';
-            break;
-
-          case 'message':
-            return 'Message';
-            break;
-
-          case 'crash_report':
-            return 'Crash Report';
-            break;
-        }
-        return '';
-      };
-
       // ----------------------------------- traceback / message
-      $tabTracebackContent = <<<HTML
-<p><span class="text-danger">{$item->exceptionClass}:</span> {$item->getFirstOcc()->getExceptionMessage(true)}</p>
-HTML;
-
-      if ($item->type === 'trace') {
-
-        $frames = $item->getFirstOcc()->data->body->trace->frames;
-        $tabTracebackContent .= '<div class="text-monospace">';
-        foreach ($frames as $id => $frame) {
-          $tabTracebackContent .= str_replace(' ', '&nbsp;', sprintf('%3s ', $id)) .
-              '<span class="text-black-50">File</span> ' . $frame->filename . ' ' .
-              (property_exists($frame, 'lineno') ? '<span class="text-black-50">line</span> ' . $frame->lineno . ' ' : '') .
-              (property_exists($frame, 'colno') ? '<span class="text-black-50">col.</span> ' . $frame->colno . ' ' : '') .
-              (property_exists($frame, 'method') ? '<span class="text-black-50">in</span> <code>' . $frame->method . '</code> ' : '') .
-              (property_exists($frame, 'code') ? '<span class="text-black-50">code <code>' . $frame->code . '</code> ' : '') .
-              (property_exists($frame, 'class_name') ? '<span class="text-black-50">class</span> ' . $frame->class_name . ' ' : '') . '<br>';
-        }
-        $tabTracebackContent .= '</div>';
-      }
+      $tabTracebackContent = $item->getTracebackHTML();
 
 
       // ----------------------------------- occurrences
@@ -261,6 +219,8 @@ JS;
       $content .= <<<HTML
 <h4>#{$item->id} <span class="text-danger">{$item->exceptionClass}:</span> {$item->getFirstOcc()->getExceptionMessage(true)}</h4>
 <hr>
+<div class="d-flex flex-row mb-3">
+<div>
 <form class="form-inline">
 <label class="my-1 mr-2" for="selectLevel">Level:</label>
 <select class="custom-select custom-select-sm my-1 mr-sm-2" id="selectLevel">
@@ -271,6 +231,10 @@ JS;
 <option value="debug" {$helper->checkSelected('debug', $item->level)}>Debug</option>
 </select>
 </form>
+</div>
+
+<div class="ml-auto"><button type="button float-right" class="btn btn-danger" id="btnDeleteItem" data-projectid="{$item->projectId}" data-userid="$user->id" data-itemid="{$item->id}">Delete Item</button></div>
+</div>
 
 <hr>
 
@@ -286,7 +250,7 @@ JS;
 
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-traceback-tab" data-toggle="tab" href="#nav-traceback" role="tab" aria-controls="nav-traceback" aria-selected="true">{$tabTracebackName($item->type)}</a>
+    <a class="nav-item nav-link active" id="nav-traceback-tab" data-toggle="tab" href="#nav-traceback" role="tab" aria-controls="nav-traceback" aria-selected="true">{$helper->tabTracebackName($item->type)}</a>
     <a class="nav-item nav-link" id="nav-occurrences-tab" data-toggle="tab" href="#nav-occurrences" role="tab" aria-controls="nav-occurrences" aria-selected="false">Occurrences</a>
     <a class="nav-item nav-link {$helper->disabled($tabCoOccurringItemsDisabled)}" id="nav-cooccurrences-tab" data-toggle="tab" href="#nav-cooccurrences" role="tab" aria-controls="nav-cooccurrences" aria-selected="false">Co-Occurring Items</a>
     <a class="nav-item nav-link" id="nav-browser-tab" data-toggle="tab" href="#nav-browser" role="tab" aria-controls="nav-browser" aria-selected="false">Browser/OS</a>
@@ -319,7 +283,7 @@ HTML;
     }
   } else {
     $content .= <<<HTML
-<h4>Item not found</h4>
+<h4 class="text-danger">Item not found</h4>
 HTML;
 
   }
