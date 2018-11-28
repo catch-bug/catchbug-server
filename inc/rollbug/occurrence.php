@@ -8,7 +8,6 @@
 
 namespace rollbug;
 
-use Sinergi\BrowserDetector\Os;
 use Sinergi\BrowserDetector\UserAgent;
 
 class occurrence
@@ -34,7 +33,7 @@ class occurrence
   public $browser;
 
   /**
-   * @var \Sinergi\BrowserDetector\Os
+   * @var \rollbug\os
    */
   public $os;
 
@@ -46,7 +45,7 @@ class occurrence
 
     $userAgent = new UserAgent($this->getUserAgent());
     $this->browser = new browser($userAgent);
-    $this->os = new Os($userAgent);
+    $this->os = new os($userAgent);
   }
 
   /**
@@ -70,7 +69,8 @@ class occurrence
    */
   public function getRequestMethod(): string
   {
-    if (\property_exists($this->data, 'request') && \property_exists($this->data->request, 'method')){
+    if (\property_exists($this->data, 'request') &&
+        \property_exists($this->data->request, 'method')){
       return $this->data->request->method;
     }
 
@@ -82,7 +82,8 @@ class occurrence
    */
   public function getURL(): string
   {
-    if (\property_exists($this->data, 'request') && \property_exists($this->data->request, 'url')){
+    if (\property_exists($this->data, 'request')
+        && \property_exists($this->data->request, 'url')){
       return $this->data->request->url;
     }
 
@@ -94,8 +95,9 @@ class occurrence
    */
   public function getQueryString(): string
   {
-    if (\property_exists($this->data, 'request') && \property_exists($this->data->request, 'url')){
-      return \parse_url($this->data->request->url, \PHP_URL_QUERY);
+    if (\property_exists($this->data, 'request') &&
+        \property_exists($this->data->request, 'url')){
+      return \parse_url($this->data->request->url, \PHP_URL_QUERY) ?? '';
     }
 
     return '';
@@ -106,24 +108,81 @@ class occurrence
    */
   public function getUserIP(): string
   {
-    if (\property_exists($this->data, 'request') && \property_exists($this->data->request, 'user_ip')){
+    if (\property_exists($this->data, 'request') &&
+        \property_exists($this->data->request, 'user_ip')){
       return $this->data->request->user_ip;
     }
 
-    return '';
+    return 'Unknown';
+  }
+
+  /**
+   * @param bool $htmlSafe
+   *
+   * @return string
+   */
+  public function getExceptionMessage(bool $htmlSafe=false): string
+  {
+    $message = '';
+    if (\property_exists($this->data->body, 'message')) {
+      $message =  $this->data->body->message->body;
+    }
+
+    if (\property_exists($this->data->body, 'trace') &&
+        \property_exists($this->data->body->trace->exception, 'message')) {
+      $message =  $this->data->body->trace->exception->message;
+    }
+
+    if ($htmlSafe){
+      $message = \htmlentities($message, ENT_QUOTES);
+    }
+
+    return $message;
+  }
+
+  /**
+   * @return array
+   */
+  public function getGetArray(): array
+  {
+    if (\property_exists($this->data, 'request') &&
+        \property_exists($this->data->request, 'GET')){
+      return (array) $this->data->request->GET;
+
+    }
+    return [];
+  }
+
+  /**
+   * @return array
+   */
+  public function getPostArray(): array
+  {
+    if (\property_exists($this->data, 'request') &&
+        \property_exists($this->data->request, 'POST')){
+      return (array) $this->data->request->POST;
+
+    }
+    return [];
   }
 
   /**
    * @return string
    */
-  public function getExceptionMessage(): string
+  public function getCodeVersion(): string
   {
-    if (\property_exists($this->data->body, 'message')) {
-      return $this->data->body->message;
+    if (\property_exists($this->data, 'code_version')) {
+      return $this->data->code_version;
     }
 
-    if (\property_exists($this->data->body, 'trace') && \property_exists($this->data->body->trace->exception, 'message')) {
-      return $this->data->body->trace->exception->message;
+    if (\property_exists($this->data, 'client') &&
+        \property_exists($this->data->client, 'code_version')) {
+      return $this->data->client->code_version;
+    }
+
+    if (\property_exists($this->data, 'server') &&
+        \property_exists($this->data->server, 'code_version')) {
+      return $this->data->server->code_version;
     }
 
     return '';
@@ -138,6 +197,12 @@ class occurrence
         \property_exists($this->data->request, 'headers') &&
         \property_exists($this->data->request->headers, 'User-Agent')){
       return $this->data->request->headers->{'User-Agent'};
+    }
+
+    if (\property_exists($this->data, 'client') &&
+        \property_exists($this->data->client, 'javascript') &&
+        \property_exists($this->data->client->javascript, 'browser')){
+      return $this->data->client->javascript->browser;
     }
 
     return '';

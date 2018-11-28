@@ -10,15 +10,16 @@ use rollbug\item;
 use rollbug\occurrence;
 
 /** @var \rollbug\user $user */
+/** @var \rollbug\helper $helper */
 
-$query = "SELECT id, project_id, level, language, id_str, type, last_occ, last_timestamp FROM item WHERE user_id=$user->id and project_id=$projectId and id=$projectItem";
+$query = "SELECT id, project_id, level, language, id_str, type, last_occ, last_timestamp, first_in_chain FROM item WHERE user_id=$user->id and project_id=$projectId and id=$projectItem";
 if ($result = $mysqli->query($query) ) {
   $obj = $result->fetch_object();
   if ($obj !== null) {
     $item = new item($obj);
     $result->close();
 
-    $query = "SELECT id, project_id, timestamp, data FROM occurence WHERE user_id=$user->id and project_id=$projectId and item_id=$projectItem and user_id=$user->id order by id desc";
+    $query = "SELECT id, project_id, timestamp, data FROM occurrence WHERE user_id=$user->id and project_id=$projectId and item_id=$projectItem and user_id=$user->id order by id desc";
     if ($result = $mysqli->query($query)) {
       while ($obj = $result->fetch_object()) {
         if ($obj !== null) {
@@ -56,8 +57,9 @@ if ($result = $mysqli->query($query) ) {
         return '';
       };
 
+      // ----------------------------------- traceback / message
       $tabTracebackContent = <<<HTML
-<p><span class="text-danger">{$item->exceptionClass}:</span> {$item->exceptionMessage}</p>
+<p><span class="text-danger">{$item->exceptionClass}:</span> {$item->getFirstOcc()->getExceptionMessage(true)}</p>
 HTML;
 
       if ($item->type === 'trace') {
@@ -76,36 +78,44 @@ HTML;
         $tabTracebackContent .= '</div>';
       }
 
-      if ($item->type === 'trace') {
 
-
+      // ----------------------------------- occurrences
+      $tabOccurrencesContent = '';
+      if (($item->type === 'trace') || ($item->type === 'message')) {
         $tabOccurrencesContentBody = '';
+
         /** @var \rollbug\occurrence $occurrence */
         foreach ($item->occurrences as $id => $occurrence) {
           $tabOccurrencesContentBody .= '<tr>';
           // Timestamp
           $tabOccurrencesContentBody .= "<td><a href=\"?/project/$projectId/item/{$item->id}/occurrence/$id\">{$occurrence->getTimestampStr('d.m.Y H:i:s', $user->DateTimeZone)}</a> </td>";
           // Browser
-          $tabOccurrencesContentBody .= "<td>{$occurrence->browser->getName()}</td>";
+          $tabOccurrencesContentBody .= "<td>{$occurrence->browser->getImg(24)}</td>";
           // OS
-          $tabOccurrencesContentBody .= "<td>{$occurrence->os->getName()}</td>";
+          $tabOccurrencesContentBody .= "<td>{$occurrence->os->getImg(24)}</td>";
           // Req. Method
           $tabOccurrencesContentBody .= "<td>{$occurrence->getRequestMethod()}</td>";
           // Request URL
-          if ($occurrence->getRequestMethod() === 'GET') {
-            $tabOccurrencesContentBody .= "<td><a href='{$occurrence->getURL()}' target='_blank'>{$occurrence->getURL()}</a></td>";
-          } elseif ($occurrence->getRequestMethod() === 'POST'){
+          $tabOccurrencesContentBody .= '<td>';
+          if (($occurrence->getRequestMethod() === 'GET') || ($occurrence->getRequestMethod() === '')) {
+            $tabOccurrencesContentBody .= "<a href='{$occurrence->getURL()}' target='_blank'>{$occurrence->getURL()}</a>";
+          } else {
             // todo script for CURL replay post data
-            $tabOccurrencesContentBody .= "<td>{$occurrence->getURL()}</td>";
+            $tabOccurrencesContentBody .= $occurrence->getURL();
           }
+          $tabOccurrencesContentBody .= '</td>';
           // Exception Message
-          $tabOccurrencesContentBody .= "<td>{$occurrence->getExceptionMessage()}</td>";
+          /*
+          $tabOccurrencesContentBody .= "<td>
+<span class='d-inline-block text-truncate' style='max-width: 200px;' title='{$occurrence->getExceptionMessage(true)}'>{$occurrence->getExceptionMessage(true)}</span>
+</td>";
+          */
           // Code Version
-          $tabOccurrencesContentBody .= "<td></td>";
+          $tabOccurrencesContentBody .= "<td>{$occurrence->getCodeVersion()}</td>";
           // GET
-          $tabOccurrencesContentBody .= "<td></td>";
+          $tabOccurrencesContentBody .= "<td class='list-values'>{$helper->listArray($occurrence->getGetArray())}</td>";
           // POST
-          $tabOccurrencesContentBody .= "<td></td>";
+          $tabOccurrencesContentBody .= "<td class='list-values'>{$helper->listArray($occurrence->getPostArray())}</td>";
           // Query String
           $tabOccurrencesContentBody .= "<td>{$occurrence->getQueryString()}</td>";
           // User IP
@@ -125,7 +135,6 @@ HTML;
 <th scope="col">OS</th>
 <th scope="col">Req. Method</th>
 <th scope="col">Request URL</th>
-<th scope="col">Exception Message</th>
 <th scope="col">Code Version</th>
 <th scope="col">GET</th>
 <th scope="col">POST</th>
@@ -140,18 +149,126 @@ HTML;
 
       }
 
+      // ----------------------------------- co-occurring items
+      $tabCoOccurringItemsContent = '';
 
+      if ((int) $item->firstInChain === 0){
+        $query = "SELECT id, project_id, level, language, id_str, type, last_occ, last_timestamp, first_in_chain FROM item WHERE user_id=$user->id and project_id=$projectId and first_in_chain=$item->id";
+      } else {
+        $query = "SELECT id, project_id, level, language, id_str, type, last_occ, last_timestamp, first_in_chain FROM item WHERE user_id=$user->id and project_id=$projectId and (id=$item->firstInChain or first_in_chain=$item->firstInChain)";
+      }
+
+      $coOccurringItems = [];
+      /** @noinspection NotOptimalIfConditionsInspection */
+      if ($result = $mysqli->query($query) ) {
+        while ($obj = $result->fetch_object()) {
+          if ($obj !== null) {
+            $coOccurringItems[ $obj->id ] = new item($obj);
+          }
+        }
+        $result->close();
+
+        $tabCoOccurringItemsContentBody = '';
+        $tabCoOccurringItemsDisabled = true;
+
+        if (count($coOccurringItems) > 0) {
+          $tabCoOccurringItemsDisabled = false;
+
+          foreach ($coOccurringItems as $coOccurringItem) {
+
+            $tabCoOccurringItemsContentBody .= <<<HTML
+<tr>
+<td>{$coOccurringItem->lastOcc}</td>
+<td>{$coOccurringItem->getLastTimestampStr('d.m.Y H:i:s', $user->DateTimeZone)}</td>
+<td><i class="devicon-{$coOccurringItem->language}-plain colored" title="{$coOccurringItem->language}"></i></td>
+<td><a href="?/project/{$coOccurringItem->projectId}/item/{$coOccurringItem->id}">#{$coOccurringItem->id} {$coOccurringItem->exceptionClass}: {$coOccurringItem->exceptionMessage}</a></td>
+<td>{$coOccurringItem->level}</td>
+</tr>
+HTML;
+          }
+
+          $tabCoOccurringItemsContent .= <<<HTML
+<div class="table-responsive">
+<table class="table table-hover table-sm ">
+<thead class="thead-dark">
+<tr>
+<th scope="col">Total</th>
+<th scope="col">Last</th>
+<th scope="col"></th>
+<th scope="col">Item</th>
+<th scope="col">Level</th>
+</tr>
+</thead>
+<tbody>$tabCoOccurringItemsContentBody</tbody>
+</table>
+</div>
+HTML;
+        }
+      }
+
+
+        // ----------------------------------- browser / OS
+      $tabBrowserContent = '<div class="row">';
+      $item->countBrowsers();
+      $item->countOs();
+
+      if (count($item->browsers) > 0) {
+        $columns = '';
+        foreach ($item->browsers as $name => $count) {
+          $columns .= "['$name',$count],";
+        }
+
+        $tabBrowserContent .= '<div class="col-sm-6"><div id="browser-chart"></div></div>';
+        $javascriptContent .= <<<JS
+var chartB = c3.generate({
+    bindto: '#browser-chart',
+    data: {
+      columns: [$columns],
+      type : 'pie'
+    }
+});
+JS;
+      }
+
+      if (count($item->oss) > 0) {
+        $columns = '';
+        foreach ($item->oss as $name => $count) {
+          $columns .= "['$name',$count],";
+        }
+
+        $tabBrowserContent .= '<div class="col-sm-6"><div id="os-chart"></div></div>';
+        $javascriptContent .= <<<JS
+var chartO = c3.generate({
+  bindto: '#os-chart',
+  data: {
+    columns: [$columns],
+    type : 'pie'
+  }
+});
+JS;
+
+      }
+      $tabBrowserContent .= '</div>';
+
+
+          // ----------------------------------- IP addresses
+      $tabIpAddr = '';
+      $item->countUserIP();
+      $tabIpAddr .= $helper->listArray($item->userIPs, 'col-sm-2', 'col-sm-10');
+
+
+      // ----------------------------------- page content
       $content .= <<<HTML
-<h4>#{$item->id} {$item->exceptionClass}: {$item->exceptionMessage}</h4>
+<h4>#{$item->id} <span class="text-danger">{$item->exceptionClass}:</span> {$item->getFirstOcc()->getExceptionMessage(true)}</h4>
 <hr>
 <form class="form-inline">
 <label class="my-1 mr-2" for="selectLevel">Level:</label>
 <select class="custom-select custom-select-sm my-1 mr-sm-2" id="selectLevel">
-<option value="critical" {$active->checkSelected('ctitical', $item->level)}>Critical</option>
-<option value="error" {$active->checkSelected('error', $item->level)}>Error</option>
-<option value="warning" {$active->checkSelected('warning', $item->level)}>Warning</option>
-<option value="info" {$active->checkSelected('info', $item->level)}>Info</option>
-<option value="debug" {$active->checkSelected('debug', $item->level)}>Debug</option>
+<option value="critical" {$helper->checkSelected('ctitical', $item->level)}>Critical</option>
+<option value="error" {$helper->checkSelected('error', $item->level)}>Error</option>
+<option value="warning" {$helper->checkSelected('warning', $item->level)}>Warning</option>
+<option value="info" {$helper->checkSelected('info', $item->level)}>Info</option>
+<option value="debug" {$helper->checkSelected('debug', $item->level)}>Debug</option>
 </select>
 </form>
 
@@ -161,6 +278,8 @@ HTML;
   <div class="p-2">First seen: {$item->getFirstTimestampStr('d.m.Y H:i:s', $user->DateTimeZone)}</div>
   <div class="p-2">Last seen: {$item->getLastTimestampStr('d.m.Y H:i:s', $user->DateTimeZone)}</div>
   <div class="p-2">Occurrences: {$item->lastOcc}</div>
+  
+  <div class="ml-auto"><i class="devicon-{$item->language}-plain colored h1" title="{$item->language}"></i></div>
 </div>
 
 <hr>
@@ -169,27 +288,27 @@ HTML;
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-traceback-tab" data-toggle="tab" href="#nav-traceback" role="tab" aria-controls="nav-traceback" aria-selected="true">{$tabTracebackName($item->type)}</a>
     <a class="nav-item nav-link" id="nav-occurrences-tab" data-toggle="tab" href="#nav-occurrences" role="tab" aria-controls="nav-occurrences" aria-selected="false">Occurrences</a>
-    <a class="nav-item nav-link" id="nav-cooccurrences-tab" data-toggle="tab" href="#nav-cooccurrences" role="tab" aria-controls="nav-cooccurrences" aria-selected="false">Co-Occurrences</a>
+    <a class="nav-item nav-link {$helper->disabled($tabCoOccurringItemsDisabled)}" id="nav-cooccurrences-tab" data-toggle="tab" href="#nav-cooccurrences" role="tab" aria-controls="nav-cooccurrences" aria-selected="false">Co-Occurring Items</a>
     <a class="nav-item nav-link" id="nav-browser-tab" data-toggle="tab" href="#nav-browser" role="tab" aria-controls="nav-browser" aria-selected="false">Browser/OS</a>
-    <a class="nav-item nav-link" id="nav-ipaddr-tab" data-toggle="tab" href="#nav-ipaddr" role="tab" aria-controls="nav-ipaddr" aria-selected="false">IP Adresses</a>
+    <a class="nav-item nav-link" id="nav-ipaddr-tab" data-toggle="tab" href="#nav-ipaddr" role="tab" aria-controls="nav-ipaddr" aria-selected="false">IP Addresses</a>
   </div>
 </nav>
 
 <div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade pt-3 show active" id="nav-traceback" role="tabpanel" aria-labelledby="nav-traceback-tab">
+  <div class="tab-pane pt-3 show active" id="nav-traceback" role="tabpanel" aria-labelledby="nav-traceback-tab">
   $tabTracebackContent
   </div>
-  <div class="tab-pane fade pt-3" id="nav-occurrences" role="tabpanel" aria-labelledby="nav-occurrences-tab">
+  <div class="tab-pane pt-3" id="nav-occurrences" role="tabpanel" aria-labelledby="nav-occurrences-tab">
   $tabOccurrencesContent
   </div>
-  <div class="tab-pane fade pt-3" id="nav-cooccurrences" role="tabpanel" aria-labelledby="nav-cooccurrences-tab">
-  bbbbb...cooccurrences
+  <div class="tab-pane pt-3" id="nav-cooccurrences" role="tabpanel" aria-labelledby="nav-cooccurrences-tab">
+  $tabCoOccurringItemsContent
   </div>
-  <div class="tab-pane fade pt-3" id="nav-browser" role="tabpanel" aria-labelledby="nav-browser-tab">
-  cccc...browser
+  <div class="tab-pane pt-3" id="nav-browser" role="tabpanel" aria-labelledby="nav-browser-tab">
+  $tabBrowserContent
   </div>
-  <div class="tab-pane fade pt-3" id="nav-ipaddr" role="tabpanel" aria-labelledby="nav-ipaddr-tab">
-  cccc...ipaddr
+  <div class="tab-pane pt-3" id="nav-ipaddr" role="tabpanel" aria-labelledby="nav-ipaddr-tab">
+  $tabIpAddr
   </div>
 </div>
 

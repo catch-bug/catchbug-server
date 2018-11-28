@@ -66,9 +66,32 @@ class item
   public $lastTimestamp;
 
   /**
+   * @var int
+   */
+  public $firstInChain = 0;
+
+  /**
    * @var \rollbug\occurrence
    */
   public $occurrences = array();
+
+  /**
+   * browser array 'browser name' => 'count'
+   * @var array
+   */
+  public $browsers = [];
+
+  /**
+   * OS array 'os name' => 'count'
+   * @var array
+   */
+  public $oss = [];
+
+  /**
+   * IP array 'user IP' => 'count'
+   * @var array
+   */
+  public $userIPs = [];
 
   /**
    * item constructor.
@@ -83,6 +106,7 @@ class item
     $this->type = $item->type;
     $this->language = $item->language;
     $this->lastOcc = $item->last_occ;
+    $this->firstInChain = $item->first_in_chain;
     $this->lastTimestamp = new \DateTime( $item->last_timestamp, new \DateTimeZone('UTC'));
     $this->file = \strtok($item->id_str, '|');
     $this->line = \strtok('|');
@@ -132,6 +156,59 @@ class item
     return end($this->occurrences);
   }
 
+  /**
+   * @param bool $force
+   */
+  public function countBrowsers(bool $force=false): void
+  {
+    if(!$force && \count($this->browsers) === 0){
+      /** @var \rollbug\occurrence $occurrence */
+      foreach ($this->occurrences as $occurrence){
+        $browserId = $occurrence->browser->getName() . ' ' . $occurrence->browser->getVersion();
+        if (\array_key_exists($browserId, $this->browsers)){
+          $this->browsers[$browserId]++;
+        } else {
+          $this->browsers[$browserId] = 1;
+        }
+      }
+    }
+  }
+
+  /**
+   * @param bool $force
+   */
+  public function countOs(bool $force=false): void
+  {
+    if(!$force && \count($this->oss) === 0){
+      /** @var \rollbug\occurrence $occurrence */
+      foreach ($this->occurrences as $occurrence){
+        $osId = $occurrence->os->getName() . ' ' . $occurrence->os->getVersion();
+        if (\array_key_exists($osId, $this->oss)){
+          $this->oss[$osId]++;
+        } else {
+          $this->oss[$osId] = 1;
+        }
+      }
+    }
+  }
+
+  /**
+   * @param bool $force
+   */
+  public function countUserIP(bool $force=false): void
+  {
+    if(!$force && \count($this->userIPs) === 0){
+      /** @var \rollbug\occurrence $occurrence */
+      foreach ($this->occurrences as $occurrence){
+        $userIP = $occurrence->getUserIP();
+        if (\array_key_exists($userIP, $this->userIPs)){
+          $this->userIPs[$userIP]++;
+        } else {
+          $this->userIPs[$userIP] = 1;
+        }
+      }
+    }
+  }
 
 
 }

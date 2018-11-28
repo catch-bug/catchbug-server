@@ -227,7 +227,13 @@ div#loading {
   border-bottom: 5px solid #5bc0eb;
 }
 
-.text-monospace{
-  font-size: 0.8rem;
+.text-monospace,
+.table-occurrence{
+  font-size: 80%;
+}
+
+td.list-values dl,
+td.list-values dd{
+  margin-bottom: 0;
 }
 

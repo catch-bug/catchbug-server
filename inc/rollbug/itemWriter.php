@@ -45,7 +45,7 @@ class itemWriter
    */
   private $mysqli;
   /**
-   * @var \config
+   * @var config
    */
   private $config;
 
@@ -62,9 +62,9 @@ class itemWriter
    * itemWriter constructor.
    *
    * @param \mysqli $mysqli
-   * @param \config $config
+   * @param config $config
    */
-  public function __construct(\mysqli $mysqli, \config $config)
+  public function __construct(\mysqli $mysqli, config $config)
   {
     $this->mysqli = $mysqli;
     $this->config = $config;
@@ -229,7 +229,8 @@ class itemWriter
 
     if ($last_occ <= $this->config->max_occurences) {
       $data = json_encode($this->payload->data);
-      $stmt = $this->mysqli->prepare('INSERT INTO occurence (id, user_id, project_id, item_id, timestamp, data) VALUES (?,?,?,?,?,?);');
+      $data = \str_replace('$remote_ip', $this->getClientIpServer(), $data);
+      $stmt = $this->mysqli->prepare('INSERT INTO occurrence (id, user_id, project_id, item_id, timestamp, data) VALUES (?,?,?,?,?,?);');
       $stmt->bind_param('iiiiss', $last_occ, $this->userId, $this->projectId, $itemId, $timestamp, $data);
       $this->query_success = $this->query_success && $stmt->execute();
       $this->mysqli_error .= "\n" . $this->mysqli->error;
@@ -244,6 +245,38 @@ class itemWriter
      */
 
 
+  }
+
+  /**
+   * Function to get the client ip address
+   *
+   * @return string
+   */
+  private function getClientIpServer(): string
+  {
+    if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+      $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    }
+    else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+      $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    else if (isset($_SERVER['HTTP_X_FORWARDED'])) {
+      $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+    }
+    else if (isset($_SERVER['HTTP_FORWARDED_FOR'])) {
+      $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    }
+    else if (isset($_SERVER['HTTP_FORWARDED'])) {
+      $ipaddress = $_SERVER['HTTP_FORWARDED'];
+    }
+    else if (isset($_SERVER['REMOTE_ADDR'])) {
+      $ipaddress = $_SERVER['REMOTE_ADDR'];
+    }
+    else {
+      $ipaddress = 'UNKNOWN';
+    }
+
+    return $ipaddress;
   }
 
 }

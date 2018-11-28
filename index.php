@@ -6,6 +6,7 @@
  * @Time   : 17:34
  */
 
+use rollbug\helper;
 use rollbug\user;
 use rollbug\config;
 
@@ -28,10 +29,11 @@ if(!isset($_SESSION['ajax_token'])) {
 }
 
 $content = '';
+$javascriptContent = '';
 $title = '';
 
 $section = strtok($_SERVER['QUERY_STRING'], '/');
-$active = new active();
+$helper = new helper();
 
 if (isset($_SESSION['user_id'])){
   $config = new config();
@@ -59,14 +61,14 @@ if (isset($_SESSION['user_id'])){
 <h1>{$projectName}</h1>
 
 <ul class="nav justify-content-center subnav">
-  <li class="nav-item {$active->checkActive($projectSection, 'items')}">
+  <li class="nav-item {$helper->checkActive($projectSection, 'items')}">
     <a class="nav-link" href="/?project/$projectId/items">Items</a>
   </li>
 HTML;
 
       if ($projectId !== 0) {
         $content .= <<<HTML
-  <li class="nav-item {$active->checkActive($projectSection, 'settings')}">
+  <li class="nav-item {$helper->checkActive($projectSection, 'settings')}">
     <a class="nav-link" href="/?project/$projectId/settings">Settings</a>
   </li> 
 HTML;
@@ -114,9 +116,13 @@ echo <<<HTML
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/custom.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/css/devicon.css">
+    <link rel="stylesheet" href="/css/devicon-colors.css">
+    <link rel="stylesheet" href="/css/c3.css">
+    <link rel="stylesheet" href="/css/custom.css">
 
     <title>$title</title>
 
@@ -155,20 +161,20 @@ HTML;
 if (isset($_SESSION['user_id'])) {
   echo <<<HTML
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item {$active->checkActive($section, 'dashboard')}">
+          <li class="nav-item {$helper->checkActive($section, 'dashboard')}">
             <a class="nav-link" href="/?dashboard">Dashboard</a>
           </li>
-          <li class="nav-item dropdown {$active->checkActive($section, 'project')}">
+          <li class="nav-item dropdown {$helper->checkActive($section, 'project')}">
             <a class="nav-link dropdown-toggle" href="#" id="navbarProjects" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
             <div class="dropdown-menu" aria-labelledby="navbarProjects">
-              <a class="dropdown-item {$active->checkActive($projectId, 0)}" href="/?project/">All projects</a>
+              <a class="dropdown-item {$helper->checkActive($projectId, 0)}" href="/?project/">All projects</a>
 
 HTML;
 
   /** @var \rollbug\project $project */
   foreach ($user->projects as $project){
     echo <<<HTML
-<a class="dropdown-item {$active->checkActive($projectId, $project->getId())}" href="/?project/{$project->getId()}/items" data-id="{$project->getId()}">{$project->getName()}</a>
+<a class="dropdown-item {$helper->checkActive($projectId, $project->getId())}" href="/?project/{$project->getId()}/items" data-id="{$project->getId()}">{$project->getName()}</a>
 HTML;
 
   }
@@ -266,27 +272,14 @@ echo <<<HTML
 <script type="text/javascript">
   var AJAX_TOKEN = '$_SESSION[ajax_token]';
 </script>
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/index.js"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/d3.min.js" charset="utf-8"></script>
+<script src="/js/c3.min.js"></script>
+<script src="/js/index.js"></script>
+<script type="text/javascript">$javascriptContent</script>
  
   <div id="loading" style="display: none;"></div>
   </body>
 </html>
 HTML;
-
-
-
-class active
-{
-  public function checkActive($section, $item)
-  {
-    return $section === $item ? ' active' : '';
-  }
-
-  public function checkSelected($option, $item)
-  {
-    return $option === $item ? ' selected' : '';
-  }
-}

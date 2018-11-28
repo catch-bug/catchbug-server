@@ -1,3 +1,6 @@
 /.idea/
 /api/v1.0/textfile.txt
 
+/composer.lock
+/composer.phar
+/vendor/

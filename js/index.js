@@ -15,6 +15,14 @@ $(function() {
     $(this).blur();
   });
 
+  $("#nav-browser-tab").on('click', function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+    console.log("prdel");
+    chartB.flush();
+    chartO.flush();
+  });
+
   $("#formLogin").submit(function (e) {
     e.preventDefault();
 
@@ -38,5 +46,7 @@ $(function() {
           $('#loading').hide();
         })
   });
+
+  $('*[data-toggle="tooltip"]').tooltip();
 
 });

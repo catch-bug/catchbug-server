@@ -904,7 +904,7 @@
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
     <table id="226" parent="3" name="item"/>
-    <table id="227" parent="3" name="occurence"/>
+    <table id="227" parent="3" name="occurrence"/>
     <table id="228" parent="3" name="project">
       <Collation>utf32_bin</Collation>
     </table>
@@ -942,7 +942,7 @@
     </column>
     <column id="236" parent="226" name="id_str">
       <Position>6</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>varchar(400)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1050,7 +1050,7 @@ item_id
 id</ColNames>
       <UnderlyingIndexName>id</UnderlyingIndexName>
     </key>
-    <foreign-key id="253" parent="227" name="occurence_ibfk_1">
+    <foreign-key id="253" parent="227" name="occurrence_ibfk_1">
       <ColNames>user_id
 project_id
 item_id</ColNames>

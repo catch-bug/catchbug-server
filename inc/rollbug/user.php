@@ -80,9 +80,9 @@ class user
   public function setItems(int $project): user
   {
     if ($project !== 0) {
-      $query = "SELECT id, project_id, level, language, id_str, last_occ, type, last_timestamp FROM item WHERE user_id=$this->id and project_id=$project order by id desc";
+      $query = "SELECT id, project_id, level, language, id_str, last_occ, type, last_timestamp, first_in_chain FROM item WHERE user_id=$this->id and project_id=$project order by id desc";
     } else {
-      $query = "SELECT id, project_id, level, language, id_str, last_occ, type, last_timestamp FROM item WHERE user_id=$this->id order by id desc";
+      $query = "SELECT id, project_id, level, language, id_str, last_occ, type, last_timestamp, first_in_chain FROM item WHERE user_id=$this->id order by id desc";
     }
 
     if ($result = $this->mysqli->query($query)) {
