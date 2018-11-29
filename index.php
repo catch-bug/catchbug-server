@@ -319,6 +319,7 @@ echo <<<HTML
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/d3.min.js" charset="utf-8"></script>
 <script src="/js/c3.min.js"></script>
+<script src="/js/bootstrap-notify.js"></script>
 <script src="/js/index.js"></script>
 <script type="text/javascript">$javascriptContent</script>
  

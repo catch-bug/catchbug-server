@@ -223,7 +223,7 @@ JS;
 <div>
 <form class="form-inline">
 <label class="my-1 mr-2" for="selectLevel">Level:</label>
-<select class="custom-select custom-select-sm my-1 mr-sm-2" id="selectLevel">
+<select class="custom-select custom-select-sm my-1 mr-sm-2" id="selectLevel" data-projectid="{$item->projectId}" data-userid="$user->id" data-itemid="{$item->id}">
 <option value="critical" {$helper->checkSelected('ctitical', $item->level)}>Critical</option>
 <option value="error" {$helper->checkSelected('error', $item->level)}>Error</option>
 <option value="warning" {$helper->checkSelected('warning', $item->level)}>Warning</option>
@@ -233,7 +233,7 @@ JS;
 </form>
 </div>
 
-<div class="ml-auto"><button type="button float-right" class="btn btn-danger" id="btnDeleteItem" data-projectid="{$item->projectId}" data-userid="$user->id" data-itemid="{$item->id}">Delete Item</button></div>
+<div class="ml-auto"><button type="button" class="btn btn-danger" id="btnDeleteItem" data-projectid="{$item->projectId}" data-userid="$user->id" data-itemid="{$item->id}">Delete Item</button></div>
 </div>
 
 <hr>
@@ -241,7 +241,7 @@ JS;
 <div class="d-flex flex-row mb-3">
   <div class="p-2">First seen: {$item->getFirstTimestampStr('d.m.Y H:i:s', $user->DateTimeZone)}</div>
   <div class="p-2">Last seen: {$item->getLastTimestampStr('d.m.Y H:i:s', $user->DateTimeZone)}</div>
-  <div class="p-2">Occurrences: {$item->lastOcc}</div>
+  <div class="p-2">Occurrences all time: {$item->lastOcc}</div>
   
   <div class="ml-auto"><i class="devicon-{$item->language}-plain colored h1" title="{$item->language}"></i></div>
 </div>

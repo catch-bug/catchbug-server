@@ -70,7 +70,6 @@ $(function() {
           projectid = $(this).data("projectid"),
           itemid = $(this).data("itemid");
 
-      console.log(userid);
       $.get("/ajax/a_index.php?cmd=delete_item&ajax_token=" + AJAX_TOKEN + "&itemid=" + itemid + "&projectid=" + projectid + "&userid=" + userid)
           .done(function (result) {
             if (result.code === 0) {
@@ -100,13 +99,12 @@ $(function() {
           itemid = $(this).data("itemid"),
           occurrenceid = $(this).data("occurrenceid");
 
-      console.log(userid);
-      $.get("/ajax/a_index.php?cmd=delete_item&ajax_token=" + AJAX_TOKEN + "&itemid=" + itemid + "&projectid=" + projectid + "&userid=" + userid + "&occurrenceid=" + occurrenceid)
+      $.get("/ajax/a_index.php?cmd=delete_occurrence&ajax_token=" + AJAX_TOKEN + "&itemid=" + itemid + "&projectid=" + projectid + "&userid=" + userid + "&occurrenceid=" + occurrenceid)
           .done(function (result) {
             if (result.code === 0) {
               $("#okModalText").text(result.message);
               $("#okModal").modal('show').on('hidden.bs.modal', function (e) {
-                document.location.replace(_REWRITE + "project/" + projectid + "/item/" + itemid);
+                document.location.replace(_REWRITE + "project/" + projectid + "/item/" + itemid + '#nav-occurrences');
               });
             } else {
               $("#errorModalText").text(result.message);
@@ -119,6 +117,34 @@ $(function() {
           })
     }
 
+  });
+
+  $("#selectLevel").on('change', function() {
+    var userid = $(this).data("userid"),
+        projectid = $(this).data("projectid"),
+        itemid = $(this).data("itemid"),
+        level = this.value,
+        type = 'success';
+
+    $.get("/ajax/a_index.php?cmd=change_level&ajax_token=" + AJAX_TOKEN + "&itemid=" + itemid + "&projectid=" + projectid + "&userid=" + userid + "&level=" + level)
+        .done(function (result) {
+          if (result.code === 0) {
+
+          } else {
+            type = 'danger';
+          }
+          $.notify({
+            // http://bootstrap-notify.remabledesigns.com/
+            message: result.message
+          },{
+            delay: 2000,
+            type: 'success'
+          });
+          $('#loading').hide();
+        })
+        .fail(function () {
+          $('#loading').hide();
+        })
   });
 
 

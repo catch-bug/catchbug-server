@@ -67,7 +67,7 @@ if ($result = $mysqli->query($query) ) {
 <div>
 <form class="form-inline">
 <label class="my-1 mr-2" for="selectLevel">Level:</label>
-<select class="custom-select custom-select-sm my-1 mr-sm-2" id="selectLevel">
+<select class="custom-select custom-select-sm my-1 mr-sm-2" id="selectLevel" data-projectid="{$item->projectId}" data-userid="$user->id" data-itemid="{$item->id}">
 <option value="critical" {$helper->checkSelected('ctitical', $item->level)}>Critical</option>
 <option value="error" {$helper->checkSelected('error', $item->level)}>Error</option>
 <option value="warning" {$helper->checkSelected('warning', $item->level)}>Warning</option>

@@ -19,7 +19,7 @@ require_once __DIR__ . '/../inc/mysqli.php';
 $vystup = array();
 
 $vystup['code'] = 1;
-$vystup['message'] = '';
+$vystup['message'] = 'Command not found.';
 
 
 $cmd = $_GET['cmd'] ?? $_POST['cmd'] ?? '';
@@ -79,6 +79,60 @@ switch ($cmd){
       } else {
         $vystup['code'] = 1;
         $vystup['message'] = 'Delete item failed.';
+      }
+    } else {
+      $vystup['code'] = 1;
+      $vystup['message'] = 'Unauthorised access!';
+    }
+    break;
+#endregion
+
+#region delete_occurrence
+  case 'delete_occurrence':
+    $userId = (integer) ($_GET['userid'] ?? 0);
+    $projectId = (integer) ($_GET['projectid'] ?? 0);
+    $itemId = (integer) ($_GET['itemid'] ?? 0);
+    $occurrenceId = (integer) ($_GET['occurrenceid'] ?? 0);
+
+    if ($_SESSION['user_id'] === $userId) {
+      $stmt = $mysqli->prepare('DELETE FROM occurrence WHERE user_id=? and project_id=? and item_id=? and id=?');
+      $stmt->bind_param('iiii', $userId, $projectId, $itemId, $occurrenceId);
+      $query_success = $stmt->execute();
+      $stmt->close();
+
+      if($query_success) {
+        $vystup['code'] = 0;
+        $vystup['message'] = 'Item successfully deleted.';
+      } else {
+        $vystup['code'] = 1;
+        $vystup['message'] = 'Delete item failed.';
+      }
+    } else {
+      $vystup['code'] = 1;
+      $vystup['message'] = 'Unauthorised access!';
+    }
+    break;
+#endregion
+
+#region change_level
+  case 'change_level':
+    $userId = (integer) ($_GET['userid'] ?? 0);
+    $projectId = (integer) ($_GET['projectid'] ?? 0);
+    $itemId = (integer) ($_GET['itemid'] ?? 0);
+    $level = $_GET['level'] ?? '';
+
+    if ($_SESSION['user_id'] === $userId) {
+      $stmt = $mysqli->prepare('UPDATE item SET level = ? WHERE user_id=? and project_id=? and id=?');
+      $stmt->bind_param('siii', $level, $userId, $projectId, $itemId);
+      $query_success = $stmt->execute();
+      $stmt->close();
+
+      if($query_success) {
+        $vystup['code'] = 0;
+        $vystup['message'] = 'Item level successfully changed.';
+      } else {
+        $vystup['code'] = 1;
+        $vystup['message'] = 'Updating item level failed.';
       }
     } else {
       $vystup['code'] = 1;
