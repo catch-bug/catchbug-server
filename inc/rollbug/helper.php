@@ -43,12 +43,12 @@ class helper
   /**
    * add active to class in bs4 navigation
    *
-   * @param $section string
-   * @param $item    string
+   * @param $section mixed
+   * @param $item    mixed
    *
    * @return string ' active' | ''
    */
-  public function checkActive(string $section, string $item): string
+  public function checkActive($section, $item): string
   {
     return $section === $item ? ' active' : '';
   }

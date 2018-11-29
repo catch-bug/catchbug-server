@@ -56,7 +56,7 @@ if (isset($_SESSION['user_id'])){
       $projectSection = strtok('/');
       $projectSection = $projectSection === false ? 'items' : $projectSection;
 
-      if ($user->isProject($projectId)) {
+      if (($projectId === 0) || $user->isProject($projectId)) {
 
         $projectName = $projectId !== 0 ? $user->getProject($projectId)->getName() : 'All projects';
 
@@ -205,7 +205,7 @@ if (isset($_SESSION['user_id'])) {
           <li class="nav-item {$helper->checkActive($section, 'dashboard')}">
             <a class="nav-link" href="/?dashboard">Dashboard</a>
           </li>
-          <li class="nav-item dropdown {$helper->checkActive($section, 'project')}">
+          <li class="nav-item dropdown {$helper->checkActive($section, 'project')}{$helper->checkActive($section, 'newproject')}">
             <a class="nav-link dropdown-toggle" href="#" id="navbarProjects" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
             <div class="dropdown-menu" aria-labelledby="navbarProjects">
               <a class="dropdown-item {$helper->checkActive($projectId, 0)}" href="/?project/">All projects</a>
@@ -222,19 +222,19 @@ HTML;
 
   echo <<<HTML
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" id="navNewProject" href="/?newproject">New project</a>
+              <a class="dropdown-item {$helper->checkActive($section, 'newproject')}" id="navNewProject" href="/?newproject">New project</a>
             </div>
           </li>
         </ul>
 HTML;
 }
 
-// user logout
+// user menu and logout
 if (isset($_SESSION['user_id'])){
   echo <<<HTML
 <ul class="nav navbar-nav navbar-right ml-auto">
   <li class="nav-item">
-    <a class="nav-link" href="/?user/{$user->name}" data-id="{$user->getId()}" id="navUser">{$user->name}</a>
+    <a class="nav-link{$helper->checkActive($section, 'user')}" href="/?user/{$user->name}" data-id="{$user->getId()}" id="navUser">{$user->name}</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#" id="navLogout">Log out</a>
