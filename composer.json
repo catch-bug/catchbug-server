@@ -1,12 +1,16 @@
 {
   "name": "ms502040/rollbug",
+  "version": "1.0.0-dev",
+  "type": "project",
   "description": "description_text",
+  "keywords": [],
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
     {
       "name": "Mira",
-      "email": "ms502040@gmail.com"
+      "email": "ms502040@gmail.com",
+      "role": "Developer"
     }
   ],
   "require": {
@@ -18,7 +22,9 @@
   "autoload": {
     "psr-4": {
       "rollbug\\": "\\inc\\rollbug"
-    },
-    "files": ["config.php"]
+    }
+  },
+  "config": {
+    "sort-packages": true
   }
 }
