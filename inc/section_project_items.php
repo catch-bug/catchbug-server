@@ -23,7 +23,7 @@ foreach ($user->items as $item){
 <td>{$item->lastOcc}</td>
 <td>{$item->getLastTimestampStr('d.m.Y H:i:s', $user->DateTimeZone)}</td>
 <td><i class="devicon-{$item->language}-plain colored" title="{$item->language}"></i></td>
-<td><a href="?/project/{$item->projectId}/item/{$item->id}">#{$item->id} {$item->exceptionClass}: {$item->getExceptionMessage(true)}</a></td>
+<td><a href="{$config->rewrite}project/{$item->projectId}/item/{$item->id}">#{$item->id} {$item->exceptionClass}: {$item->getExceptionMessage(true)}</a></td>
 <td>{$item->level}</td>
 </tr>
 HTML;

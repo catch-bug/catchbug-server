@@ -46,7 +46,7 @@ if ($result = $mysqli->query($query) ) {
         foreach ($item->occurrences as $id => $occurrence) {
           $tabOccurrencesContentBody .= '<tr>';
           // Timestamp
-          $tabOccurrencesContentBody .= "<td><a href=\"?/project/$projectId/item/{$item->id}/occurrence/$id\">{$occurrence->getTimestampStr('d.m.Y H:i:s', $user->DateTimeZone)}</a> </td>";
+          $tabOccurrencesContentBody .= "<td><a href=\"{$config->rewrite}project/$projectId/item/{$item->id}/occurrence/$id\">{$occurrence->getTimestampStr('d.m.Y H:i:s', $user->DateTimeZone)}</a> </td>";
           // Browser
           $tabOccurrencesContentBody .= "<td>{$occurrence->browser->getImg(24)}</td>";
           // OS
@@ -139,7 +139,7 @@ HTML;
 <td>{$coOccurringItem->lastOcc}</td>
 <td>{$coOccurringItem->getLastTimestampStr('d.m.Y H:i:s', $user->DateTimeZone)}</td>
 <td><i class="devicon-{$coOccurringItem->language}-plain colored" title="{$coOccurringItem->language}"></i></td>
-<td><a href="?/project/{$coOccurringItem->projectId}/item/{$coOccurringItem->id}">#{$coOccurringItem->id} {$coOccurringItem->exceptionClass}: {$coOccurringItem->exceptionMessage}</a></td>
+<td><a href="{$config->rewrite}project/{$coOccurringItem->projectId}/item/{$coOccurringItem->id}">#{$coOccurringItem->id} {$coOccurringItem->exceptionClass}: {$coOccurringItem->exceptionMessage}</a></td>
 <td>{$coOccurringItem->level}</td>
 </tr>
 HTML;

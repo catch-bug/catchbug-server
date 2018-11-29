@@ -61,7 +61,7 @@ if ($result = $mysqli->query($query) ) {
 
 // ----------------------------------- page content
         $content .= <<<HTML
-<h4><a href="?/project/$projectId/item/{$item->id}">#{$item->id}</a> <span class="text-danger">{$item->exceptionClass}:</span> {$item->getFirstOcc()->getExceptionMessage(true)}</h4>
+<h4><a href="{$config->rewrite}project/$projectId/item/{$item->id}">#{$item->id}</a> <span class="text-danger">{$item->exceptionClass}:</span> {$item->getFirstOcc()->getExceptionMessage(true)}</h4>
 <hr>
 <div class="d-flex flex-row mb-3">
 <div>
@@ -77,7 +77,7 @@ if ($result = $mysqli->query($query) ) {
 </form>
 </div>
 
-<div class="ml-auto"><button type="button float-right" class="btn btn-danger" id="btnDeleteOccurrence">Delete Occurrence</button></div>
+<div class="ml-auto"><button type="button float-right" class="btn btn-danger" id="btnDeleteOccurrence" data-projectid="{$item->projectId}" data-userid="$user->id" data-itemid="{$item->id}" data-occurrenceid="{$item->getFirstOcc()->id}">Delete Occurrence</button></div>
 </div>
 <hr>
 {$item->getTracebackHTML()}

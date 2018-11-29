@@ -65,14 +65,14 @@ if (isset($_SESSION['user_id'])){
 
 <ul class="nav justify-content-center subnav">
   <li class="nav-item {$helper->checkActive($projectSection, 'items')}">
-    <a class="nav-link" href="/?project/$projectId/items">Items</a>
+    <a class="nav-link" href="{$config->rewrite}project/$projectId/items">Items</a>
   </li>
 HTML;
 
         if ($projectId !== 0) {
           $content .= <<<HTML
   <li class="nav-item {$helper->checkActive($projectSection, 'settings')}">
-    <a class="nav-link" href="/?project/$projectId/settings">Settings</a>
+    <a class="nav-link" href="{$config->rewrite}project/$projectId/settings">Settings</a>
   </li> 
 HTML;
         }
@@ -203,26 +203,26 @@ if (isset($_SESSION['user_id'])) {
   echo <<<HTML
         <ul class="navbar-nav mr-auto">
           <li class="nav-item {$helper->checkActive($section, 'dashboard')}">
-            <a class="nav-link" href="/?dashboard">Dashboard</a>
+            <a class="nav-link" href="{$config->rewrite}dashboard">Dashboard</a>
           </li>
           <li class="nav-item dropdown {$helper->checkActive($section, 'project')}{$helper->checkActive($section, 'newproject')}">
             <a class="nav-link dropdown-toggle" href="#" id="navbarProjects" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
             <div class="dropdown-menu" aria-labelledby="navbarProjects">
-              <a class="dropdown-item {$helper->checkActive($projectId, 0)}" href="/?project/">All projects</a>
+              <a class="dropdown-item {$helper->checkActive($projectId, 0)}" href="{$config->rewrite}project/">All projects</a>
 
 HTML;
 
   /** @var \rollbug\project $project */
   foreach ($user->projects as $project){
     echo <<<HTML
-<a class="dropdown-item {$helper->checkActive($projectId, $project->getId())}" href="/?project/{$project->getId()}/items" data-id="{$project->getId()}">{$project->getName()}</a>
+<a class="dropdown-item {$helper->checkActive($projectId, $project->getId())}" href="{$config->rewrite}project/{$project->getId()}/items" data-id="{$project->getId()}">{$project->getName()}</a>
 HTML;
 
   }
 
   echo <<<HTML
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item {$helper->checkActive($section, 'newproject')}" id="navNewProject" href="/?newproject">New project</a>
+              <a class="dropdown-item {$helper->checkActive($section, 'newproject')}" id="navNewProject" href="{$config->rewrite}newproject">New project</a>
             </div>
           </li>
         </ul>
@@ -234,7 +234,7 @@ if (isset($_SESSION['user_id'])){
   echo <<<HTML
 <ul class="nav navbar-nav navbar-right ml-auto">
   <li class="nav-item">
-    <a class="nav-link{$helper->checkActive($section, 'user')}" href="/?user/{$user->name}" data-id="{$user->getId()}" id="navUser">{$user->name}</a>
+    <a class="nav-link{$helper->checkActive($section, 'user')}" href="{$config->rewrite}user/{$user->name}" data-id="{$user->getId()}" id="navUser">{$user->name}</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#" id="navLogout">Log out</a>
@@ -311,7 +311,8 @@ echo '<main role="main" class="container" id="content">' . $content . '</main>';
 
 echo <<<HTML
 <script type="text/javascript">
-  var AJAX_TOKEN = '$_SESSION[ajax_token]';
+  var AJAX_TOKEN = '$_SESSION[ajax_token]',
+  _REWRITE = '{$config->rewrite}';
 </script>
 
 <script src="/js/jquery-3.3.1.min.js"></script>

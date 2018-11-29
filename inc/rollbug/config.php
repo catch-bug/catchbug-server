@@ -9,6 +9,21 @@ namespace rollbug;
 
 class config
 {
+  /**
+    (object)(array(
+  'database' =>
+  (object)(array(
+  'server' => 'localhost',
+  'user' => 'rollbar',
+  'pass' => 'prdel',
+  'database' => 'rollbar',
+  'port' => '5719',
+  'socket' => '/tmp/mysql_sandbox5719.sock',
+  )),
+  'max_occurences' => 10,
+  'rewrite' => '/',  '/' - rewrite is on; '/?' - rewrite is off
+  ));
+   */
   private static $data;
   private $settingsFileName;
 

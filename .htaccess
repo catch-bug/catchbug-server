@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^project/(.*) index.php?project/$1 [END,QSA]

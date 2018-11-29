@@ -76,7 +76,7 @@ $(function() {
             if (result.code === 0) {
               $("#okModalText").text(result.message);
               $("#okModal").modal('show').on('hidden.bs.modal', function (e) {
-                document.location.replace("/?project/" + projectid + "/items");
+                document.location.replace(_REWRITE + "project/" + projectid + "/items");
               });
             } else {
               $("#errorModalText").text(result.message);
@@ -90,6 +90,37 @@ $(function() {
     }
 
   });
+
+  $("#btnDeleteOccurrence").on('click', function (e) {
+    e.preventDefault();
+    var result = confirm("Want to delete this item?");
+    if (result) {
+      var userid = $(this).data("userid"),
+          projectid = $(this).data("projectid"),
+          itemid = $(this).data("itemid"),
+          occurrenceid = $(this).data("occurrenceid");
+
+      console.log(userid);
+      $.get("/ajax/a_index.php?cmd=delete_item&ajax_token=" + AJAX_TOKEN + "&itemid=" + itemid + "&projectid=" + projectid + "&userid=" + userid + "&occurrenceid=" + occurrenceid)
+          .done(function (result) {
+            if (result.code === 0) {
+              $("#okModalText").text(result.message);
+              $("#okModal").modal('show').on('hidden.bs.modal', function (e) {
+                document.location.replace(_REWRITE + "project/" + projectid + "/item/" + itemid);
+              });
+            } else {
+              $("#errorModalText").text(result.message);
+              $("#errorModal").modal('show');
+            }
+            $('#loading').hide();
+          })
+          .fail(function () {
+            $('#loading').hide();
+          })
+    }
+
+  });
+
 
 
 
