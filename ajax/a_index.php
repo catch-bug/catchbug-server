@@ -7,6 +7,7 @@
  */
 
 
+use Composer\Plugin\PreCommandRunEvent;
 use rollbug\config;
 
 require_once __DIR__ . '/../inc/ajax_secure.php';
@@ -27,18 +28,18 @@ $cmd = $_GET['cmd'] ?? $_POST['cmd'] ?? '';
 switch ($cmd){
 #region login
   case 'login':
-    $login = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
+    $login = trim($_POST['username'] ?? '');
+    $password = trim($_POST['password'] ?? '');
     //$password = md5($password);
 
-    $stmt = $mysqli->prepare('SELECT id FROM user WHERE (name=? or email=?) and password=?');
-    $stmt->bind_param('sss', $login, $login, $password);
-    $stmt->bind_result($userId);
+    $stmt = $mysqli->prepare('SELECT id, password FROM user WHERE name=?');
+    $stmt->bind_param('s', $login);
+    $stmt->bind_result($userId, $userPassword);
     $stmt->execute();
     $stmt->fetch();
     $stmt->close();
 
-    if ($userId !== null){
+    if (password_verify($password, $userPassword)){
       $vystup['code'] = 0;
       $_SESSION['user_id'] = $userId;
     } else {
@@ -51,6 +52,43 @@ switch ($cmd){
 
 #region register
   case 'register':
+    $userName = trim($_POST['username'] ?? '');
+    $userPassword = trim ($_POST['password'] ?? '');
+    $userPasswordConfirm = trim ($_POST['passwordConfirm'] ?? '');
+
+    if ($userPassword !== $userPasswordConfirm){
+      $vystup['code'] = 1;
+      $vystup['message'] = 'Passwords not matches.';
+    } else {
+      $stmt = $mysqli->prepare('SELECT count(id) FROM user WHERE name=? LIMIT 1');
+      $stmt->bind_param('s', $userName);
+      $stmt->bind_result($pocet);
+      $stmt->execute();
+      $stmt->fetch();
+      $stmt->close();
+
+      if ($pocet > 0){
+        $vystup['code'] = 1;
+        $vystup['message'] = 'User with name ' . $userName . ' already registered. Try another name.';
+      } else {
+        $userPassword = password_hash($userPassword, PASSWORD_DEFAULT);
+        $stmt = $mysqli->prepare('INSERT INTO user (name, password) VALUES (?,?);');
+        $stmt->bind_param('ss', $userName, $userPassword);
+        $query_success = $stmt->execute();
+        $userId = $stmt->insert_id;
+        $stmt->close();
+
+        if ($query_success){
+          $_SESSION['user_id'] = $userId;
+          $vystup['code'] = 0;
+          $vystup['message'] = 'You successfully registered.';
+        } else {
+          $vystup['code'] = 1;
+          $vystup['message'] = 'Database error.';
+        }
+
+      }
+    }
 
     break;
 #endregion

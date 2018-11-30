@@ -34,10 +34,10 @@ $title = '';
 
 $section = strtok($_SERVER['QUERY_STRING'], '/');
 $helper = new helper();
+$config = new config();
 
 // user is logged
 if (isset($_SESSION['user_id'])){
-  $config = new config();
 
   require_once __DIR__ . '/inc/mysqli.php';
 
@@ -47,8 +47,18 @@ if (isset($_SESSION['user_id'])){
 
   switch ($section){
     case 'user':
-      include __DIR__ . '/inc/section_user.php';
-      break;
+      $userSection = strtok('/');
+      switch ($userSection){
+        case 'welcome':
+          include __DIR__ . '/inc/section_user_welcome.php';
+          break;
+
+        case 'settings':
+
+          break;
+      }
+
+      break; // section user
 
     case 'project':
       $projectId = (integer) strtok('/');
@@ -146,7 +156,7 @@ $projectSettingsContent
 </div>
 HTML;
 
-            break;  // case 'settings'
+            break;  // project / case 'settings'
         } // end switch $projectSection
 
       } else {
@@ -154,7 +164,7 @@ HTML;
 <h4 class="text-danger">Project not found</h4>
 HTML;
       }
-      break;
+      break; // section project
 
     case 'newproject':
 
@@ -274,7 +284,7 @@ if (isset($_SESSION['user_id'])){
     <a class="nav-link{$helper->checkActive($section, 'user')}" href="{$config->rewrite}user/{$user->name}" data-id="{$user->getId()}" id="navUser">{$user->name}</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#" id="navLogout">Log out</a>
+    <a class="nav-link" href="/logout.php" id="navLogout">Log out</a>
   </li>
 </ul>
 HTML;
@@ -318,16 +328,17 @@ HTML;
 						<form id="formRegister">
 							<p class="hint-text">Fill in this form to create your account!</p>
 							<div class="form-group">
-								<input type="text" name="username" class="form-control" placeholder="Username" required="required">
+								<input type="text" name="username" class="form-control" placeholder="Username" data-rule-required="true" data-msg-required="Please enter your name">
 							</div>
 							<div class="form-group">
-								<input type="password" name="password" class="form-control" placeholder="Password" required="required">
+								<input type="password" name="password" id="password" class="form-control" placeholder="Password" data-rule-required="true" data-msg-required="Please enter password" data-rule-minlength="5" data-msg-minlength="Min 5 char">
 							</div>
 							<div class="form-group">
-								<input type="password" name="passwordConfirm" class="form-control" placeholder="Confirm Password" required="required">
+								<input type="password" name="passwordConfirm" class="form-control" placeholder="Confirm Password" data-rule-required="true" data-msg-required="Please confirm password" data-rule-equalTo="#password" data-msg-equalTo="Passwords not match">
 							</div>
-							<div class="form-group">
-								<label class="checkbox-inline"><input type="checkbox" name="consent" required="required"> I accept the <a href="#">Terms &amp; Conditions</a></label>
+							<div class="form-check">
+								<input type="checkbox" name="consent" class="form-check-input" id="cbConsent" data-rule-required="true" data-msg-required="Please consent.">
+								<label class="checkbox-inline" for="cbConsent"> I accept the <a href="#">Terms &amp; Conditions</a></label>
 							</div>
 							<input type="submit" class="btn btn-primary btn-block" value="Sign up">
 						</form>

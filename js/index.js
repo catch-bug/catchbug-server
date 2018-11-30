@@ -11,15 +11,18 @@ $(function() {
     e.stopPropagation();
   });
 
+  // unfocus tab link after click
   $('[role="tab"]').on('click', function (e) {
     $(this).blur();
   });
 
+  // show charts on right position when showing tab
   $("#nav-browser-tab").on('shown.bs.tab', function (e) {
     chartB.flush();
     chartO.flush();
   });
 
+  // form login
   $("#formLogin").submit(function (e) {
     e.preventDefault();
 
@@ -44,10 +47,59 @@ $(function() {
         })
   });
 
+  // form register
+  $("#formRegister")
+      .submit(function (e) {
+        e.preventDefault();
+        if (!$(this).valid()) {
+          //    $login_validator.errorList[0].element.focus();  // when sending not by intput submit
+          return;
+        }
+
+        var b = $(this).serialize();
+        $('div#loading').show();
+        $.post("/ajax/a_index.php?cmd=register&ajax_token=" + AJAX_TOKEN, b)
+            .done(function (result) {
+
+              if (result.code === 0) {
+                $("#okModalText").text(result.message);
+                $("#okModal").modal('show').on('hidden.bs.modal', function (e) {
+                  document.location.replace(_REWRITE + "user/welcome");
+                });
+              } else {
+                $("#errorModalText").text(result.message);
+                $("#errorModal").modal('show');
+              }
+              $('#loading').hide();
+            })
+            .fail(function () {
+              $('#loading').hide();
+            })
+      })
+      .validate({
+        errorPlacement: function ( error, element ) {
+          // Add the `invalid-feedback` class to the error element
+          error.addClass( "invalid-feedback" );
+          if ( element.prop( "type" ) === "checkbox" ) {
+            error.insertAfter( element.next( "label" ) );
+          } else {
+            error.insertAfter( element );
+          }
+        },
+        highlight: function ( element, errorClass, validClass ) {
+          $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
+        }
+
+      });
+
+
+  // run all tooltips
   $('*[data-toggle="tooltip"]').tooltip();
 
 // Javascript to enable link to tab
-
   var hash = document.location.hash;
   if (hash) {
     $('.nav-tabs a[href="' + hash + '"]').tab('show');
