@@ -21,6 +21,10 @@ class project
    */
   private $name;
 
+  /**
+   * @var string project descroption
+   */
+  private $description;
 
   /**
    * @var integer last item
@@ -35,12 +39,14 @@ class project
    *
    * @param int    $id
    * @param string $name
+   * @param string $description
    * @param int    $lastItem
    */
-  public function __construct(int $id, string $name, int $lastItem)
+  public function __construct(int $id, string $name, string $description, int $lastItem)
   {
     $this->id = $id;
     $this->name = $name;
+    $this->description = $description;
     $this->lastItem = $lastItem;
   }
 
@@ -101,6 +107,27 @@ class project
     $this->lastItem = $lastItem;
     return $this;
   }
+
+  /**
+   * @return string
+   */
+  public function getDescription(): string
+  {
+    return $this->description;
+  }
+
+  /**
+   * @param string $description
+   *
+   * @return project
+   */
+  public function setDescription(string $description): project
+  {
+    $this->description = $description;
+    return $this;
+  }
+
+
 
 
 }

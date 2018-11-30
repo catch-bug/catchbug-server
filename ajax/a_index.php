@@ -119,7 +119,7 @@ switch ($cmd){
     $userId = (integer) ($_GET['userid'] ?? 0);
     $projectId = (integer) ($_GET['projectid'] ?? 0);
     $itemId = (integer) ($_GET['itemid'] ?? 0);
-    $level = $_GET['level'] ?? '';
+    $level = trim($_GET['level'] ?? '');
 
     if ($_SESSION['user_id'] === $userId) {
       $stmt = $mysqli->prepare('UPDATE item SET level = ? WHERE user_id=? and project_id=? and id=?');
@@ -134,6 +134,56 @@ switch ($cmd){
         $vystup['code'] = 1;
         $vystup['message'] = 'Updating item level failed.';
       }
+    } else {
+      $vystup['code'] = 1;
+      $vystup['message'] = 'Unauthorised access!';
+    }
+    break;
+#endregion
+
+#region project_settings
+  case 'project_settings':
+    $userId = (integer) ($_POST['userid'] ?? 0);
+
+    if ($_SESSION['user_id'] === $userId) {
+      $projectId = (integer) ($_POST['projectid'] ?? 0);
+      $section = trim($_POST['section'] ?? '');
+
+      switch ($section){
+        case 'general':
+          $name = trim($_POST['name'] ?? '');
+          $desc = trim($_POST['desc'] ?? '');
+          if ($name === ''){
+            $vystup['code'] = 1;
+            $vystup['message'] = 'Error in project name';
+          } else {
+            $stmt = $mysqli->prepare('UPDATE project SET name=?, description=? WHERE user_id=? and id=?;');
+            $stmt->bind_param('ssii', $name, $desc, $userId, $projectId);
+            $query_success = $stmt->execute();
+            $stmt->close();
+
+            if ($query_success) {
+              $vystup['code'] = 0;
+              $vystup['forceReload'] = true;
+              $vystup['message'] = 'Project successfully updated.';
+            } else {
+              $vystup['code'] = 1;
+              $vystup['message'] = 'Updating project failed.';
+            }
+          }
+          break;
+
+        case 'members':
+
+          break;
+
+        case 'tokens':
+
+          break;
+      }
+
+
+
     } else {
       $vystup['code'] = 1;
       $vystup['message'] = 'Unauthorised access!';

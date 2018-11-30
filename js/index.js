@@ -7,11 +7,11 @@
 
 $(function() {
   // Prevent dropdown menu from closing when click inside the form
-  $(document).on("click", ".navbar-right .dropdown-menu", function(e){
+  $(document).on("click", ".navbar-right .dropdown-menu", function (e) {
     e.stopPropagation();
   });
 
-  $('[role="tab"]').on('click', function(e) {
+  $('[role="tab"]').on('click', function (e) {
     $(this).blur();
   });
 
@@ -50,12 +50,12 @@ $(function() {
 
   var hash = document.location.hash;
   if (hash) {
-    $('.nav-tabs a[href="'+hash+'"]').tab('show');
+    $('.nav-tabs a[href="' + hash + '"]').tab('show');
   }
 
 // With HTML5 history API, we can easily prevent scrolling!
   $('.nav-tabs a').on('shown.bs.tab', function (e) {
-    if(history.pushState) {
+    if (history.pushState) {
       history.pushState(null, null, e.target.hash);
     } else {
       window.location.hash = e.target.hash; //Polyfill for old browsers
@@ -119,7 +119,7 @@ $(function() {
 
   });
 
-  $("#selectLevel").on('change', function() {
+  $("#selectLevel").on('change', function () {
     var userid = $(this).data("userid"),
         projectid = $(this).data("projectid"),
         itemid = $(this).data("itemid"),
@@ -136,9 +136,9 @@ $(function() {
           $.notify({
             // http://bootstrap-notify.remabledesigns.com/
             message: result.message
-          },{
+          }, {
             delay: 2000,
-            type: 'success'
+            type: type
           });
           $('#loading').hide();
         })
@@ -147,6 +147,72 @@ $(function() {
         })
   });
 
+  jQuery.validator.setDefaults({
+    errorElement: "em",
+    errorPlacement: function ( error, element ) {
+      // Add the `invalid-feedback` class to the error element
+      error.addClass( "invalid-feedback" );
+
+      $( element ).closest( "form" ).find( "label[for='" + element.attr( "id" ) + "']" ).append( error );
+    },
+
+    highlight: function ( element, errorClass, validClass ) {
+      $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
+    },
+    showErrors: function(errorMap, errorList) {
+      // scroll down if element under top nav bar
+      if (typeof errorList[0] !== "undefined") {
+        var position = $(window).scrollTop();
+        var top = $(errorList[0].element).offset().top;
+        if ((top - position) < 109){
+          $(window).scrollTop(top - 110);
+        }
+      }
+      this.defaultShowErrors();
+    }
+  });
+
+
+  $("#formProjectSettings")
+      .submit(function (e) {
+        e.preventDefault();
+        if (!$(this).valid()) {
+          //    $login_validator.errorList[0].element.focus();  // when sending not by intput submit
+          return;
+        }
+
+        var type = 'success',
+            b = $(this).serialize();
+
+        $('div#loading').show();
+        $.post("/ajax/a_index.php?cmd=project_settings&ajax_token=" + AJAX_TOKEN, b)
+            .done(function (result) {
+
+              if (result.code === 0) {
+                //need reload to changes show on page
+                if (result.forceReload) {
+                  document.location.reload(true);
+                }
+              } else {
+                type = 'danger';
+              }
+              $.notify({
+                // http://bootstrap-notify.remabledesigns.com/
+                message: result.message
+              }, {
+                delay: 2000,
+                type: type
+              });
+              $('#loading').hide();
+            })
+            .fail(function () {
+              $('#loading').hide();
+            })
+      })
+      .validate();
 
 
 

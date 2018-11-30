@@ -106,11 +106,48 @@ HTML;
             break;
 
           case 'settings':
-            $projectSectionMenu = strtok('/');
-            $projectSectionMenu = $projectSectionMenu === false ? 'general' : $projectSectionMenu;
+            $projectSettingsMenu = strtok('/');
+            $projectSettingsMenu = $projectSettingsMenu === false ? 'general' : $projectSettingsMenu;
 
-            break;
-        }
+            $projectSettingsContent = '';
+            switch ($projectSettingsMenu){
+              case 'general':
+                include __DIR__ . '/inc/section_project_settings_general.php';
+                break;
+
+              case 'members':
+                include __DIR__ . '/inc/section_project_settings_members.php';
+                break;
+
+              case 'tokens':
+                include __DIR__ . '/inc/section_project_settings_tokens.php';
+                break;
+            }
+
+            $content .= <<<HTML
+<div class="row">
+<div class="col-sm-3">
+<ul class="nav flex-column nav-settings">
+  <li class="nav-item">
+    <a class="nav-link {$helper->checkActive('general', $projectSettingsMenu)}" href="{$config->rewrite}project/$projectId/settings/general">General</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {$helper->checkActive('members', $projectSettingsMenu)}" href="{$config->rewrite}project/$projectId/settings/members">Members</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {$helper->checkActive('tokens', $projectSettingsMenu)}" href="{$config->rewrite}project/$projectId/settings/tokens">Project Access Tokens</a>
+  </li>
+</ul>
+
+</div>
+<div class="col-sm-9">
+$projectSettingsContent
+</div>
+</div>
+HTML;
+
+            break;  // case 'settings'
+        } // end switch $projectSection
 
       } else {
         $content .= <<<HTML
@@ -140,11 +177,11 @@ echo <<<HTML
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/css/devicon.css">
     <link rel="stylesheet" href="/css/devicon-colors.css">
     <link rel="stylesheet" href="/css/c3.min.css">
     <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <title>$title</title>
 
@@ -320,6 +357,8 @@ echo <<<HTML
 <script src="/js/d3.min.js" charset="utf-8"></script>
 <script src="/js/c3.min.js"></script>
 <script src="/js/bootstrap-notify.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+
 <script src="/js/index.js"></script>
 <script type="text/javascript">$javascriptContent</script>
  

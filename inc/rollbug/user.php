@@ -62,12 +62,12 @@ class user
     $this->DateTimeZone = new \DateTimeZone($time_zone);
 
     // get user projects
-    $stmt = $mysqli->prepare('SELECT id, name, last_item FROM project WHERE user_id=?');
+    $stmt = $mysqli->prepare('SELECT id, name, description, last_item FROM project WHERE user_id=?');
     $stmt->bind_param('i', $id);
-    $stmt->bind_result($projectId, $projectName, $projectLastItem);
+    $stmt->bind_result($projectId, $projectName, $projectDescription, $projectLastItem);
     $stmt->execute();
     while ($stmt->fetch()){
-      $this->addProject($projectId, $projectName, $projectLastItem);
+      $this->addProject($projectId, $projectName, $projectDescription, $projectLastItem);
     }
     $stmt->close();
   }
@@ -113,9 +113,9 @@ class user
    *
    * @return \rollbug\user
    */
-  public function addProject(int $id, string $name, int $lastItem): user
+  public function addProject(int $id, string $name, string $projectDescription, int $lastItem): user
   {
-    $this->projects[$id] = new project($id, $name, $lastItem);
+    $this->projects[$id] = new project($id, $name, $projectDescription, $lastItem);
     return $this;
   }
 

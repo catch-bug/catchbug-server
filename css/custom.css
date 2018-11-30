@@ -3,6 +3,7 @@ body {
   padding-top: 4.5rem;
 }
 
+/* ajax loading overlay */
 div#loading {
   background: url("/img/ajax-loader.gif") no-repeat center center;
   width:      100%;
@@ -16,7 +17,7 @@ div#loading {
   z-index: 9999999999999;
 }
 
-
+/* navbar + login form */
 .navbar .navbar-right li:first-child a {
   padding-right: 30px;
 }
@@ -146,8 +147,7 @@ div#loading {
   }
 }
 
-
-
+/* modal error */
 .modal-confirm {
   color: #636363;
   width: 325px;
@@ -223,6 +223,7 @@ div#loading {
   margin: 100px auto;
 }
 
+/* modal ok (+ above^^) */
 .modal-confirm-ok .icon-box {
   background: #82ce34;
 }
@@ -234,22 +235,27 @@ div#loading {
   background: #6fb32b;
 }
 
-
+/* active nav links */
 .subnav .nav-item.active a.nav-link{
   border-bottom: 5px solid #5bc0eb;
 }
+.nav-settings .nav-item a.nav-link.active {
+  color: #495057;
+}
 
+/* list occurrences, pre,... */
 .text-monospace,
 .table-occurrence{
   font-size: 80%;
 }
 
+/* description list */
 td.list-values dl,
 td.list-values dd{
   margin-bottom: 0;
 }
 
-
+/* prism syntax highlighting */
 .token.comment,
 .token.prolog,
 .token.doctype,
@@ -322,5 +328,8 @@ td.list-values dd{
   cursor: help;
 }
 
-
+/* validator error message element */
+em.error {
+  margin-left: 1rem;
+}
 
