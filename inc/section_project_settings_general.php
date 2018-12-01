@@ -9,8 +9,11 @@
 /** @var \rollbug\user $user */
 /** @var \rollbug\helper $helper */
 
-$projectSettingsContent = <<<HTML
+$projectSettingsHeader = <<<HTML
 <h3>General Project Settings</h3>
+HTML;
+
+$projectSettingsForm = <<<HTML
 <form id="formProjectSettings">
   <div class="form-group">
     <label for="formProjectSettingsName">Project name</label>
@@ -31,3 +34,5 @@ $projectSettingsContent = <<<HTML
   <button type="submit" class="btn btn-primary float-right">Save</button>
 </form>
 HTML;
+
+$projectSettingsContent = $projectSettingsHeader . $projectSettingsForm;

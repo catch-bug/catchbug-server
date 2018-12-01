@@ -187,26 +187,80 @@ switch ($cmd){
       $projectId = (integer) ($_POST['projectid'] ?? 0);
       $section = trim($_POST['section'] ?? '');
 
+      $error = '';
       switch ($section){
-        case 'general':
+        case 'general': // update / create project
           $name = trim($_POST['name'] ?? '');
           $desc = trim($_POST['desc'] ?? '');
           if ($name === ''){
             $vystup['code'] = 1;
             $vystup['message'] = 'Error in project name';
           } else {
-            $stmt = $mysqli->prepare('UPDATE project SET name=?, description=? WHERE user_id=? and id=?;');
-            $stmt->bind_param('ssii', $name, $desc, $userId, $projectId);
-            $query_success = $stmt->execute();
-            $stmt->close();
+            if ($projectId > 0) {  // update project
+              $stmt = $mysqli->prepare('UPDATE project SET name=?, description=? WHERE user_id=? and id=?;');
+              $stmt->bind_param('ssii', $name, $desc, $userId, $projectId);
+              $query_success = $stmt->execute();
+              $stmt->close();
 
-            if ($query_success) {
-              $vystup['code'] = 0;
-              $vystup['forceReload'] = true;
-              $vystup['message'] = 'Project successfully updated.';
-            } else {
-              $vystup['code'] = 1;
-              $vystup['message'] = 'Updating project failed.';
+              if ($query_success) {
+                $vystup['code'] = 0;
+                $vystup['forceReload'] = true;
+                $vystup['message'] = 'Project successfully updated.';
+              } else {
+                $vystup['code'] = 1;
+                $vystup['message'] = 'Updating project failed.';
+              }
+            } else {  // create project
+              $mysqli->autocommit(false);
+              $stmt = $mysqli->prepare('SELECT last_project+1 FROM user WHERE id=?');
+              $stmt->bind_param('i', $userId);
+              $stmt->bind_result($projectId);
+              $stmt->execute();
+              $stmt->fetch();
+              $stmt->close();
+
+              $stmt = $mysqli->prepare('INSERT INTO project (id, user_id, name, description) VALUES (?,?,?,?);');
+              $stmt->bind_param('iiss', $projectId, $userId, $name, $desc);
+              $query_success = $stmt->execute();
+              $error = $stmt->error;
+              $stmt->close();
+
+              $token = '';
+              $type = '';
+              $stmt = $mysqli->prepare('INSERT INTO token (user_id, project_id, token, type) VALUES (?,?,?,?);');
+              $stmt->bind_param('iiss', $userId, $projectId, $token, $type);
+
+              try {
+                $token = generateToken($mysqli);
+                $type = 'post_client_item';
+                $query_success = $query_success && $stmt->execute();
+                $error = $stmt->error;
+
+                $token = generateToken($mysqli);
+                $type = 'post_server_item';
+                $query_success = $query_success && $stmt->execute();
+                $error = $stmt->error;
+
+              } catch (Exception $e) {
+                $query_success = false;
+                $error = $e->getMessage();
+              }
+
+              if ($query_success) {
+                if ($mysqli->commit()) {
+                  $vystup['code'] = 0;
+                  $vystup['forceReload'] = false;
+                  $vystup['replace'] = "{$config->rewrite}project/$projectId/settings/tokens";
+                  $vystup['message'] = 'Project successfully created.';
+                } else {
+                  $vystup['code'] = 1;
+                  $vystup['message'] = 'Creating project failed.';
+                }
+              } else {
+                $mysqli->rollback();
+                $vystup['code'] = 1;
+                $vystup['message'] = 'Creating project failed.' . $error;
+              }
             }
           }
           break;
@@ -232,3 +286,31 @@ switch ($cmd){
 
 header('Content-Type: application/json');
 echo json_encode($vystup);
+
+
+/**
+ * @param \mysqli $mysqli
+ * @param int     $length
+ *
+ * @return string
+ * @throws \Exception
+ */
+function generateToken (\mysqli $mysqli, int $length = 32): string
+{
+  $bytes = (int) $length/2;
+  $token = '';
+  $count = 1;
+
+  $stmt =$mysqli->prepare('SELECT count(id) FROM token WHERE token=?');
+  $stmt->bind_param('s', $token);
+  $stmt->bind_result($count);
+
+  while ($count > 0) {
+    $token = bin2hex(random_bytes($bytes));
+    $stmt->execute();
+    $stmt->fetch();
+  }
+  $stmt->close();
+
+  return $token;
+}

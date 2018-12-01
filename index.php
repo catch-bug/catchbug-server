@@ -45,6 +45,7 @@ if (isset($_SESSION['user_id'])){
 
   $projectId = null;
 
+  $userSection = '';
   switch ($section){
     case 'user':
       $userSection = strtok('/');
@@ -55,6 +56,10 @@ if (isset($_SESSION['user_id'])){
 
         case 'settings':
 
+          break;
+
+        case 'newproject':
+          include __DIR__ . '/inc/section_user_newproject.php';
           break;
       }
 
@@ -252,7 +257,7 @@ if (isset($_SESSION['user_id'])) {
           <li class="nav-item {$helper->checkActive($section, 'dashboard')}">
             <a class="nav-link" href="{$config->rewrite}dashboard">Dashboard</a>
           </li>
-          <li class="nav-item dropdown {$helper->checkActive($section, 'project')}{$helper->checkActive($section, 'newproject')}">
+          <li class="nav-item dropdown {$helper->checkActive($section, 'project')}{$helper->checkActive($userSection, 'newproject')}">
             <a class="nav-link dropdown-toggle" href="#" id="navbarProjects" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
             <div class="dropdown-menu" aria-labelledby="navbarProjects">
               <a class="dropdown-item {$helper->checkActive($projectId, 0)}" href="{$config->rewrite}project/">All projects</a>
@@ -269,7 +274,7 @@ HTML;
 
   echo <<<HTML
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item {$helper->checkActive($section, 'newproject')}" id="navNewProject" href="{$config->rewrite}newproject">New project</a>
+              <a class="dropdown-item {$helper->checkActive($userSection, 'newproject')}" id="navNewProject" href="{$config->rewrite}user/newproject">New project</a>
             </div>
           </li>
         </ul>
@@ -281,7 +286,7 @@ if (isset($_SESSION['user_id'])){
   echo <<<HTML
 <ul class="nav navbar-nav navbar-right ml-auto">
   <li class="nav-item">
-    <a class="nav-link{$helper->checkActive($section, 'user')}" href="{$config->rewrite}user/{$user->name}" data-id="{$user->getId()}" id="navUser">{$user->name}</a>
+    <a class="nav-link{$helper->checkActive($section, 'user')}" href="{$config->rewrite}user/{$user->getId()}" id="navUser">{$user->name}</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="/logout.php" id="navLogout">Log out</a>

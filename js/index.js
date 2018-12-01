@@ -13,7 +13,7 @@ $(function() {
 
   // unfocus tab link after click
   $('[role="tab"]').on('click', function (e) {
-    $(this).blur();
+    $(this).trigger("blur");
   });
 
   // show charts on right position when showing tab
@@ -23,7 +23,7 @@ $(function() {
   });
 
   // form login
-  $("#formLogin").submit(function (e) {
+  $("#formLogin").on("submit", function (e) {
     e.preventDefault();
 
     var b = $(this).serialize();
@@ -49,7 +49,7 @@ $(function() {
 
   // form register
   $("#formRegister")
-      .submit(function (e) {
+      .on("submit", function (e) {
         e.preventDefault();
         if (!$(this).valid()) {
           //    $login_validator.errorList[0].element.focus();  // when sending not by intput submit
@@ -229,7 +229,7 @@ $(function() {
 
 
   $("#formProjectSettings")
-      .submit(function (e) {
+      .on("submit", function (e) {
         e.preventDefault();
         if (!$(this).valid()) {
           //    $login_validator.errorList[0].element.focus();  // when sending not by intput submit
@@ -247,6 +247,9 @@ $(function() {
                 //need reload to changes show on page
                 if (result.forceReload) {
                   document.location.reload(true);
+                }
+                if (result.replace) {
+                  document.location.replace(result.replace);
                 }
               } else {
                 type = 'danger';

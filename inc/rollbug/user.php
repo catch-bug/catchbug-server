@@ -105,10 +105,10 @@ class user
   }
 
 
-
   /**
    * @param int    $id
    * @param string $name
+   * @param string $projectDescription
    * @param int    $lastItem
    *
    * @return \rollbug\user
@@ -120,13 +120,17 @@ class user
   }
 
   /**
-   * @param int $id project id
+   * @param int|null $id project id
    *
    * @return project
    */
-  public function getProject(int $id): project
+  public function getProject(int $id = null): project
   {
-    return $this->projects[$id];
+    if ($id !== null) {
+      return $this->projects[ $id ];
+    }
+
+    return new project(0, '', '', 0);
   }
 
   /**
