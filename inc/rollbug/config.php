@@ -26,7 +26,7 @@ class config
    */
   private static $data;
   private $settingsFileName;
-  private static $version = '0.0.';
+  private static $version = '1.0.0-dev';
 
   /**
    * config constructor.
