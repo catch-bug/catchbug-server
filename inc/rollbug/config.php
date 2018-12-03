@@ -26,6 +26,7 @@ class config
    */
   private static $data;
   private $settingsFileName;
+  private static $version = '0.0.';
 
   /**
    * config constructor.
@@ -41,6 +42,7 @@ class config
       throw new \RuntimeException('Application settings not found.', 1);
     }
     self::$data = $success;
+    $this->version = self::$version;
   }
 
   public function getData()
