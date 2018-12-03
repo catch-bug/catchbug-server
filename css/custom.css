@@ -333,3 +333,7 @@ em.error {
   margin-left: 1rem;
 }
 
+.modal-body legend {
+  font-size: inherit !important;
+  font-weight: bold;
+}

@@ -97,6 +97,8 @@ class item
    * item constructor.
    *
    * @param \stdClass $item id, project_id, level, language, id_str, last_occ, last_timestamp
+   *
+   * @throws \Exception
    */
   public function __construct(\stdClass $item)
   {

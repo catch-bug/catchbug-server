@@ -10,7 +10,7 @@ use \rollbug\itemWriter;
 ob_start();
 require_once __DIR__ . '/../../inc/mysqli.php';
 
-
+// SELECT COUNT(id) FROM `item` WHERE `project_id`=1 and `real_time`>(DATE(NOW()) - INTERVAL 20 MINUTE)
 
 switch ($method){
   case 'POST':

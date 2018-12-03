@@ -188,11 +188,11 @@ switch ($cmd){
       $section = trim($_POST['section'] ?? '');
 
       $error = '';
-      switch ($section){
+      switch ($section) {
         case 'general': // update / create project
           $name = trim($_POST['name'] ?? '');
           $desc = trim($_POST['desc'] ?? '');
-          if ($name === ''){
+          if ($name === '') {
             $vystup['code'] = 1;
             $vystup['message'] = 'Error in project name';
           } else {
@@ -263,15 +263,75 @@ switch ($cmd){
               }
             }
           }
-          break;
+          break;  // END update / create project
 
         case 'members':
-
+          $vystup['code'] = 1;
+          $vystup['message'] = 'members.';
           break;
 
-        case 'tokens':
+        case 'tokens':  // update / create token
+          $tokeId = (integer)($_POST['tokenid'] ?? 0);
+          $name = trim($_POST['name'] ?? '');
+          $limitPer = $_POST['limit_per'] ?? 'Default';
+          $limitCalls = (integer)($_POST['limit_calls'] ?? 0);
+          $disabled = ($_POST['disabled'] ?? false) !== false;
+          $type = implode(',', $_POST['type'] ?? []);
 
-          break;
+          $maxRate = $config->default_token_rate_limit;
+          $rate = $maxRate;
+          switch ($limitPer) {
+            case '5 minutes':
+              $rate = 5 * $maxRate;
+              break;
+            case '30 minutes':
+              $rate = 30 * $maxRate;
+              break;
+            case '1 hour':
+              $rate = 60 * $maxRate;
+              break;
+            case '1 day':
+              $rate = 1440 * $maxRate;
+              break;
+            case '1 week':
+              $rate = 10080 * $maxRate;
+              break;
+            case '1 month':
+              $rate = 43200 * $maxRate;
+              break;
+          }
+
+          if (($limitPer === 'Default') || ($limitCalls <= $rate)){
+            $query_success = true;
+            if ($tokeId > 0){ // edit
+              $stmt = $mysqli->prepare('UPDATE token SET type=?, name=?, disabled=?, rate_limit_per=?, rate_limit_calls=? WHERE id=?;');
+              $stmt->bind_param('ssisis', $type, $name, $disabled, $limitPer, $limitCalls, $tokeId);
+            } else { // new toke
+              try {
+                $token = generateToken($mysqli);
+              } catch (Exception $e) {
+                $query_success = false;
+                $error = $e->getMessage();
+              }
+              $stmt = $mysqli->prepare('INSERT INTO token (user_id, project_id, token, type, name, disabled, rate_limit_per, rate_limit_calls) VALUES (?,?,?,?,?,?,?,?);');
+              $stmt->bind_param('iisssisi', $userId, $projectId, $token, $type, $name, $disabled, $limitPer, $limitCalls);
+            }
+            $query_success = $query_success && $stmt->execute();
+            $error = $stmt->error;
+
+            if($query_success) {
+              $vystup['code'] = 0;
+              $vystup['message'] = 'Token successfully saved.';
+            } else {
+              $vystup['code'] = 1;
+              $vystup['message'] = 'Saving token failed. ' . $error;
+            }
+
+          } else {
+            $vystup['code'] = 1;
+            $vystup['message'] = 'You can set max rate ' . $rate . 'not ' . $limitCalls . '.';
+          }
+          break;  // END update / create token
       }
 
 

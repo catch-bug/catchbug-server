@@ -100,4 +100,23 @@ class helper
     }
     return '';
   }
+
+  /**
+   * format DateTime
+   *
+   * @param string             $format
+   * @param \DateTime          $date
+   * @param \DateTimeZone|null $timezone
+   *
+   * @return string
+   */
+  public static function formatDateTime(string $format, \DateTime $date, \DateTimeZone $timezone=null): string
+  {
+    if ($timezone === null){
+      $date->setTimezone(new \DateTimeZone('UTC'));
+    } else {
+      $date->setTimezone($timezone);
+    }
+    return $date->format($format);
+  }
 }

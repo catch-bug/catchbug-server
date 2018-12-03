@@ -29,6 +29,7 @@ if(!isset($_SESSION['ajax_token'])) {
 }
 
 $content = '';
+$modalWindow = '';
 $javascriptContent = '';
 $title = '';
 
@@ -137,6 +138,10 @@ HTML;
               case 'tokens':
                 include __DIR__ . '/inc/section_project_settings_tokens.php';
                 break;
+
+              case 'delete':
+                include __DIR__ . '/inc/section_project_settings_delete.php';
+                break;
             }
 
             $content .= <<<HTML
@@ -151,6 +156,9 @@ HTML;
   </li>
   <li class="nav-item">
     <a class="nav-link {$helper->checkActive('tokens', $projectSettingsMenu)}" href="{$config->rewrite}project/$projectId/settings/tokens">Project Access Tokens</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {$helper->checkActive('delete', $projectSettingsMenu)} text-danger" href="{$config->rewrite}project/$projectId/settings/delete">Delete Project</a>
   </li>
 </ul>
 
@@ -363,6 +371,7 @@ HTML;
 echo '<main role="main" class="container" id="content">' . $content . '</main>';
 
 echo <<<HTML
+$modalWindow
 <script type="text/javascript">
   var AJAX_TOKEN = '$_SESSION[ajax_token]',
   _REWRITE = '{$config->rewrite}';

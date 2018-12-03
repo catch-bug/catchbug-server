@@ -269,6 +269,117 @@ $(function() {
       })
       .validate();
 
+  // modal edit / new token
+  var $tokenModal = $("#tokenModal");
+  if ($tokenModal) {
 
+    $tokenModal.on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget),
+          token = button.data('token'),
+          modal = $(this);
+
+      $("#tokenModalError").text("");
+      if (token) { // edit
+        modal.find('.modal-title').text('Edit token ' + token.name);
+        modal.find('.tokenEdit').show();
+        modal.find('#inpTokenId').val(token.id);
+        modal.find('#inpUserId').val(token.userId);
+        modal.find('#inpProjectId').val(token.projectId);
+        modal.find('#inpLimitCalls').val(token.rateLimitCalls.toString() === "0" ? "" : token.rateLimitCalls);
+        modal.find('#inpName').val(token.name);
+        modal.find('#selLimitPer').val(token.rateLimitPer).trigger("change");
+        modal.find('#tokenModalLastUpdated').text(token.updated);
+
+        modal.find('#cbDisableToken').prop('checked', token.disabled);
+        modal.find('#cbPostClientItem').prop('checked', token.types.indexOf("post_client_item") > -1);
+        modal.find('#cbPostServerItem').prop('checked', token.types.indexOf("post_server_item") > -1);
+        modal.find('#cbRead').prop('checked', token.types.indexOf("read") > -1);
+        modal.find('#cbWrite').prop('checked', token.types.indexOf("write") > -1);
+
+
+      } else {  // new token
+        modal.find('.modal-title').text('Create a new token');
+        modal.find('.tokenEdit').hide();
+        modal.find('#inpTokenId').val("");
+        modal.find('#inpUserId').val(button.data('user_id'));
+        modal.find('#inpProjectId').val(button.data('project_id'));
+        modal.find('#inpLimitCalls').val("");
+        modal.find('#selLimitPer').val("Default").trigger("change");
+        modal.find('#inpName').val("");
+        modal.find('.form-check-input').prop('checked', false);
+
+      }
+
+    });
+
+    $tokenModal.find("#selLimitPer").on("change", function(){
+      if(this.value === "Default"){
+        $tokenModal.find(".limitNoDefault").addClass("invisible").removeClass("visible");
+        $tokenModal.find(".limitDefault").addClass("visible").removeClass("invisible");
+        $("#inpLimitCalls").removeData("rule-max").removeAttr("data-rule-max").data("rule-required", false);
+        formEditTokenValidator.element( "#inpLimitCalls" );
+      } else {
+        $tokenModal.find(".limitNoDefault").addClass("visible").removeClass("invisible");
+        $tokenModal.find(".limitDefault").addClass("invisible").removeClass("visible");
+        $tokenModal.find("#spTokenRatePer").text(this.value);
+        var rate,
+            maxRate = $(this).data("max_rate");
+        switch (this.value) {
+          case "1 minute":
+            rate = maxRate;
+            break;
+          case "5 minutes":
+            rate = 5 * maxRate;
+            break;
+          case "30 minutes":
+            rate = 30 * maxRate;
+            break;
+          case "1 hour":
+            rate = 60 * maxRate;
+            break;
+          case "1 day":
+            rate = 1440 * maxRate;
+            break;
+          case "1 week":
+            rate = 10080 * maxRate;
+            break;
+          case "1 month":
+            rate = 43200 * maxRate;
+            break;
+        }
+        $("#inpLimitCalls").data("rule-max", rate).data("rule-required", true);
+        $tokenModal.find("#spTokenRateLimit").text(rate);
+      }
+      formEditTokenValidator.element( "#inpLimitCalls" );
+    });
+
+    var $formEditToken = $tokenModal.find("#formEditToken"),
+        formEditTokenValidator = $formEditToken.validate();
+
+    $tokenModal.find("#formEditTokenSubmit").on("click", function(e){
+      e.preventDefault();
+      if (!$formEditToken.valid()){
+        return false;
+      }
+      var data = $formEditToken.serialize();
+      $('div#loading').show();
+      $.post("/ajax/a_index.php?cmd=project_settings&ajax_token=" + AJAX_TOKEN, data)
+          .done(function (result) {
+            if (result.code === 0) {
+              $tokenModal.modal('hide');
+              $("#okModalText").text(result.message);
+              $("#okModal").modal('show').on('hidden.bs.modal', function (e) {
+                document.location.reload();
+              });
+            } else {
+              $("#tokenModalError").text(result.message);
+            }
+            $('#loading').hide();
+          })
+          .fail(function () {
+            $('#loading').hide();
+          })
+    });
+  }
 
 });
