@@ -58,7 +58,6 @@ if ($result = $mysqli->query($query) ) {
           if (($occurrence->getRequestMethod() === 'GET') || ($occurrence->getRequestMethod() === '')) {
             $tabOccurrencesContentBody .= "<a href='{$occurrence->getURL()}' target='_blank'>{$occurrence->getURL()}</a>";
           } else {
-            // todo script for CURL replay post data
             $tabOccurrencesContentBody .= $occurrence->getURL();
           }
           $tabOccurrencesContentBody .= '</td>';

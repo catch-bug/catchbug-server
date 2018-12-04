@@ -175,7 +175,7 @@ HTML;
       </fieldset>
       
       <fieldset class="form-group">
-      <legend class="">Token Disabled</legend>
+      <legend class="">Disable Token</legend>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" name="disabled" value="on" id="cbDisableToken">
         <label class="form-check-label" for="cbDisableToken">Disable this token</label>

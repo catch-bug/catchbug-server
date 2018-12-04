@@ -28,7 +28,7 @@
  *
  *     ajax_token=<?php echo $_SESSION['ajax_token'] ?>
  *
- * todo dodelat dokumentaci
+ *
  *
  * @Project: wexportal
  * @User: mira
