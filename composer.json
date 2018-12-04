@@ -2,10 +2,10 @@
   "name": "ms502040/rollbug",
   "version": "1.0.0-dev",
   "type": "project",
-  "description": "description_text",
+  "description": "opensource server written in PHP7 alternative to rollbar",
   "keywords": [],
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": "MIT",
   "authors": [
     {
       "name": "Mira",
