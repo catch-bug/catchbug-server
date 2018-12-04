@@ -152,6 +152,31 @@ switch ($cmd){
     break;
 #endregion
 
+#region delete_token
+  case 'delete_token':
+    $userId = (integer) ($_GET['userid'] ?? 0);
+    $tokenId = (integer) ($_GET['tokenid'] ?? 0);
+
+    if ($_SESSION['user_id'] === $userId) {
+      $stmt = $mysqli->prepare('DELETE FROM token WHERE id=?');
+      $stmt->bind_param('i', $tokenId);
+      $query_success = $stmt->execute();
+      $stmt->close();
+
+      if($query_success) {
+        $vystup['code'] = 0;
+        $vystup['message'] = 'Token successfully deleted.';
+      } else {
+        $vystup['code'] = 1;
+        $vystup['message'] = 'Delete token failed.';
+      }
+    } else {
+      $vystup['code'] = 1;
+      $vystup['message'] = 'Unauthorised access!';
+    }
+    break;
+#endregion
+
 #region change_level
   case 'change_level':
     $userId = (integer) ($_GET['userid'] ?? 0);

@@ -144,7 +144,7 @@ $(function() {
 
   $("#btnDeleteOccurrence").on('click', function (e) {
     e.preventDefault();
-    var result = confirm("Want to delete this item?");
+    var result = confirm("Do you really want to delete item?");
     if (result) {
       var userid = $(this).data("userid"),
           projectid = $(this).data("projectid"),
@@ -310,6 +310,29 @@ $(function() {
 
       }
 
+      modal.find("#btnDeleteToken").off().on("click", function (e) {
+        if (!confirm("Do you really want to delete token")){
+          return false;
+        }
+        $('div#loading').show();
+        $.get("/ajax/a_index.php?cmd=delete_token&ajax_token=" + AJAX_TOKEN + "&tokenid=" + token.id + "&userid=" + token.userId)
+            .done(function (result) {
+              if (result.code === 0) {
+                $tokenModal.modal('hide');
+                $("#okModalText").text(result.message);
+                $("#okModal").modal('show').on('hidden.bs.modal', function (e) {
+                  document.location.reload();
+                });
+              } else {
+                $("#tokenModalError").text(result.message);
+              }
+              $('#loading').hide();
+            })
+            .fail(function () {
+              $('#loading').hide();
+            })
+      })
+
     });
 
     $tokenModal.find("#selLimitPer").on("change", function(){
@@ -380,6 +403,7 @@ $(function() {
             $('#loading').hide();
           })
     });
+
   }
 
 });

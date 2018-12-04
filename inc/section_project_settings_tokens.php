@@ -44,7 +44,7 @@ if ($result = $mysqli->query($query)) {
   $projectSettingsContent .= <<<HTML
   <div class="d-flex flex-row mb-3">
   <div class="ml-auto">
-<button type='button' class="btn btn-primary btn-sm" id="btnNewToken" data-toggle='modal' data-target='#tokenModal' data-project_id="$projectId" data-user_id="$user->id">Create s new token</button>
+<button type='button' class="btn btn-primary btn-sm" id="btnNewToken" data-toggle='modal' data-target='#tokenModal' data-project_id="$projectId" data-user_id="$user->id">Create new token</button>
 </div>
 </div>
 HTML;
@@ -191,7 +191,7 @@ HTML;
       </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger mr-auto tokenEdit" id="btnDeleteToken">Delete This Token</button>
+        <button type="button" class="btn btn-danger mr-auto tokenEdit" id="btnDeleteToken" data-token-id="{$token->id}">Delete This Token</button>
       
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="formEditTokenSubmit">Save changes</button>
