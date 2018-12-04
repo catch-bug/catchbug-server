@@ -406,4 +406,28 @@ $(function() {
 
   }
 
+
+  $("#btnDeleteProject").on("click", function (e) {
+    var projectName = prompt("To confirm the deletion, write the name of the project");
+    if ((projectName !== null) && (projectName === $(this).data("project-name"))){
+      $('div#loading').show();
+      $.get("/ajax/a_index.php?cmd=delete_project&ajax_token=" + AJAX_TOKEN + "&projectid=" + $(this).data("project-id") + "&userid=" + $(this).data("user-id"))
+          .done(function (result) {
+            if (result.code === 0) {
+              $("#okModalText").text(result.message);
+              $("#okModal").modal('show').on('hidden.bs.modal', function (e) {
+                document.location.replace('/');
+              });
+            } else {
+              $("#errorModalText").text(result.message);
+              $("#errorModal").modal('show');
+            }
+            $('#loading').hide();
+          })
+          .fail(function () {
+            $('#loading').hide();
+          })
+    }
+  })
+
 });

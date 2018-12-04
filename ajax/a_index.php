@@ -177,6 +177,30 @@ switch ($cmd){
     break;
 #endregion
 
+#region delete_project
+  case 'delete_project':
+    $userId = (integer) ($_GET['userid'] ?? 0);
+    $projectId = (integer) ($_GET['projectid'] ?? 0);
+    if ($_SESSION['user_id'] === $userId) {
+      $stmt = $mysqli->prepare('DELETE FROM project WHERE user_id=? and id=?');
+      $stmt->bind_param('ii', $userId, $projectId);
+      $query_success = $stmt->execute();
+      $stmt->close();
+
+      if($query_success) {
+        $vystup['code'] = 0;
+        $vystup['message'] = 'Project successfully deleted.';
+      } else {
+        $vystup['code'] = 1;
+        $vystup['message'] = 'Delete project failed.';
+      }
+    } else {
+      $vystup['code'] = 1;
+      $vystup['message'] = 'Unauthorised access!';
+    }
+    break;
+#endregion
+
 #region change_level
   case 'change_level':
     $userId = (integer) ($_GET['userid'] ?? 0);
@@ -237,16 +261,21 @@ switch ($cmd){
               }
             } else {  // create project
               $mysqli->autocommit(false);
-              $stmt = $mysqli->prepare('SELECT last_project+1 FROM user WHERE id=?');
+              $stmt = $mysqli->prepare('SELECT last_project+1 FROM `user` WHERE id=?');
               $stmt->bind_param('i', $userId);
               $stmt->bind_result($projectId);
-              $stmt->execute();
+              $query_success = $stmt->execute();
               $stmt->fetch();
+              $stmt->close();
+
+              $stmt = $mysqli->prepare('UPDATE `user` SET last_project=last_project+1 WHERE id=?');
+              $stmt->bind_param('i', $userId);
+              $query_success = $query_success && $stmt->execute();
               $stmt->close();
 
               $stmt = $mysqli->prepare('INSERT INTO project (id, user_id, name, description) VALUES (?,?,?,?);');
               $stmt->bind_param('iiss', $projectId, $userId, $name, $desc);
-              $query_success = $stmt->execute();
+              $query_success = $query_success && $stmt->execute();
               $error = $stmt->error;
               $stmt->close();
 

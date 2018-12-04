@@ -75,9 +75,11 @@ if (isset($_SESSION['user_id'])){
       if (($projectId === 0) || $user->isProject($projectId)) {
 
         $projectName = $projectId !== 0 ? $user->getProject($projectId)->getName() : 'All projects';
+        $projectDescription = $projectId !== 0 ? $user->getProject($projectId)->getDescription() : '';
 
         $content .= <<<HTML
 <h1>{$projectName}</h1>
+<h4 style="margin-top: -0.5rem;"><small class="text-muted"><em>{$projectDescription}</em></small></h4>
 
 <ul class="nav justify-content-center subnav">
   <li class="nav-item {$helper->checkActive($projectSection, 'items')}">
