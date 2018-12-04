@@ -28,6 +28,10 @@ class itemWriter
    */
   private $projectId;
   /**
+   * @var int
+   */
+  private $tokenId;
+  /**
    * @var string
    */
   private $id_str;
@@ -64,10 +68,11 @@ class itemWriter
    * @param \mysqli $mysqli
    * @param config $config
    */
-  public function __construct(\mysqli $mysqli, config $config)
+  public function __construct(\mysqli $mysqli, config $config, int $tokenId)
   {
     $this->mysqli = $mysqli;
     $this->config = $config;
+    $this->tokenId = $tokenId;
   }
 
   /**
@@ -191,6 +196,8 @@ class itemWriter
       $timeStamp = $this->payload->data->timestamp;
     } elseif (property_exists($this->payload->data->body, 'telemetry')) {
       $timeStamp = (int)($this->payload->data->body->telemetry[0]->timestamp_ms / 1000);
+    } else {
+      $timeStamp = time();
     }
 
     $date = new \DateTime('@' . $timeStamp);
@@ -199,8 +206,8 @@ class itemWriter
     // if new item
     if ($itemId === null) {
       $itemId = $this->last_item + 1;
-      $stmt = $this->mysqli->prepare('INSERT INTO item (id, user_id, project_id, level, language, id_str, type, last_occ, last_timestamp, first_in_chain) VALUES (?,?,?,?,?,?,?,1, ?,?);');
-      $stmt->bind_param('iiisssssi', $itemId, $this->userId, $this->projectId, $this->payload->data->level, $this->payload->data->language, $this->id_str, $this->itemType, $timestamp, $this->firstInChain);
+      $stmt = $this->mysqli->prepare('INSERT INTO item (id, user_id, project_id, level, language, id_str, type, last_occ, last_timestamp, first_in_chain, token_id) VALUES (?,?,?,?,?,?,?,1, ?,?,?);');
+      $stmt->bind_param('iiisssssii', $itemId, $this->userId, $this->projectId, $this->payload->data->level, $this->payload->data->language, $this->id_str, $this->itemType, $timestamp, $this->firstInChain, $this->tokenId);
       $this->query_success = $this->query_success && $stmt->execute();
       $this->mysqli_error .= "\n" . $this->mysqli->error;
       $stmt->fetch();

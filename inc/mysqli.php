@@ -13,4 +13,6 @@ if ($mysqli->connect_error){
 }
 
 $mysqli->set_charset('utf8');
+$mysqli->query('SET time_zone=\'+00:00\';');
+date_default_timezone_set('UTC');
 

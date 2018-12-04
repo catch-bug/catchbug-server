@@ -17,20 +17,63 @@ switch ($method){
 
     if ($payload !== null) {
 
-      $stmt = $mysqli->prepare('select user.id, p.last_item, p.id, t.type from user join project p on user.id = p.user_id join token t on p.user_id = t.user_id and p.id = t.project_id where t.token=?');
+      $stmt = $mysqli->prepare('select user.id, p.last_item, p.id, t.id, t.type, t.disabled, t.rate_limit_per, t.rate_limit_calls from user join project p on user.id = p.user_id join token t on p.user_id = t.user_id and p.id = t.project_id where t.token=?');
       $stmt->bind_param('s', $access_token);
-      $stmt->bind_result($userId, $last_item, $projectId, $tokenType);
+      $stmt->bind_result($userId, $last_item, $projectId, $tokenId, $tokenType, $tokenDisabled, $tokenRateLimitPer, $tokenRateLimitCalls);
       $stmt->execute();
     //  $mysqli_error .= "\n" . $mysqli->error;
       $stmt->fetch();
       $stmt->close();
 
       if ($userId !== null) {
+        // check /  switch server/client token
+        $platform = strtolower(property_exists($payload->data, 'platform') ? $payload->data->platform : '');
+
+        $illegalAccessToken = true;
+        if (in_array($platform, ['android', 'browser', 'client', 'flash', 'ios']) && (strpos($tokenType, 'post_client_item') !== false)){
+          $illegalAccessToken = false;
+        } elseif (!in_array($platform, ['android', 'browser', 'client', 'flash', 'ios']) && strpos($tokenType, 'post_server_item') !== false){
+          $illegalAccessToken = false;
+        }
+
+        if ($illegalAccessToken){
+          header('Content-Type: application/json; charset=utf-8');
+          http_response_code(500);
+          echo '{"err": 1, "message": "Illegal token access scope."}';
+          break;
+        }
+
+        if ($tokenDisabled){
+          header('Content-Type: application/json; charset=utf-8');
+          http_response_code(500);
+          echo '{"err": 1, "message": "Token is disabled."}';
+          break;
+        }
+
+        if ($tokenRateLimitPer === 'Default'){
+          $tokenRateLimitPer = '1 minute';
+          $tokenRateLimitCalls = $config->default_token_rate_limit;
+        }
+        $tokenRateLimitPer = str_replace('minutes', 'minute', $tokenRateLimitPer);
+        $stmt = $mysqli->prepare("SELECT COUNT(id) FROM item WHERE token_id=? and real_time>(DATE(NOW()) - INTERVAL $tokenRateLimitPer)");
+        $stmt->bind_param('i', $tokenId);
+        $stmt->bind_result($tokenCallsCount);
+        $stmt->execute();
+        $stmt->fetch();
+        $stmt->close();
+
+        if ($tokenCallsCount >= $tokenRateLimitCalls){
+          header('Content-Type: application/json; charset=utf-8');
+          http_response_code(500);
+          echo '{"err": 1, "message": "Token token rate limit calls exceed."}';
+          break;
+        }
+
+
         $mysqli->autocommit(false);
 
-        $itemWriter = new itemWriter($mysqli, $config);
+        $itemWriter = new itemWriter($mysqli, $config, $tokenId);
 
-        // todo check /  switch server/client token
 
 
         if (property_exists($payload->data->body, 'trace_chain')) {
@@ -109,8 +152,6 @@ switch ($method){
       http_response_code(500);
       echo '{"err": 1, "message": "missing payload data"}';
     }
-
-
 
     break;
 

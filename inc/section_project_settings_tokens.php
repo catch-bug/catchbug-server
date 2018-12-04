@@ -15,6 +15,11 @@ use rollbug\token;
 
 $projectSettingsContent = <<<HTML
 <h3>Project Access Tokens</h3>
+<div class="d-flex flex-row mb-3">
+<div class="ml-auto">
+<button type='button' class="btn btn-primary btn-sm" id="btnNewToken" data-toggle='modal' data-target='#tokenModal' data-project_id="$projectId" data-user_id="$user->id">Create new token</button>
+</div>
+</div>
 HTML;
 
 $tokens = [];
@@ -41,13 +46,6 @@ if ($result = $mysqli->query($query)) {
     }
   }
 
-  $projectSettingsContent .= <<<HTML
-  <div class="d-flex flex-row mb-3">
-  <div class="ml-auto">
-<button type='button' class="btn btn-primary btn-sm" id="btnNewToken" data-toggle='modal' data-target='#tokenModal' data-project_id="$projectId" data-user_id="$user->id">Create new token</button>
-</div>
-</div>
-HTML;
 
 
   if ($tokenTableBodyActive !== '') {
@@ -140,7 +138,7 @@ HTML;
       </fieldset> 
       
       <fieldset class="form-group">
-      <legend class="">Rate Limit</legend>
+      <legend class="">POST New Item Rate Limit</legend>
       <div class="form-row">      
       <div class="form-group col-md-6">      
       <label for="selLimitPer" class="limitNoDefault invisible">Per</label>
