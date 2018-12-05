@@ -1,6 +1,6 @@
 <?php
 /**
- * @Project: RollbarServer
+ * @Project: RollBugServer
  * @User   : mira
  * @Date   : 26.11.18
  * @Time   : 7:41

@@ -1,6 +1,6 @@
 <?php
 /**
- * @Project: RollbarServer
+ * @Project: RollBugServer
  * @User   : mira
  * @Date   : 21.11.18
  * @Time   : 17:34
@@ -48,6 +48,9 @@ if (isset($_SESSION['user_id'])){
 
   $userSection = '';
   switch ($section){
+    case 'system':
+      include __DIR__ . '/inc/section_system.php';
+      break;
     case 'user':
       $userSection = strtok('/');
       switch ($userSection){
@@ -56,7 +59,7 @@ if (isset($_SESSION['user_id'])){
           break;
 
         case 'settings':
-
+          include __DIR__ . '/inc/section_user_settings.php';
           break;
 
         case 'newproject':
@@ -64,7 +67,7 @@ if (isset($_SESSION['user_id'])){
           break;
       }
 
-      break; // section user
+      break; // end section user
 
     case 'project':
       $projectId = (integer) strtok('/');
@@ -77,6 +80,7 @@ if (isset($_SESSION['user_id'])){
         $projectName = $projectId !== 0 ? $user->getProject($projectId)->getName() : 'All projects';
         $projectDescription = $projectId !== 0 ? $user->getProject($projectId)->getDescription() : '';
 
+        // project top menu
         $content .= <<<HTML
 <h1>{$projectName}</h1>
 <h4 style="margin-top: -0.5rem;"><small class="text-muted"><em>{$projectDescription}</em></small></h4>
@@ -146,6 +150,7 @@ HTML;
                 break;
             }
 
+            // settings left menu
             $content .= <<<HTML
 <div class="row">
 <div class="col-sm-3">
@@ -181,9 +186,6 @@ HTML;
       }
       break; // section project
 
-    case 'newproject':
-
-      break;
   }
 
 // user NOT logged
@@ -291,12 +293,24 @@ HTML;
 HTML;
 }
 
-// user menu and logout
+// system settings, user menu and logout
 if (isset($_SESSION['user_id'])){
-  echo <<<HTML
-<ul class="nav navbar-nav navbar-right ml-auto">
+
+  $systemSettingsLink = $user->root ? <<<HTML
   <li class="nav-item">
-    <a class="nav-link{$helper->checkActive($section, 'user')}" href="{$config->rewrite}user/{$user->getId()}" id="navUser">{$user->name}</a>
+    <a class="nav-link{$helper->checkActive($section, 'system')}" href="{$config->rewrite}system/" id="navSystem">System</a>
+  </li>
+HTML
+      : '';
+
+
+  echo <<<HTML
+<ul class="nav navbar-nav ml-auto">
+  $systemSettingsLink
+  <li class="nav-item">
+    <a class="nav-link{$helper->checkActive($section, 'user')}" href="{$config->rewrite}user/settings" id="navUser">
+    <img src="{$user->getGravatarImgLink()}" class="avatar" alt="">
+{$user->name}</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="/logout.php" id="navLogout">Log out</a>

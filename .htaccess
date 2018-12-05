@@ -3,3 +3,4 @@ RewriteRule ^api/v1\.0/(.*)$ api/v1.0/index.php?path=$1 [END,QSA]
 
 RewriteRule ^project/(.*) index.php?project/$1 [END,QSA]
 RewriteRule ^user/(.*) index.php?user/$1 [END,QSA]
+RewriteRule ^system/(.*) index.php?system/$1 [END,QSA]

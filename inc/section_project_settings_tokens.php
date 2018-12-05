@@ -1,6 +1,6 @@
 <?php
 /**
- * @Project: RollbarServer
+ * @Project: RollBugServer
  * @User   : mira
  * @Date   : 30.11.18
  * @Time   : 0:57
@@ -211,7 +211,7 @@ function formatTokenTableRow (\rollbug\token $token, \rollbug\user $user): strin
   $row .= "<td>$token->name</td>";
   $row .= "<td>$token->token<br><small>$token->types</small></td>";
   $row .= "<td>{$token->getCreatedStr('d.m.Y H:i:s', $user->DateTimeZone)}</td>";
-  $row .= "<td><button type='button' class='btn btn-outline-success btn-sm btn-edit-token' data-toggle='modal' data-target='#tokenModal' data-token='{$token}'>Edit</button></td>";
+  $row .= "<td class='align-middle'><div class=' d-flex justify-content-center'><button type='button' class='btn btn-outline-success btn-sm btn-edit-token' data-toggle='modal' data-target='#tokenModal' data-token='{$token}'>Edit</button></div></td>";
   $row .= '</tr>';
 
   return $row;

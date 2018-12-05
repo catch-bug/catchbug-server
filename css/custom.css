@@ -18,6 +18,14 @@ div#loading {
 }
 
 /* navbar + login form */
+.navbar img {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  margin-right: 5px;
+  margin-top: -0.5rem;
+  margin-bottom: -0.5rem;
+}
 .navbar .navbar-right li:first-child a {
   padding-right: 30px;
 }

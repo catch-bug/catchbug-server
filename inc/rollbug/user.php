@@ -1,6 +1,6 @@
 <?php
 /**
- * @Project: RollbarServer
+ * @Project: RollBugServer
  * @User   : mira
  * @Date   : 22.11.18
  * @Time   : 13:07
@@ -20,6 +20,11 @@ class user
    * @var string user name
    */
   public $name;
+
+  /**
+   * @var string user email
+   */
+  public $email;
 
   /**
    * @var boolean
@@ -52,9 +57,9 @@ class user
     $this->id = $id;
     $this->mysqli = $mysqli;
     //get user data
-    $stmt = $mysqli->prepare('SELECT name, root, time_zone FROM user WHERE id=?');
+    $stmt = $mysqli->prepare('SELECT name, email, root, time_zone FROM user WHERE id=?');
     $stmt->bind_param('i', $this->id);
-    $stmt->bind_result($this->name, $this->root, $time_zone);
+    $stmt->bind_result($this->name, $this->email, $this->root, $time_zone);
     $stmt->execute();
     $stmt->fetch();
     $stmt->close();
@@ -151,5 +156,16 @@ class user
     return $this->id;
   }
 
+  /**
+   * get user avatar from Gravatar
+   *
+   * @param int $size image size, default 80px
+   *
+   * @return string link to avatar img
+   */
+  public function getGravatarImgLink(int $size = 80): string
+  {
+    return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->email))) . '?d=identicon&s=' . $size;
+  }
 
 }

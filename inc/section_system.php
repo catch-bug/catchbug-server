@@ -2,13 +2,13 @@
 /**
  * @Project: RollBugServer
  * @User   : mira
- * @Date   : 22.11.18
- * @Time   : 14:56
+ * @Date   : 30.11.18
+ * @Time   : 0:57
  */
 
 /** @var \rollbug\user $user */
 /** @var \rollbug\helper $helper */
 
 $content .= <<<HTML
-<h2>welcome {$user->name}</h2>
+system settings
 HTML;
