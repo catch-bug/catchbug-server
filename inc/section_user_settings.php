@@ -15,22 +15,22 @@ $userSettingsMenu = strtok('/');
 $userSettingsMenu = $userSettingsMenu === false ? 'general' : $userSettingsMenu;
 
 $userSettingsContent = '';
-switch ($userSettingsMenu){
-case 'general':
-include __DIR__ . '/section_user_settings_general.php';
-break;
+switch ($userSettingsMenu) {
+  case 'general':
+    include __DIR__ . '/section_user_settings_general.php';
+    break;
 
-case 'auth':
+  case 'auth':
 //include __DIR__ . '/section_user_settings_members.php';
-break;
+    break;
 
-case 'emails':
+  case 'emails':
 //include __DIR__ . '/section_user_settings_tokens.php';
-break;
+    break;
 
-case 'delete':
+  case 'delete':
 //include __DIR__ . '/section_user_settings_delete.php';
-break;
+    break;
 }
 
 // settings left menu
