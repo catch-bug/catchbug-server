@@ -81,6 +81,13 @@ if (isset($_SESSION['user_id'])){
         $projectDescription = $projectId !== 0 ? $user->getProject($projectId)->getDescription() : '';
 
         // project top menu
+        $projectTomMenuSettings = $projectId !== 0 ? <<<HTML
+  <li class="nav-item {$helper->checkActive($projectSection, 'settings')}">
+    <a class="nav-link" href="{$config->rewrite}project/$projectId/settings">Settings</a>
+  </li> 
+HTML
+            : '';
+
         $content .= <<<HTML
 <h1>{$projectName}</h1>
 <h4 style="margin-top: -0.5rem;"><small class="text-muted"><em>{$projectDescription}</em></small></h4>
@@ -89,27 +96,19 @@ if (isset($_SESSION['user_id'])){
   <li class="nav-item {$helper->checkActive($projectSection, 'items')}">
     <a class="nav-link" href="{$config->rewrite}project/$projectId/items">Items</a>
   </li>
-HTML;
-
-        if ($projectId !== 0) {
-          $content .= <<<HTML
-  <li class="nav-item {$helper->checkActive($projectSection, 'settings')}">
-    <a class="nav-link" href="{$config->rewrite}project/$projectId/settings">Settings</a>
-  </li> 
-HTML;
-        }
-
-        $content .= <<<HTML
+  $projectTomMenuSettings
 <div class="pt-4"></div>
 </ul>
 <hr>
 HTML;
 
         switch ($projectSection) {
+          // items list
           case 'items':
             include __DIR__ . '/inc/section_project_items.php';
             break;
 
+          // item
           case 'item':
             $projectItem = (integer)strtok('/');
             $itemSection = strtok('/');
@@ -117,6 +116,7 @@ HTML;
               include __DIR__ . '/inc/section_project_item.php';
             } else {
               switch ($itemSection) {
+                // occurrence
                 case 'occurrence':
                   $itemOccurrenceId = (integer)strtok('/');
                   if ($itemOccurrenceId > 0) {
@@ -127,70 +127,24 @@ HTML;
             }
             break;
 
+          // peoject settings
           case 'settings':
-            $projectSettingsMenu = strtok('/');
-            $projectSettingsMenu = $projectSettingsMenu === false ? 'general' : $projectSettingsMenu;
+            $content .= include __DIR__ . '/inc/section_project_settings.php';
+            break;
 
-            $projectSettingsContent = '';
-            switch ($projectSettingsMenu){
-              case 'general':
-                include __DIR__ . '/inc/section_project_settings_general.php';
-                break;
-
-              case 'members':
-                include __DIR__ . '/inc/section_project_settings_members.php';
-                break;
-
-              case 'tokens':
-                include __DIR__ . '/inc/section_project_settings_tokens.php';
-                break;
-
-              case 'delete':
-                include __DIR__ . '/inc/section_project_settings_delete.php';
-                break;
-            }
-
-            // settings left menu
-            $content .= <<<HTML
-<div class="row">
-<div class="col-sm-3">
-<ul class="nav flex-column nav-settings">
-  <li class="nav-item">
-    <a class="nav-link {$helper->checkActive('general', $projectSettingsMenu)}" href="{$config->rewrite}project/$projectId/settings/general">General</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link {$helper->checkActive('members', $projectSettingsMenu)}" href="{$config->rewrite}project/$projectId/settings/members">Members</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link {$helper->checkActive('tokens', $projectSettingsMenu)}" href="{$config->rewrite}project/$projectId/settings/tokens">Project Access Tokens</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link {$helper->checkActive('delete', $projectSettingsMenu)} text-danger" href="{$config->rewrite}project/$projectId/settings/delete">Delete Project</a>
-  </li>
-</ul>
-
-</div>
-<div class="col-sm-9">
-$projectSettingsContent
-</div>
-</div>
-HTML;
-
-            break;  // project / case 'settings'
         } // end switch $projectSection
 
       } else {
-        $content .= <<<HTML
-<h4 class="text-danger">Project not found</h4>
-HTML;
+        $content .= '<h4 class="text-danger">Project not found</h4>';
       }
       break; // section project
 
-  }
+  }  // end switch section
 
 // user NOT logged
 } else {
-
+  // read default index file for all web visitors
+  $content = include __DIR__ . '/index_default.php';
 }
 
 
@@ -256,7 +210,7 @@ HTML;
 // ----------------------------------- navbar
 echo <<<HTML
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="/">rollBug <small><small class="text-muted">v{$config->version}</small></small></a>
+      <a class="navbar-brand align-self-stretch" href="/">rollBug <small><small class="text-muted">v{$config->version}</small></small></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -312,7 +266,7 @@ HTML
     <img src="{$user->getGravatarImgLink()}" class="avatar" alt="">
 {$user->name}</a>
   </li>
-  <li class="nav-item">
+  <li class="nav-item pl-3">
     <a class="nav-link" href="/logout.php" id="navLogout">Log out</a>
   </li>
 </ul>

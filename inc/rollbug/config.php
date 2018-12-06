@@ -10,19 +10,20 @@ namespace rollbug;
 class config
 {
   /**
-    (object)(array(
-  'database' =>
-  (object)(array(
-  'server' => 'localhost',
-  'user' => 'rollbar',
-  'pass' => 'prdel',
-  'database' => 'rollbar',
-  'port' => '5719',
-  'socket' => '/tmp/mysql_sandbox5719.sock',
-  )),
-  'max_occurences' => 10,
-  'rewrite' => '/',  '/' - rewrite is on; '/?' - rewrite is off
-  ));
+   * @var $data = (object)['database' =>
+   *                    (object)[
+   *                    'server' => 'localhost',
+   *                    'user' => 'rollbar',
+   *                    'pass' => 'prdel',
+   *                    'database' => 'rollbar',
+   *                    'port' => '5719',
+   *                    'socket' => '/tmp/mysql_sandbox5719.sock',
+   *                    ],
+   *            'max_occurences' => 10,
+   *            'rewrite' => '/', // '/' - rewrite is on; '/?' - rewrite is off
+   *            'version' => ''  // version from source code
+   *   ]
+   *
    */
   private static $data;
   private $settingsFileName;
@@ -45,6 +46,9 @@ class config
     $this->version = self::$version;
   }
 
+  /**
+   * @return mixed
+   */
   public function getData()
   {
     return self::$data;
@@ -53,7 +57,7 @@ class config
   /**
    * @param $key
    *
-   * @return mixed
+   * @return self::$data
    * @throws \Exception
    */
   public function __get($key)
