@@ -6,8 +6,10 @@
  * @Time   : 5:03
  */
 
-
+/** @var \rollbug\user $user */
+/** @var \rollbug\helper $helper */
 
 $userSettingsContent= <<<HTML
-user general
+<h3>General settings</h3>
+<div class="row"><img src="{$user->getGravatarImgLink()}" alt="Avatar" class="src"></div>
 HTML;

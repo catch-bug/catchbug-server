@@ -77,20 +77,20 @@ $(function() {
             })
       })
       .validate({
-        errorPlacement: function ( error, element ) {
+        errorPlacement: function (error, element) {
           // Add the `invalid-feedback` class to the error element
-          error.addClass( "invalid-feedback" );
-          if ( element.prop( "type" ) === "checkbox" ) {
-            error.insertAfter( element.next( "label" ) );
+          error.addClass("invalid-feedback");
+          if (element.prop("type") === "checkbox") {
+            error.insertAfter(element.next("label"));
           } else {
-            error.insertAfter( element );
+            error.insertAfter(element);
           }
         },
-        highlight: function ( element, errorClass, validClass ) {
-          $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass("is-invalid").removeClass("is-valid");
         },
         unhighlight: function (element, errorClass, validClass) {
-          $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
+          $(element).addClass("is-valid").removeClass("is-invalid");
         }
 
       });
@@ -201,25 +201,25 @@ $(function() {
 
   jQuery.validator.setDefaults({
     errorElement: "em",
-    errorPlacement: function ( error, element ) {
+    errorPlacement: function (error, element) {
       // Add the `invalid-feedback` class to the error element
-      error.addClass( "invalid-feedback" );
+      error.addClass("invalid-feedback");
 
-      $( element ).closest( "form" ).find( "label[for='" + element.attr( "id" ) + "']" ).append( error );
+      $(element).closest("form").find("label[for='" + element.attr("id") + "']").append(error);
     },
 
-    highlight: function ( element, errorClass, validClass ) {
-      $( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass("is-invalid").removeClass("is-valid");
     },
     unhighlight: function (element, errorClass, validClass) {
-      $( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
+      $(element).addClass("is-valid").removeClass("is-invalid");
     },
-    showErrors: function(errorMap, errorList) {
+    showErrors: function (errorMap, errorList) {
       // scroll down if element under top nav bar
       if (typeof errorList[0] !== "undefined") {
         var position = $(window).scrollTop();
         var top = $(errorList[0].element).offset().top;
-        if ((top - position) < 109){
+        if ((top - position) < 109) {
           $(window).scrollTop(top - 110);
         }
       }
@@ -311,7 +311,7 @@ $(function() {
       }
 
       modal.find("#btnDeleteToken").off().on("click", function (e) {
-        if (!confirm("Do you really want to delete token")){
+        if (!confirm("Do you really want to delete token")) {
           return false;
         }
         $('div#loading').show();
@@ -335,12 +335,12 @@ $(function() {
 
     });
 
-    $tokenModal.find("#selLimitPer").on("change", function(){
-      if(this.value === "Default"){
+    $tokenModal.find("#selLimitPer").on("change", function () {
+      if (this.value === "Default") {
         $tokenModal.find(".limitNoDefault").addClass("invisible").removeClass("visible");
         $tokenModal.find(".limitDefault").addClass("visible").removeClass("invisible");
         $("#inpLimitCalls").removeData("rule-max").removeAttr("data-rule-max").data("rule-required", false);
-        formEditTokenValidator.element( "#inpLimitCalls" );
+        formEditTokenValidator.element("#inpLimitCalls");
       } else {
         $tokenModal.find(".limitNoDefault").addClass("visible").removeClass("invisible");
         $tokenModal.find(".limitDefault").addClass("invisible").removeClass("visible");
@@ -373,15 +373,15 @@ $(function() {
         $("#inpLimitCalls").data("rule-max", rate).data("rule-required", true);
         $tokenModal.find("#spTokenRateLimit").text(rate);
       }
-      formEditTokenValidator.element( "#inpLimitCalls" );
+      formEditTokenValidator.element("#inpLimitCalls");
     });
 
     var $formEditToken = $tokenModal.find("#formEditToken"),
         formEditTokenValidator = $formEditToken.validate();
 
-    $tokenModal.find("#formEditTokenSubmit").on("click", function(e){
+    $tokenModal.find("#formEditTokenSubmit").on("click", function (e) {
       e.preventDefault();
-      if (!$formEditToken.valid()){
+      if (!$formEditToken.valid()) {
         return false;
       }
       var data = $formEditToken.serialize();
@@ -409,7 +409,7 @@ $(function() {
 
   $("#btnDeleteProject").on("click", function (e) {
     var projectName = prompt("To confirm the deletion, write the name of the project");
-    if ((projectName !== null) && (projectName === $(this).data("project-name"))){
+    if ((projectName !== null) && (projectName === $(this).data("project-name"))) {
       $('div#loading').show();
       $.get("/ajax/a_index.php?cmd=delete_project&ajax_token=" + AJAX_TOKEN + "&projectid=" + $(this).data("project-id") + "&userid=" + $(this).data("user-id"))
           .done(function (result) {
@@ -428,6 +428,42 @@ $(function() {
             $('#loading').hide();
           })
     }
-  })
+  });
+
+  $("#form_user_settings_change_password")
+      .on("submit", function (e) {
+        e.preventDefault();
+        if (!$(this).valid()) {
+          //    $login_validator.errorList[0].element.focus();  // when sending not by input submit
+          return;
+        }
+
+        var b = $(this).serialize();
+
+        $('div#loading').show();
+        $.post("/ajax/a_index.php?cmd=user_settings&ajax_token=" + AJAX_TOKEN, b)
+            .done(function (result) {
+
+                if (result.code === 0) {
+                  $("#okModalText").text(result.message);
+                  $("#okModal").modal('show').on('hidden.bs.modal', function (e) {
+                    if (result.forceReload) {
+                      document.location.reload(true);
+                    }
+                    if (result.replace) {
+                      document.location.replace(result.replace);
+                    }
+                  });
+                } else {
+                  $("#errorModalText").text(result.message);
+                  $("#errorModal").modal('show');
+                }
+              $('#loading').hide();
+            })
+            .fail(function () {
+              $('#loading').hide();
+            })
+      })
+      .validate();
 
 });

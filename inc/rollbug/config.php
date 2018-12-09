@@ -10,18 +10,18 @@ namespace rollbug;
 class config
 {
   /**
-   * @var $data = (object)['database' =>
-   *                    (object)[
-   *                    'server' => 'localhost',
-   *                    'user' => 'rollbar',
-   *                    'pass' => 'prdel',
-   *                    'database' => 'rollbar',
-   *                    'port' => '5719',
-   *                    'socket' => '/tmp/mysql_sandbox5719.sock',
-   *                    ],
-   *            'max_occurences' => 10,
-   *            'rewrite' => '/', // '/' - rewrite is on; '/?' - rewrite is off
-   *            'version' => ''  // version from source code
+   * @var $data = (object)[
+   *       'database' => (object)[
+   *               'server' => 'localhost',
+   *               'user' => 'rollbar',
+   *               'pass' => 'prdel',
+   *               'database' => 'rollbar',
+   *               'port' => '5719',
+   *               'socket' => '/tmp/mysql_sandbox5719.sock',
+   *        ],
+   *       'max_occurences' => 10,
+   *       'rewrite' => '/', // '/' - rewrite is on; '/?' - rewrite is off
+   *       'version' => ''  // version from source code
    *   ]
    *
    */
@@ -55,12 +55,12 @@ class config
   }
 
   /**
-   * @param $key
+   * @param $key string
    *
    * @return self::$data
    * @throws \Exception
    */
-  public function __get($key)
+  public function __get(string $key)
   {
     if (isset(self::$data->$key)) {
       return self::$data->$key;
@@ -70,20 +70,20 @@ class config
   }
 
   /**
-   * @param $key
-   * @param $value
+   * @param $key    string
+   * @param $value  mixed
    */
-  public function __set($key, $value)
+  public function __set(string $key, $value)
   {
     self::$data->$key = $value;
   }
 
   /**
-   * @param $key
+   * @param $key string
    *
    * @return bool
    */
-  public function __isset($key)
+  public function __isset(string $key)
   {
     return isset(self::$data[$key]);
   }
@@ -94,7 +94,7 @@ class config
    *
    * @throws \Exception
    */
-  public function saveData($filename = null): void
+  public function saveData(string $filename = null): void
   {
     $filename = $filename ?? $this->settingsFileName;
     $filename = \realpath($filename);

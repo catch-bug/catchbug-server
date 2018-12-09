@@ -21,7 +21,7 @@ switch ($userSettingsMenu) {
     break;
 
   case 'auth':
-//include __DIR__ . '/section_user_settings_members.php';
+    include __DIR__ . '/section_user_settings_auth.php';
     break;
 
   case 'emails':
@@ -29,12 +29,13 @@ switch ($userSettingsMenu) {
     break;
 
   case 'delete':
-//include __DIR__ . '/section_user_settings_delete.php';
+//include __DIR__ . '/section_user_settings_delete.php'; // don't delete last root
     break;
 }
 
 // settings left menu
 $content .= <<<HTML
+<h2>User Settings</h2>
 <div class="row">
   <div class="col-sm-3">
     <ul class="nav flex-column nav-settings">

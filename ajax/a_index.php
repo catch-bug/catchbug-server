@@ -7,7 +7,6 @@
  */
 
 
-use Composer\Plugin\PreCommandRunEvent;
 use rollbug\config;
 
 require_once __DIR__ . '/../inc/ajax_secure.php';
@@ -238,6 +237,7 @@ switch ($cmd){
 
       $error = '';
       switch ($section) {
+        #region general project settings
         case 'general': // update / create project
           $name = trim($_POST['name'] ?? '');
           $desc = trim($_POST['desc'] ?? '');
@@ -318,12 +318,16 @@ switch ($cmd){
             }
           }
           break;  // END update / create project
+        #endregion general project settings
 
+        #region members project settings
         case 'members':
           $vystup['code'] = 1;
           $vystup['message'] = 'members.';
           break;
+        #endregion members project settings
 
+        #region tokens project settings
         case 'tokens':  // update / create token
           $tokeId = (integer)($_POST['tokenid'] ?? 0);
           $name = trim($_POST['name'] ?? '');
@@ -386,10 +390,73 @@ switch ($cmd){
             $vystup['message'] = 'You can set max rate ' . $rate . 'not ' . $limitCalls . '.';
           }
           break;  // END update / create token
+        #endregion tokens project settings
       }
 
 
 
+    } else {
+      $vystup['code'] = 1;
+      $vystup['message'] = 'Unauthorised access!';
+    }
+    break;
+#endregion project_settings
+
+
+#region user_settings
+  case 'user_settings':
+    $userId = (integer) ($_POST['user_id'] ?? 0);
+
+    if ($_SESSION['user_id'] === $userId) {
+      $section = trim($_POST['section'] ?? '');
+
+      $error = '';
+      switch ($section) {
+
+        // change password
+        #region change_password
+        case 'auth_ch_pwd':
+          $oldPassword = trim($_POST['old_password'] ?? '');
+
+          $stmt = $mysqli->prepare('SELECT password FROM user WHERE id=? LIMIT 1');
+          $stmt->bind_param('i', $userId);
+          $stmt->bind_result($password);
+          $query_success = $stmt->execute();
+          $error = $stmt->error;
+          $stmt->fetch();
+          $stmt->close();
+
+          if (password_verify($oldPassword, $password)) {
+            $newPassword = trim($_POST['new_password'] ?? '');
+            $newPasswordConfirm = trim($_POST['confirm_new_password'] ?? '');
+
+            if ($query_success && ($newPassword === $newPasswordConfirm)){
+              $passwordHast = password_hash($newPassword, PASSWORD_DEFAULT);
+
+              $stmt = $mysqli->prepare('UPDATE user SET password=? WHERE id=?;');
+              $stmt->bind_param('si', $passwordHast, $userId);
+              $query_success = $query_success && $stmt->execute();
+              $error = $stmt->error;
+              $stmt->close();
+
+              if ($query_success){
+                $vystup['code'] = 0;
+                $vystup['message'] = 'Password successfully updated.';
+              } else {
+                $vystup['code'] = 1;
+                $vystup['message'] = 'Database error: ' . $error;
+              }
+            } else {
+              $vystup['code'] = 1;
+              $vystup['message'] = 'Passwords not match.';
+            }
+          } else {
+            $vystup['code'] = 1;
+            $vystup['message'] = 'Wrong old password';
+          }
+          break;
+          #endregion change_password
+      }
     } else {
       $vystup['code'] = 1;
       $vystup['message'] = 'Unauthorised access!';
