@@ -500,6 +500,17 @@ $(function() {
 
   $("#selMailEmail").on("change", function (e) {
     postData("user_settings", $(this).parent("form").serialize());
+  });
+
+  $("#btnDeleteAccount").on("click", function () {
+    var usserName = prompt("To confirm the deletion, write the name of the user");
+    if ((usserName !== null) && (usserName === $(this).data("user-name"))) {
+      postData("user_settings", $.param({
+        user_id: $(this).data("user-id"),
+        user_name: $(this).data("user-name"),
+        section: "delete_user"
+      }));
+    }
   })
 
 });

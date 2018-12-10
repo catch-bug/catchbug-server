@@ -29,7 +29,7 @@ switch ($userSettingsMenu) {
     break;
 
   case 'delete':
-//include __DIR__ . '/section_user_settings_delete.php'; // don't delete last root
+    include __DIR__ . '/section_user_settings_delete.php'; // don't delete last root
     break;
 }
 

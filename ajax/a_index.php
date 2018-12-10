@@ -622,6 +622,62 @@ switch ($cmd){
           }
           break;
           #endregion set_main_email
+
+        #region delete_user
+        case 'delete_user':
+          $userName = trim($_POST['user_name'] ?? '');
+
+          $stmt = $mysqli->prepare('SELECT name, root FROM user WHERE id=?');
+          $stmt->bind_param('i', $userId);
+          $stmt->bind_result($dbUserName, $dbUserRoot);
+          $stmt->execute();
+          $stmt->fetch();
+          $stmt->close();
+
+          if ($dbUserName === $userName){
+            if ($dbUserRoot){
+              $stmt = $mysqli->prepare('SELECT count(id) FROM user WHERE root!=0');
+              $stmt->bind_result($count);
+              $stmt->execute();
+              $stmt->fetch();
+              $stmt->close();
+
+              $accountDeletable = $count > 1;
+            } else {
+              $accountDeletable = true;
+            }
+
+            if ($accountDeletable){
+              $stmt = $mysqli->prepare('DELETE FROM user WHERE id=?');
+              $stmt->bind_param('i', $userId);
+              $query_success = $stmt->execute();
+              $stmt->close();
+
+              if ($query_success){
+                $vystup['code'] = 0;
+                $vystup['message'] = 'User ' . $dbUserName . ' successfully deleted.';
+                $vystup['replace'] = '/';
+                // logout deleted user
+                $_SESSION['user_id'] = '';
+                unset ($_SESSION['user_id']);
+
+                $_COOKIE['auth'] = '';
+                setcookie ('auth', '', time() - 3600,'/');
+              } else {
+                $vystup['code'] = 1;
+                $vystup['message'] = 'Database error when deleting user.';
+              }
+
+            } else {
+              $vystup['code'] = 1;
+              $vystup['message'] = 'You can\'t delete last root user.';
+            }
+          } else {
+            $vystup['code'] = 1;
+            $vystup['message'] = 'Unauthorised user delete.';
+          }
+          break;
+        #endregion delete_user
       }
     } else {
       $vystup['code'] = 1;
