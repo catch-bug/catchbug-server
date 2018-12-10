@@ -119,4 +119,15 @@ class helper
     }
     return $date->format($format);
   }
+
+  /**
+   * @param bool   $condition
+   * @param string $string
+   *
+   * @return string
+   */
+  public function ifEcho(bool $condition, string $string): string
+  {
+    return $condition ? $string : '';
+  }
 }

@@ -430,6 +430,32 @@ $(function() {
     }
   });
 
+  function postData(cmd, data){
+    $('div#loading').show();
+    $.post("/ajax/a_index.php?cmd=" + cmd + "&ajax_token=" + AJAX_TOKEN, data)
+        .done(function (result) {
+
+          if (result.code === 0) {
+            $("#okModalText").text(result.message);
+            $("#okModal").modal('show').on('hidden.bs.modal', function (e) {
+              if (result.forceReload) {
+                document.location.reload(true);
+              }
+              if (result.replace) {
+                document.location.replace(result.replace);
+              }
+            });
+          } else {
+            $("#errorModalText").text(result.message);
+            $("#errorModal").modal('show');
+          }
+          $('#loading').hide();
+        })
+        .fail(function () {
+          $('#loading').hide();
+        })
+  }
+
   $("#form_user_settings_change_password")
       .on("submit", function (e) {
         e.preventDefault();
@@ -437,33 +463,43 @@ $(function() {
           //    $login_validator.errorList[0].element.focus();  // when sending not by input submit
           return;
         }
-
-        var b = $(this).serialize();
-
-        $('div#loading').show();
-        $.post("/ajax/a_index.php?cmd=user_settings&ajax_token=" + AJAX_TOKEN, b)
-            .done(function (result) {
-
-                if (result.code === 0) {
-                  $("#okModalText").text(result.message);
-                  $("#okModal").modal('show').on('hidden.bs.modal', function (e) {
-                    if (result.forceReload) {
-                      document.location.reload(true);
-                    }
-                    if (result.replace) {
-                      document.location.replace(result.replace);
-                    }
-                  });
-                } else {
-                  $("#errorModalText").text(result.message);
-                  $("#errorModal").modal('show');
-                }
-              $('#loading').hide();
-            })
-            .fail(function () {
-              $('#loading').hide();
-            })
+        postData("user_settings", $(this).serialize());
       })
       .validate();
+
+  $(".btn-verify-email").on("click", function (e) {
+    e.preventDefault();
+    postData("user_settings", $.param({
+      id: $(this).data("id"),
+      email: $(this).data("email"),
+      user_id: $(this).data("user-id"),
+      section: "verify_email"
+    }));
+  });
+
+  $(".btn-delete-email").on("click", function (e) {
+    e.preventDefault();
+    postData("user_settings", $.param({
+      id: $(this).data("id"),
+      email: $(this).data("email"),
+      user_id: $(this).data("user-id"),
+      section: "delete_email"
+    }));
+  });
+
+  $("#form_user_settings_add_email")
+      .on("submit", function (e) {
+        e.preventDefault();
+        if (!$(this).valid()) {
+          //    $login_validator.errorList[0].element.focus();  // when sending not by input submit
+          return;
+        }
+        postData("user_settings", $(this).serialize());
+      })
+      .validate();
+
+  $("#selMailEmail").on("change", function (e) {
+    postData("user_settings", $(this).parent("form").serialize());
+  })
 
 });

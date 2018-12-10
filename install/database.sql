@@ -74,7 +74,6 @@ CREATE TABLE `token` (
 CREATE TABLE `user` (
   `id` bigint(20) unsigned NOT NULL,
   `name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `email` varchar(255) COLLATE utf8_bin NOT NULL,
   `password` varchar(255) COLLATE utf8_bin NOT NULL,
   `root` tinyint(1) NOT NULL DEFAULT '0',
   `last_project` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -82,6 +81,20 @@ CREATE TABLE `user` (
   `time_zone` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT 'UTC',
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `name` (`name`)
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_emails` (
+  `id` bigint(20) unsigned NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `email` varchar(255) COLLATE utf8_bin NOT NULL,
+  `verified` tinyint(1) NOT NULL DEFAULT '0',
+  `main` tinyint(1) NOT NULL DEFAULT '0',
+  `hash` varchar(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `user_emails_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

@@ -22,9 +22,9 @@ class user
   public $name;
 
   /**
-   * @var string user email
+   * @var \rollbug\userEmail user emails
    */
-  public $email;
+  public $emails = [];
 
   /**
    * @var boolean
@@ -57,14 +57,23 @@ class user
     $this->id = $id;
     $this->mysqli = $mysqli;
     //get user data
-    $stmt = $mysqli->prepare('SELECT name, email, root, time_zone FROM user WHERE id=?');
+    $stmt = $mysqli->prepare('SELECT name, root, time_zone FROM user WHERE id=?');
     $stmt->bind_param('i', $this->id);
-    $stmt->bind_result($this->name, $this->email, $this->root, $time_zone);
+    $stmt->bind_result($this->name, $this->root, $time_zone);
     $stmt->execute();
     $stmt->fetch();
     $stmt->close();
-
     $this->DateTimeZone = new \DateTimeZone($time_zone);
+
+    // get user emails
+    $query = "SELECT id, email, main, verified FROM user_emails WHERE user_id=$id";
+    if ($result = $mysqli->query($query)) {
+      while ($obj = $result->fetch_object()) {
+        if ($obj !== null) {
+          $this->emails[] = new userEmail($obj);
+        }
+      }
+    }
 
     // get user projects
     $stmt = $mysqli->prepare('SELECT id, name, description, last_item FROM project WHERE user_id=?');
@@ -165,7 +174,23 @@ class user
    */
   public function getGravatarImgLink(int $size = 80): string
   {
-    return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->email))) . '?d=identicon&s=' . $size;
+    return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->getMainEmail()->email))) . '?d=identicon&s=' . $size;
+  }
+
+  /**
+   * get main user email (if none 1st email is used)
+   *
+   * @return \rollbug\userEmail
+   */
+  public function getMainEmail(): userEmail
+  {
+    foreach ($this->emails as $email){
+      if ($email->main){
+        return $email;
+      }
+    }
+
+    return $this->emails[0] ?? new userEmail(new \stdClass());
   }
 
 }

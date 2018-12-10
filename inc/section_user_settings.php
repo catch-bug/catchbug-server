@@ -25,7 +25,7 @@ switch ($userSettingsMenu) {
     break;
 
   case 'emails':
-//include __DIR__ . '/section_user_settings_tokens.php';
+    include __DIR__ . '/section_user_settings_emails.php';
     break;
 
   case 'delete':

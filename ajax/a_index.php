@@ -456,6 +456,172 @@ switch ($cmd){
           }
           break;
           #endregion change_password
+
+        #region verify_email
+        case 'verify_email':
+          $email = trim($_POST['email'] ?? '');
+          $id = (integer)trim($_POST['id'] ?? 0);
+
+          $stmt = $mysqli->prepare('SELECT email, user_id FROM user_emails WHERE id=? LIMIT 1');
+          $stmt->bind_param('i', $id);
+          $stmt->bind_result($dbEmail, $dbUserId);
+          $query_success = $stmt->execute();
+          $stmt->fetch();
+          $stmt->close();
+
+          if($query_success && ($dbEmail === $email) && ($dbUserId === $_SESSION['user_id'])){
+            try {
+              $hash = bin2hex(random_bytes(32));
+            } catch (Exception $e) {
+              $vystup['code'] = 1;
+              $vystup['message'] = 'Unable to generate hash. Error: ' . $e->getMessage();
+            }
+            $stmt = $mysqli->prepare('UPDATE user_emails SET hash=? WHERE id=?;');
+            $stmt->bind_param('si', $hash, $id);
+            $query_success = $stmt->execute();
+            $stmt->close();
+
+            if ($query_success){
+              // todo send email with verification link && verification script
+
+              $vystup['code'] = 0;
+              $vystup['message'] = 'Email ' . $email . ' successfully deleted.';
+              $vystup['forceReload'] = true;
+            } else {
+              $vystup['code'] = 1;
+              $vystup['message'] = 'Unable write hash to database.';
+            }
+          } else {
+            $vystup['code'] = 1;
+            $vystup['message'] = 'Unauthorised email verification.';
+          }
+          break;
+          #endregion verify_email
+
+        #region delete_email
+        case 'delete_email':
+          $email = trim($_POST['email'] ?? '');
+          $id = (integer)trim($_POST['id'] ?? 0);
+
+          $stmt = $mysqli->prepare('SELECT email, user_id, main FROM user_emails WHERE id=? LIMIT 1');
+          $stmt->bind_param('i', $id);
+          $stmt->bind_result($dbEmail, $dbUserId, $mainEmail);
+          $query_success = $stmt->execute();
+          $stmt->fetch();
+          $stmt->close();
+
+          $mysqli->autocommit(false);
+          if($query_success && ($dbEmail === $email) && ($dbUserId === $_SESSION['user_id'])){
+            $stmt = $mysqli->prepare('DELETE FROM user_emails WHERE id=?');
+            $stmt->bind_param('i', $id);
+            $query_success = $stmt->execute();
+            $stmt->close();
+
+            if ($mainEmail){
+              $stmt = $mysqli->prepare('UPDATE user_emails SET main = 1 WHERE user_id=? limit 1;');
+              $stmt->bind_param('i', $userId);
+              $query_success = $query_success && $stmt->execute();
+              $stmt->close();
+            }
+
+            if ($query_success) {
+              if ($mysqli->commit()) {
+                $vystup['code'] = 0;
+                $vystup['message'] = 'Email ' . $email . ' successfully deleted.';
+                $vystup['forceReload'] = true;
+              } else {
+                $vystup['code'] = 1;
+                $vystup['message'] = 'Database error when deleting email.';
+              }
+            } else {
+              $vystup['code'] = 1;
+              $vystup['message'] = 'Database error when deleting email.';
+            }
+
+          } else {
+            $vystup['code'] = 1;
+            $vystup['message'] = 'Unauthorised email delete.';
+          }
+          break;
+          #endregion delete_email
+
+        #region add_email
+        case 'add_email':
+          $email = trim($_POST['email'] ?? '');
+
+          $stmt = $mysqli->prepare('SELECT count(id) FROM user_emails WHERE user_id=? and email=?');
+          $stmt->bind_param('is', $userId, $email);
+          $stmt->bind_result($count);
+          $stmt->execute();
+          $stmt->fetch();
+          $stmt->close();
+
+          if ($count === 0) {
+
+            $stmt = $mysqli->prepare('INSERT INTO user_emails (user_id, email, main) select ?,?,count(id)=0 from user_emails where user_id=?;');
+            $stmt->bind_param('isi', $userId, $email, $userId);
+            $query_success = $stmt->execute();
+            $stmt->close();
+
+            if ($query_success) {
+              $vystup['code'] = 0;
+              $vystup['message'] = 'Email ' . $email . ' successfully added.';
+              $vystup['forceReload'] = true;
+            } else {
+              $vystup['code'] = 1;
+              $vystup['message'] = 'Database error when adding email.';
+            }
+          } else {
+            $vystup['code'] = 1;
+            $vystup['message'] = 'Email ' . $email . ' already added.';
+          }
+
+          break;
+          #endregion add_email
+
+        #region set_main_email
+        case 'set_main_email':
+          $mainEmail = (integer)trim($_POST['main_email'] ?? 0);
+
+          $stmt = $mysqli->prepare('SELECT email, user_id FROM user_emails WHERE id=? LIMIT 1');
+          $stmt->bind_param('i', $mainEmail);
+          $stmt->bind_result($dbEmail, $dbUserId);
+          $query_success = $stmt->execute();
+          $stmt->fetch();
+          $stmt->close();
+
+          if($query_success && ($dbUserId === $_SESSION['user_id'])){
+            $mysqli->autocommit(false);
+
+            $stmt = $mysqli->prepare('UPDATE user_emails SET main=0 WHERE user_id=?;');
+            $stmt->bind_param('i', $userId);
+            $query_success = $stmt->execute();
+            $stmt->close();
+
+            $stmt = $mysqli->prepare('UPDATE user_emails SET main=1 WHERE user_id=? and id=?;');
+            $stmt->bind_param('ii', $userId, $mainEmail);
+            $query_success = $query_success && $stmt->execute();
+            $stmt->close();
+
+            if ($query_success) {
+              if ($mysqli->commit()) {
+                $vystup['code'] = 0;
+                $vystup['message'] = 'Email ' . $dbEmail . ' set as main.';
+                $vystup['forceReload'] = true;
+              } else {
+                $vystup['code'] = 1;
+                $vystup['message'] = 'Database error when setting main email.';
+              }
+            } else {
+              $vystup['code'] = 1;
+              $vystup['message'] = 'Database error when setting main email.';
+            }
+          } else {
+            $vystup['code'] = 1;
+            $vystup['message'] = 'Unauthorised email settings.';
+          }
+          break;
+          #endregion set_main_email
       }
     } else {
       $vystup['code'] = 1;
