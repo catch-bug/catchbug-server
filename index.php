@@ -35,7 +35,11 @@ $title = '';
 
 $section = strtok($_SERVER['QUERY_STRING'], '/');
 $helper = new helper();
-$config = new config();
+try {
+  $config = new config(true);
+} catch (Exception $e) {
+  die($e->getMessage());
+}
 
 // user is logged
 if (isset($_SESSION['user_id'])){
@@ -49,7 +53,7 @@ if (isset($_SESSION['user_id'])){
   $userSection = '';
   switch ($section){
     case 'system':
-      include __DIR__ . '/inc/section_system.php';
+      include __DIR__ . '/inc/section_system_settings.php';
       break;
     case 'user':
       $userSection = strtok('/');
@@ -341,7 +345,15 @@ HTML;
 echo '<main role="main" class="container" id="content">' . $content . '</main>';
 
 echo <<<HTML
+<footer class="container-fluid pb-5">
+<dv class="row">
+
+</dv>
+</footer>
 $modalWindow
+<div id="loading" style="display: none;"></div>
+</body>
+
 <script type="text/javascript">
   var AJAX_TOKEN = '$_SESSION[ajax_token]',
   _REWRITE = '{$config->rewrite}';
@@ -356,9 +368,6 @@ $modalWindow
 
 <script src="/js/index.js"></script>
 <script type="text/javascript">$javascriptContent</script>
- 
-  <div id="loading" style="display: none;"></div>
-  </body>
 </html>
 HTML;
 

@@ -117,7 +117,7 @@ CREATE TABLE `versions` (
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-INSERT INTO `versions` VALUES ('core','-> master');
+INSERT INTO `versions` VALUES ('core','v0.0.0');
 INSERT INTO `versions` VALUES ('database','1.0.0');
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
