@@ -8,6 +8,7 @@
 
 
 use rollbug\config;
+use rollbug\mailer;
 
 require_once __DIR__ . '/../inc/ajax_secure.php';
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -471,7 +472,7 @@ switch ($cmd){
 
           if($query_success && ($dbEmail === $email) && ($dbUserId === $_SESSION['user_id'])){
             try {
-              $hash = bin2hex(random_bytes(32));
+              $hash = bin2hex(random_bytes(16));
             } catch (Exception $e) {
               $vystup['code'] = 1;
               $vystup['message'] = 'Unable to generate hash. Error: ' . $e->getMessage();
@@ -482,11 +483,26 @@ switch ($cmd){
             $stmt->close();
 
             if ($query_success){
-              // todo send email with verification link && verification script
 
-              $vystup['code'] = 0;
-              $vystup['message'] = 'Email ' . $email . ' successfully deleted.';
-              $vystup['forceReload'] = true;
+              try {
+                $mail = new mailer($config);
+                $mail->addAddress($email);
+                $mail->Subject = 'rollBug server email confirmation.';
+                $base_url = ( isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on' ? 'https' : 'http' ) . '://' .  $_SERVER['HTTP_HOST'];
+                $confirmUrl = "$base_url/confirm_email.php?email=" . urlencode($email) . "&hash=$hash";
+                $mail->setBody("<h1>rollBug server email confirmation</h1>You recently entered a new contact email address into rollBug.<br>To confirm your contact email, follow the link below:<br><a href='$confirmUrl'>Confirm this email address</a><br>The rollBug server");
+
+                if ($mail->send()) {
+                  $vystup['code'] = 0;
+                  $vystup['message'] = 'Email with confirmation lik was sent to ' . $email;
+                } else {
+                  $vystup['code'] = 1;
+                  $vystup['message'] = 'Error sending message.';
+                }
+              } catch (\PHPMailer\PHPMailer\Exception $e) {
+                $vystup['code'] = 500;
+                $vystup['message'] = 'Error sending message.';
+              }
             } else {
               $vystup['code'] = 1;
               $vystup['message'] = 'Unable write hash to database.';
