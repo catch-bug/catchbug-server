@@ -430,32 +430,6 @@ $(function() {
     }
   });
 
-  function postData(cmd, data){
-    $('div#loading').show();
-    $.post("/ajax/a_index.php?cmd=" + cmd + "&ajax_token=" + AJAX_TOKEN, data)
-        .done(function (result) {
-
-          if (result.code === 0) {
-            $("#okModalText").text(result.message);
-            $("#okModal").modal('show').on('hidden.bs.modal', function (e) {
-              if (result.forceReload) {
-                document.location.reload(true);
-              }
-              if (result.replace) {
-                document.location.replace(result.replace);
-              }
-            });
-          } else {
-            $("#errorModalText").text(result.message);
-            $("#errorModal").modal('show');
-          }
-          $('#loading').hide();
-        })
-        .fail(function () {
-          $('#loading').hide();
-        })
-  }
-
   $("#form_user_settings_change_password")
       .on("submit", function (e) {
         e.preventDefault();
@@ -514,3 +488,36 @@ $(function() {
   })
 
 });
+
+// -----------------------------------
+
+function postData(cmd, data, phpScript, $errorElement){
+  phpScript = phpScript || "a_index.php";
+  $errorElement = $errorElement || $("<div/>");
+
+  $('div#loading').show();
+  $.post("/ajax/" + phpScript + "?cmd=" + cmd + "&ajax_token=" + AJAX_TOKEN, data)
+      .done(function (result) {
+
+        if (result.code === 0) {
+          $("#okModalText").html(result.message);
+          $errorElement.html("");
+          $("#okModal").modal('show').on('hidden.bs.modal', function (e) {
+            if (result.forceReload) {
+              document.location.reload(true);
+            }
+            if (result.replace) {
+              document.location.replace(result.replace);
+            }
+          });
+        } else {
+          $("#errorModalText").html(result.message);
+          $errorElement.html(result.message);
+          $("#errorModal").modal('show');
+        }
+        $('#loading').hide();
+      })
+      .fail(function () {
+        $('#loading').hide();
+      })
+}

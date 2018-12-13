@@ -50,7 +50,7 @@ class helper
    */
   public function checkActive($section, $item): string
   {
-    return $section === $item ? ' active' : '';
+    return ($section === $item ? ' active' : '');
   }
 
   /**
@@ -63,7 +63,7 @@ class helper
    */
   public function checkSelected(string $option, string $item): string
   {
-    return $option === $item ? ' selected' : '';
+    return ($option === $item ? ' selected' : '');
   }
 
   /**
@@ -73,7 +73,17 @@ class helper
    */
   public function disabled(bool $disabled): string
   {
-    return $disabled ? ' disabled' : '';
+    return ($disabled ? ' disabled' : '');
+  }
+
+  /**
+   * @param bool $checked
+   *
+   * @return string
+   */
+  public function checked(bool $checked): string
+  {
+    return ($checked ? ' checked="checked"' : '');
   }
 
   /**
