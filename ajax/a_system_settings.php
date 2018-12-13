@@ -42,6 +42,7 @@ switch ($cmd){
 
     $smtpConfig = $_POST['config']['smtp'] ?? false;
     if ($smtpConfig !== false) {
+      $config->smtp->smtp_enable = ($smtpConfig['smtp_enable'] ?? 'off') === 'on';
       $config->smtp->smtp_host = trim($smtpConfig['smtp_host'] ?? '');
       $config->smtp->smtp_port = trim($smtpConfig['smtp_port'] ?? 0);
       $config->smtp->smtp_user = trim($smtpConfig['smtp_user'] ?? '');
@@ -90,14 +91,16 @@ switch ($cmd){
         $smtpUser = trim($smtpConfig['smtp_user'] ?? '');
         $smtpPassword = trim($smtpConfig['smtp_password'] ?? '');
 
-        if (($smtpUser !== '') && ($smtpPassword !== '')) {
+        if (($smtpConfig['smtp_enable'] ?? 'off') === 'on') {
+          $mail->isSMTP();
           $mail->SMTPAuth = true;
           $mail->Username = $smtpUser;
           $mail->Password = $smtpPassword;
           $mail->SMTPSecure = $smtpConfig['smtp_secure'];
+          $mail->Port = trim($smtpConfig['smtp_port'] ?? 0);
+        } else {
+          $mail->isMail();
         }
-
-        $mail->Port = trim($smtpConfig['smtp_port'] ?? 0);
 
         //Recipients
         $mail->setFrom(trim($smtpConfig['smtp_from_addr'] ?? ''), trim($smtpConfig['smtp_from_name'] ?? ''));

@@ -35,7 +35,6 @@ class mailer extends PHPMailer
         )
     );
     $this->XMailer = 'rollBug https://github.com/rollbug/rollbug-server/ powered by PHPMailer';
-    $this->isSMTP();
 
     if($config !== null){
       $this->setConfig($config);
@@ -58,19 +57,24 @@ class mailer extends PHPMailer
    */
   public function setConfig(config $config):void
   {
-    // todo Server settings
-    $this->Host = gethostbyname('z-web.eu');
-    $this->SMTPAuth = true;
-    $this->Username = 'github@z-web.eu';
-    $this->Password = '';
-    $this->SMTPSecure = 'tls';
-    $this->Port = 587;
+    // Server settings
+    if ($config->smtp->smtp_enable) {
+      $this->isSMTP();
+      $this->Host = gethostbyname($config->smtp->smtp_host);
+      $this->SMTPAuth = ($config->smtp->smtp_user !== '') && ($config->smtp->smtp_password !== '');
+      $this->Username = $config->smtp->smtp_user;
+      $this->Password = $config->smtp->smtp_password;
+      $this->SMTPSecure = $config->smtp->smtp_secure;
+      $this->Port = $config->smtp->smtp_port;
+    } else {
+      $this->isMail();
+    }
 
     //Recipients
-    $this->setFrom('github@z-web.eu', 'Mailer');
+    $this->setFrom($config->smtp->smtp_from_addr, $config->smtp->smtp_from_name);
 
     //Content
-    $this->isHTML(true);
+    $this->isHTML($config->smtp->smtp_html_enable);
   }
 
   /**

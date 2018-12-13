@@ -30,6 +30,7 @@ class settingsBase
             ],
         'smtp'                     =>
             (object)[
+                'smtp_enable'      => false,
                 'smtp_host'        => 'smtp.gmail.com',
                 'smtp_port'        => '587',
                 'smtp_user'        => '',
@@ -41,7 +42,7 @@ class settingsBase
             ],
         'max_occurences'           => 10,
         'default_token_rate_limit' => 1000,
-        'rewrite'                  => '/', // '/' - rewrite is on; '/?' - rewrite is off
+        'rewrite'                  => '/?', // '/' - rewrite is on; '/?' - rewrite is off
         'account_reg'              => false,
         'auto_update'              => true,
         'version'                  => '',

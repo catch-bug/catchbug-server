@@ -23,6 +23,14 @@ $(function() {
     }
     var config = $("input[name*=config\\[smtp\\]]").serialize();
     postData("test_smtp_settings", config, "a_system_settings.php", $("#divErrorTestMail"));
+  });
 
+
+  $("#cbSmtpEnable").on("click", function (e) {
+    if ($(this).prop("checked") === true){
+      $(".smtp-settings").show();
+    } else {
+      $(".smtp-settings").hide();
+    }
   })
 });

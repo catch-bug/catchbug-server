@@ -117,7 +117,7 @@ $systemSettingsContent= <<<HTML
 		</div>
 		
 		<div class="col-sm-12">
-		<small class="text-muted">Automatic one click update to new version. {$helper->ifEcho(!$dirsWritable, '<em class="text-danger">There is some files with <a data-toggle="collapse" href="#collapseFiles">wrong permissions</a>. Auto update will not work</em>')}</small>
+		<small class="text-muted">Automatic one click update to new version. {$helper->ifEcho(!$dirsWritable, '<em class="text-danger">There is some files with <a data-toggle="collapse" href="#collapseFiles">wrong permissions</a>. Auto update will not work.</em>')}</small>
 		</div>
 		
     <div class="collapse col-sm-12" id="collapseFiles">
@@ -130,37 +130,47 @@ $systemSettingsContent= <<<HTML
 	<hr>
 	
 	<div class="form-group row">
-    <label for="" class="col-sm-4 col-form-label font-weight-bold">SMTP configuration</label>
+    <label for="" class="col-sm-4 col-form-label font-weight-bold">Mail configuration</label>
 	</div>
-	<div class="form-group  row">
+	
+	<div class="form-group row">
+		<label for="cbSmtpEnable" class="col-sm-4 col-form-label">Enable SMTP</label>
+		<div class="col-sm-8">	
+	    <div class="form-check">
+      <input class="form-check-input position-static" type="checkbox" id="cbSmtpEnable" value="on" name="config[smtp][smtp_enable]" {$helper->checked($config->smtp->smtp_enable)}>
+      </div>
+		</div>
+	</div>
+	
+	<div class="form-group row smtp-settings" {$helper->ifEcho(!$config->smtp->smtp_enable, 'style="display: none"')}>
 		<label for="inpSmtpHost" class="col-sm-4 col-form-label">SMTP host</label>
 		<div class="col-sm-8">
 		<input type="text" name="config[smtp][smtp_host]" id="inpSmtpHost" class="form-control" value="{$config->smtp->smtp_host}">
 		</div>
 	</div>
 	
-	<div class="form-group  row">
+	<div class="form-group row smtp-settings" {$helper->ifEcho(!$config->smtp->smtp_enable, 'style="display: none"')}>
 		<label for="inpSmtpPort" class="col-sm-4 col-form-label">SMTP port</label>
 		<div class="col-sm-8">
 		<input type="text" name="config[smtp][smtp_port]" id="inpSmtpPort" class="form-control" value="{$config->smtp->smtp_port}" data-rule-min="1" data-rule-digits="true">
 		</div>
 	</div>
 	
-	<div class="form-group  row">
+	<div class="form-group row smtp-settings" {$helper->ifEcho(!$config->smtp->smtp_enable, 'style="display: none"')}>
 		<label for="inpSmtpUser" class="col-sm-4 col-form-label">SMTP user</label>
 		<div class="col-sm-8">
 		<input type="text" name="config[smtp][smtp_user]" id="inpSmtpUser" class="form-control" value="{$config->smtp->smtp_user}">
 		</div>
 	</div>
 	
-	<div class="form-group  row">
+	<div class="form-group row smtp-settings" {$helper->ifEcho(!$config->smtp->smtp_enable, 'style="display: none"')}>
 		<label for="inpSmtpPassword" class="col-sm-4 col-form-label">SMTP password</label>
 		<div class="col-sm-8">
 		<input type="password" name="config[smtp][smtp_password]" id="inpSmtpPassword" class="form-control" value="{$config->smtp->smtp_password}">
 		</div>
 	</div>
 	
-	<div class="form-group row">
+	<div class="form-group row smtp-settings" {$helper->ifEcho(!$config->smtp->smtp_enable, 'style="display: none"')}>
 		<label for="" class="col-sm-4 col-form-label">SMTP encryption</label>
 		<div class="col-sm-8">
 		
@@ -194,7 +204,7 @@ $systemSettingsContent= <<<HTML
 	</div>
 	
 	<div class="form-group row">
-		<label for="cbSmtpHtmlEnable" class="col-sm-4 col-form-label">Enable HLML emails</label>
+		<label for="cbSmtpHtmlEnable" class="col-sm-4 col-form-label">Enable HTML emails</label>
 		<div class="col-sm-8">	
 	    <div class="form-check">
       <input class="form-check-input position-static" type="checkbox" id="cbSmtpHtmlEnable" value="on" name="config[smtp][smtp_html_enable]" {$helper->checked($config->smtp->smtp_html_enable)}>
