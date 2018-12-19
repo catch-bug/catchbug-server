@@ -6,7 +6,7 @@
  * @Time   : 15:17
  */
 
-namespace rollbug;
+namespace catchbug;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use SimpleHtmlToText\Parser;
@@ -19,8 +19,8 @@ class mailer extends PHPMailer
   /**
    * mailer constructor.
    *
-   * @param \rollbug\config|null $config
-   * @param bool                 $exceptions
+   * @param \catchbug\config|null $config
+   * @param bool                  $exceptions
    *
    * @throws \PHPMailer\PHPMailer\Exception
    */
@@ -34,7 +34,7 @@ class mailer extends PHPMailer
             'allow_self_signed' => true
         )
     );
-    $this->XMailer = 'rollBug https://github.com/rollbug/rollbug-server/ powered by PHPMailer';
+    $this->XMailer = 'rollBug https://github.com/catch-bug/catchbug-server/ powered by PHPMailer';
 
     if($config !== null){
       $this->setConfig($config);
@@ -51,7 +51,7 @@ class mailer extends PHPMailer
   }
 
   /**
-   * @param \rollbug\config $config
+   * @param \catchbug\config $config
    *
    * @throws \PHPMailer\PHPMailer\Exception
    */

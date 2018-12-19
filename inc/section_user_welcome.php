@@ -6,8 +6,8 @@
  * @Time   : 14:56
  */
 
-/** @var \rollbug\user $user */
-/** @var \rollbug\helper $helper */
+/** @var \catchbug\user $user */
+/** @var \catchbug\helper $helper */
 
 $content .= <<<HTML
 <h2>welcome {$user->name}</h2>

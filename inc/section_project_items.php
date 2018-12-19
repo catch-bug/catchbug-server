@@ -11,12 +11,12 @@ var_dump($projectId);
 echo '</pre>';
 */
 
-/** @var \rollbug\user $user */
+/** @var \catchbug\user $user */
 
 $user->setItems($projectId);
 
 $tableBody = '';
-/** @var \rollbug\item $item */
+/** @var \catchbug\item $item */
 foreach ($user->items as $item){
   $tableBody .= <<<HTML
 <tr>

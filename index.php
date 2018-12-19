@@ -6,9 +6,9 @@
  * @Time   : 17:34
  */
 
-use rollbug\helper;
-use rollbug\user;
-use rollbug\config;
+use catchbug\helper;
+use catchbug\user;
+use catchbug\config;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -214,7 +214,7 @@ HTML;
 // ----------------------------------- navbar
 echo <<<HTML
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand align-self-stretch" href="/">rollBug <small><small class="text-muted">v{$config->version}</small></small></a>
+      <a class="navbar-brand align-self-stretch" href="/">catchBug <small><small class="text-muted">v{$config->version}</small></small></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -234,7 +234,7 @@ if (isset($_SESSION['user_id'])) {
 
 HTML;
 
-  /** @var \rollbug\project $project */
+  /** @var \catchbug\project $project */
   foreach ($user->projects as $project){
     echo <<<HTML
 <a class="dropdown-item {$helper->checkActive($projectId, $project->getId())}" href="{$config->rewrite}project/{$project->getId()}/items" data-id="{$project->getId()}">{$project->getName()}</a>

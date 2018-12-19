@@ -6,7 +6,7 @@
  * @Time   : 0:26
  */
 
-use rollbug\config;
+use catchbug\config;
 
 require_once __DIR__ . '/vendor/autoload.php';
 try {

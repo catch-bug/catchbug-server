@@ -7,8 +7,8 @@
  */
 
 
-use rollbug\config;
-use rollbug\mailer;
+use catchbug\config;
+use catchbug\mailer;
 
 require_once __DIR__ . '/../inc/ajax_secure.php';
 require_once __DIR__ . '/../vendor/autoload.php';

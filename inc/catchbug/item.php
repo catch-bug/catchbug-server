@@ -6,7 +6,7 @@
  * @Time   : 15:25
  */
 
-namespace rollbug;
+namespace catchbug;
 
 class item
 {
@@ -71,7 +71,7 @@ class item
   public $firstInChain = 0;
 
   /**
-   * @var \rollbug\occurrence
+   * @var \catchbug\occurrence
    */
   public $occurrences = array();
 
@@ -150,9 +150,9 @@ class item
   }
 
   /**
-   * @return \rollbug\occurrence
+   * @return \catchbug\occurrence
    */
-  public function getFirstOcc(): \rollbug\occurrence
+  public function getFirstOcc(): \catchbug\occurrence
   {
     // mysql sorting from last to first (desc)
     return end($this->occurrences);
@@ -164,7 +164,7 @@ class item
   public function countBrowsers(bool $force=false): void
   {
     if(!$force && \count($this->browsers) === 0){
-      /** @var \rollbug\occurrence $occurrence */
+      /** @var \catchbug\occurrence $occurrence */
       foreach ($this->occurrences as $occurrence){
         $browserId = $occurrence->browser->getName() . ' ' . $occurrence->browser->getVersion();
         if (\array_key_exists($browserId, $this->browsers)){
@@ -182,7 +182,7 @@ class item
   public function countOs(bool $force=false): void
   {
     if(!$force && \count($this->oss) === 0){
-      /** @var \rollbug\occurrence $occurrence */
+      /** @var \catchbug\occurrence $occurrence */
       foreach ($this->occurrences as $occurrence){
         $osId = $occurrence->os->getName() . ' ' . $occurrence->os->getVersion();
         if (\array_key_exists($osId, $this->oss)){
@@ -200,7 +200,7 @@ class item
   public function countUserIP(bool $force=false): void
   {
     if(!$force && \count($this->userIPs) === 0){
-      /** @var \rollbug\occurrence $occurrence */
+      /** @var \catchbug\occurrence $occurrence */
       foreach ($this->occurrences as $occurrence){
         $userIP = $occurrence->getUserIP();
         if (\array_key_exists($userIP, $this->userIPs)){

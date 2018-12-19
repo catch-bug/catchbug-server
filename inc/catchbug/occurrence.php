@@ -6,7 +6,7 @@
  * @Time   : 19:56
  */
 
-namespace rollbug;
+namespace catchbug;
 
 use Sinergi\BrowserDetector\UserAgent;
 
@@ -33,7 +33,7 @@ class occurrence
   public $browser;
 
   /**
-   * @var \rollbug\os
+   * @var \catchbug\os
    */
   public $os;
 

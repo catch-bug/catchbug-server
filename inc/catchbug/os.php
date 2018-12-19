@@ -6,7 +6,7 @@
  * @Time   : 15:49
  */
 
-namespace rollbug;
+namespace catchbug;
 
 
 class os extends \Sinergi\BrowserDetector\Os

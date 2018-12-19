@@ -6,9 +6,9 @@
  * @Time   : 0:10
  */
 
-use rollbug\config;
+use catchbug\config;
 
-/** @var \rollbug\helper $helper */
+/** @var \catchbug\helper $helper */
 unset($config);
 try {
   $config = new config(true, true);

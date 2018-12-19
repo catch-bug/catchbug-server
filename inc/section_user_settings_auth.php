@@ -7,8 +7,8 @@
  */
 
 
-/** @var \rollbug\user $user */
-/** @var \rollbug\helper $helper */
+/** @var \catchbug\user $user */
+/** @var \catchbug\helper $helper */
 
 $userSettingsContent= <<<HTML
 <h3>Authentication settings</h3>

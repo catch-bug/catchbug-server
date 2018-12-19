@@ -6,7 +6,7 @@
 * @Time   : 0:10
 */
 
-/** @var \rollbug\helper $helper */
+/** @var \catchbug\helper $helper */
 
 $systemSettingsContent= <<<HTML
 <h3>Users settings</h3>

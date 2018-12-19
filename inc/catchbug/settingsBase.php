@@ -6,7 +6,7 @@
  * @Time   : 22:30
  */
 
-namespace rollbug;
+namespace catchbug;
 
 
 class settingsBase

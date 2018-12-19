@@ -6,8 +6,8 @@
  * @Time   : 0:57
  */
 
-/** @var \rollbug\user $user */
-/** @var \rollbug\helper $helper */
+/** @var \catchbug\user $user */
+/** @var \catchbug\helper $helper */
 
 
 

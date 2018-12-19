@@ -1,5 +1,5 @@
 {
-  "name": "ms502040/rollbug",
+  "name": "catch-bug/catchbug-server",
   "version": "1.0.0-dev",
   "type": "project",
   "description": "opensource server written in PHP7 alternative to rollbar",
@@ -23,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "rollbug\\": "\\inc\\rollbug"
+      "catchbug\\": "\\inc\\catchbug"
     }
   },
   "config": {

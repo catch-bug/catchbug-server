@@ -6,7 +6,7 @@
  * @Time   : 0:58
  */
 
-namespace rollbug;
+namespace catchbug;
 
 class userEmail
 {

@@ -6,7 +6,7 @@
  * @Time   : 13:12
  */
 
-namespace rollbug;
+namespace catchbug;
 
 
 class project

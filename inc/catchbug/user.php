@@ -6,7 +6,7 @@
  * @Time   : 13:07
  */
 
-namespace rollbug;
+namespace catchbug;
 
 
 class user
@@ -22,7 +22,7 @@ class user
   public $name;
 
   /**
-   * @var \rollbug\userEmail user emails
+   * @var \catchbug\userEmail user emails
    */
   public $emails = [];
 
@@ -89,7 +89,7 @@ class user
   /**
    * @param int $project project id
    *
-   * @return \rollbug\user
+   * @return \catchbug\user
    */
   public function setItems(int $project): user
   {
@@ -125,7 +125,7 @@ class user
    * @param string $projectDescription
    * @param int    $lastItem
    *
-   * @return \rollbug\user
+   * @return \catchbug\user
    */
   public function addProject(int $id, string $name, string $projectDescription, int $lastItem): user
   {
@@ -180,7 +180,7 @@ class user
   /**
    * get main user email (if none 1st email is used)
    *
-   * @return \rollbug\userEmail
+   * @return \catchbug\userEmail
    */
   public function getMainEmail(): userEmail
   {

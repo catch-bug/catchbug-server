@@ -6,12 +6,12 @@
  * @Time   : 14:09
  */
 
-use rollbug\item;
-use rollbug\occurrence;
+use catchbug\item;
+use catchbug\occurrence;
 
 
-/** @var \rollbug\user $user */
-/** @var \rollbug\helper $helper */
+/** @var \catchbug\user $user */
+/** @var \catchbug\helper $helper */
 
 $query = "SELECT id, project_id, level, language, id_str, type, last_occ, last_timestamp, first_in_chain FROM item WHERE user_id=$user->id and project_id=$projectId and id=$projectItem";
 if ($result = $mysqli->query($query) ) {

@@ -5,7 +5,7 @@
  * @Date   : 7.11.18
  * @Time   : 20:28
  */
-use \rollbug\itemWriter;
+use \catchbug\itemWriter;
 
 ob_start();
 require_once __DIR__ . '/../../inc/mysqli.php';

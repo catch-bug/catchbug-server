@@ -6,8 +6,8 @@
  * @Time   : 0:29
  */
 
-/** @var \rollbug\user $user */
-/** @var \rollbug\helper $helper */
+/** @var \catchbug\user $user */
+/** @var \catchbug\helper $helper */
 
 $projectSettingsHeader = <<<HTML
 <h3>General Project Settings</h3>

@@ -6,11 +6,11 @@
  * @Time   : 0:57
  */
 
-use rollbug\token;
+use catchbug\token;
 
-/** @var \rollbug\user $user */
-/** @var \rollbug\helper $helper */
-/** @var \rollbug\config $config */
+/** @var \catchbug\user $user */
+/** @var \catchbug\helper $helper */
+/** @var \catchbug\config $config */
 
 
 $projectSettingsContent = <<<HTML
@@ -35,7 +35,7 @@ if ($result = $mysqli->query($query)) {
 
   $tokenTableBodyActive = '';
   $tokenTableBodyDisabled = '';
-  /** @var \rollbug\token $token */
+  /** @var \catchbug\token $token */
   foreach ($tokens as $token){
     $token->setTimeFormat('d.m.Y H:i:s');
     $token->setTimeZone($user->DateTimeZone);
@@ -204,7 +204,7 @@ HTML;
 
 
 
-function formatTokenTableRow (\rollbug\token $token, \rollbug\user $user): string
+function formatTokenTableRow (\catchbug\token $token, \catchbug\user $user): string
 {
   $row = '';
   $row .= '<tr>';

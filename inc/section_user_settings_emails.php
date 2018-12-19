@@ -7,14 +7,14 @@
  */
 
 
-/** @var \rollbug\user $user */
-/** @var \rollbug\helper $helper */
+/** @var \catchbug\user $user */
+/** @var \catchbug\helper $helper */
 
 
 $emailsTableBody = '';
 $optionsEmail = '';
 
-/** @var \rollbug\userEmail $email */
+/** @var \catchbug\userEmail $email */
 foreach ($user->emails as $email){
   $emailsTableBody .= '<tr>';
   $emailsTableBody .= "<td>{$email->email}</td>";

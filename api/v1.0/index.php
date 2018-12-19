@@ -8,7 +8,7 @@
 
 error_reporting(E_ALL);
 
-use rollbug\config;
+use catchbug\config;
 
 // Allow from any origin
 if (isset($_SERVER['HTTP_ORIGIN'])) {

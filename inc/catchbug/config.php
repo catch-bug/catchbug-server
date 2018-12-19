@@ -5,12 +5,12 @@
  * @Date   : 19.11.18
  * @Time   : 16:02
  */
-namespace rollbug;
+namespace catchbug;
 
 class config
 {
   /**
-   * @var  \rollbug\settingsBase::$data
+   * @var  \catchbug\settingsBase::$data
    */
   private static $data;
   private $settingsFileName;
@@ -137,7 +137,7 @@ class config
     ];
 
     $context = stream_context_create($opts);
-    if ($json = \file_get_contents('https://api.github.com/repos/rollbug/rollbug-server/releases/latest', false, $context)) {
+    if ($json = \file_get_contents('https://api.github.com/repos/catch-bug/catchbug-server/releases/latest', false, $context)) {
       $apiLatest = \json_decode($json);
 
       if (isset($apiLatest->tag_name)) {
